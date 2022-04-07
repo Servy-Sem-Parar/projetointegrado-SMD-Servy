@@ -18,6 +18,8 @@
       "no-unused-vars": "off",
       "prefer-arrow-callback": "warn",
       "import/extensions": "off",
-      "import/no-unresolved": "off"
+      "import/no-unresolved": "off",
+      "no-shadow": "off",
+      "arrow-body-style": "off"
     }
 }

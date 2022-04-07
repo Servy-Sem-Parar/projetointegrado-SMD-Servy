@@ -2,10 +2,11 @@ import IUser from '@interfaces/user';
 import { Schema } from 'mongoose';
 import bcrypt from 'bcryptjs';
 import mongoose from '../database';
+import Role from '../enums/role';
 
 require('mongoose-type-email');
 
-const UserSchema = new Schema({
+const UserSchema = new Schema<IUser>({
   name: {
     type: String,
     required: true,
@@ -20,6 +21,11 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     select: false,
+  },
+  role: {
+    type: String,
+    default: Role.STUDENT,
+    enum: Role,
   },
   createdAt: {
     type: 'Date',
