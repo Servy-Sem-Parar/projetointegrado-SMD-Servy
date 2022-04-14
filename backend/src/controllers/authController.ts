@@ -26,16 +26,26 @@ const login = async (request: Request, response: Response): Promise<Response> =>
 
   const token = generateToken(user.id);
 
-  delete user.password;
+  user.password = undefined;
   return response.send({ user, token });
 };
 
 const register = async (request: Request, response: Response): Promise<Response> => {
   const { name, password, email } = request.body;
 
-  const user = await userController.createUser(name, password, email);
+  if (await User.findOne({ email })) throw new HttpError('Usuário já cadastrado', 409);
+
+  const result = new User({
+    _id: new mongoose.Types.ObjectId(),
+    name,
+    password,
+    email,
+  });
+
+  const user = await result.save();
   const token = generateToken(user.id);
 
+  user.password = undefined;
   return response.status(201).json({ user, token });
 };
 

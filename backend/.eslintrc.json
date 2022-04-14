@@ -20,6 +20,7 @@
       "import/extensions": "off",
       "import/no-unresolved": "off",
       "no-shadow": "off",
-      "arrow-body-style": "off"
+      "arrow-body-style": "off",
+      "class-methods-use-this": "off"
     }
 }

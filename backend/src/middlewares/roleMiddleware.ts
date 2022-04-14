@@ -6,24 +6,23 @@ import config from '../config/config';
 import Role from '../enums/role';
 
 const roleMiddleware = (roles: Role[]) => {
-  return (request: Request, response: Response, next: NextFunction) => {
-    const { authorization } = request.headers;
-    const parts = authorization.split(' ');
-    const [scheme, token] = parts;
+  return async (request: Request, response: Response, next: NextFunction) => {
+    const { userId } = request;
 
-    jwt.verify(token, config.secretJwt, (error, decoded) => {
-      if (error) return response.status(401).json({ error: 'Unauthorized' });
-      const userId = decoded.id;
-      return User.findById(userId).then((user) => {
-        if (!user) return response.status(401).json({ error: 'Unauthorized' });
+    const user = await User.findById(userId);
 
-        if (!roles.includes(user.role)) {
-          return response.status(403).json({ error: 'Forbidden' });
-        }
+    if (!user) throw new HttpError('Unauthorized', 401);
 
-        return next();
-      });
-    });
+    if (user.role === Role.ADMIN) {
+      return next();
+    } if (roles.includes(Role.SELF)) {
+      const bodyId = request.params.id;
+      if (bodyId !== userId) throw new HttpError('Forbidden', 403);
+    } else if (!roles.includes(user.role)) {
+      throw new HttpError('Forbidden', 403);
+    }
+
+    return next();
   };
 };
 
