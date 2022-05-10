@@ -13,6 +13,10 @@ class UserController extends CrudController<IUser, typeof User> {
     return User;
   }
 
+  override populate(entity) {
+    return entity;
+  }
+
   override async createFromParameters(request: Request): Promise<IUser> {
     const { email } = request.body;
 

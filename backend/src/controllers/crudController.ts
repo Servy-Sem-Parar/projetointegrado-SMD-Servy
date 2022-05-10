@@ -10,6 +10,10 @@ require('express-async-errors');
 abstract class CrudController<I, T extends Model<I>> {
   abstract getEntity(): T;
 
+  populate(entity): any {
+    return entity;
+  }
+
   async createFromParameters(request: Request): Promise<Document<unknown, any, I> & I> {
     const parameters = request.body;
 
@@ -21,7 +25,7 @@ abstract class CrudController<I, T extends Model<I>> {
 
     const result = await entity.save();
 
-    return this.getEntity().findById(result.id);
+    return this.populate(this.getEntity().findById(result.id));
   }
 
   async updateFromParameters(request: Request): Promise<Document<unknown, any, I> & I> {
@@ -30,7 +34,7 @@ abstract class CrudController<I, T extends Model<I>> {
 
     const result = await this.getEntity().updateOne({ _id: id }, parameters);
 
-    return this.getEntity().findById(id);
+    return this.populate(this.getEntity().findById(id));
   }
 
   create = async (request: Request, response: Response): Promise<Response> => {
@@ -40,7 +44,7 @@ abstract class CrudController<I, T extends Model<I>> {
   };
 
   read = async (request: Request, response: Response): Promise<Response> => {
-    const result = await this.getEntity().findById(request.params.id).exec();
+    const result = await this.populate(this.getEntity().findById(request.params.id)).exec();
 
     return response.status(200).json({ data: result });
   };
@@ -52,13 +56,13 @@ abstract class CrudController<I, T extends Model<I>> {
   };
 
   delete = async (request: Request, response: Response): Promise<Response> => {
-    const result = await this.getEntity().deleteOne({ _id: request.params.id }).exec();
+    const result = await this.populate(this.getEntity().deleteOne({ _id: request.params.id })).exec();
 
     return response.status(200).json({ data: result });
   };
 
   list = async (request: Request, response: Response): Promise<Response> => {
-    const result = await this.getEntity().find().exec();
+    const result = await this.populate(this.getEntity().find()).exec();
 
     return response.status(200).json({ data: result });
   };

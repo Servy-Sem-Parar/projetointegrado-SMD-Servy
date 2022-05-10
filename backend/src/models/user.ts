@@ -1,6 +1,7 @@
 import IUser from '@interfaces/user';
 import { Schema } from 'mongoose';
 import bcrypt from 'bcryptjs';
+import paginate from 'mongoose-paginate-v2';
 import mongoose from '../database';
 import Role from '../enums/role';
 
@@ -32,6 +33,8 @@ const UserSchema = new Schema<IUser>({
     default: Date.now,
   },
 });
+
+UserSchema.plugin(paginate);
 
 UserSchema.pre('save', async function (next) {
   const hash = await bcrypt.hash(this.password, 10);

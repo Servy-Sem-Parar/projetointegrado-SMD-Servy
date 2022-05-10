@@ -1,5 +1,6 @@
 import { Document } from 'moongose';
 import Role from '../enums/role';
+import ITurma from './turma';
 
 interface IUser extends Document {
   name: String;
