@@ -6,7 +6,8 @@ import IUser from './user';
 
 interface ITurma extends Document {
   name: String;
-  participants: IUser[],
+  teachers: IUser[],
+  students: IUser[],
   materiais: IMaterial[],
   disciplina: IDisciplina
 }

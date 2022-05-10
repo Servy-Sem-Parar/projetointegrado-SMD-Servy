@@ -17,7 +17,8 @@ class TurmaController extends CrudController<ITurma, typeof Turma> {
     return entity
       .populate('disciplina')
       .populate('materiais')
-      .populate('participants');
+      .populate('teachers')
+      .populate('students');
   }
 }
 
