@@ -1,0 +1,27 @@
+.popover-body {
+    position: absolute;
+    font-size: 3px;
+    width: auto;
+    background-color: white;
+    border-radius: 5px;
+    left: -25px;
+    box-shadow: 0 0 6px #999999;
+    border: 1px solid #aeaeae;
+    padding: 5px 0px;
+    z-index: 1;
+}
+
+.popover-item {
+    font-size: 13px;
+    padding: 5px 10px;
+    justify-content: space-between;
+    display: flex;
+    cursor: pointer;
+}
+.popover-icon {
+    margin-left: 5px;
+}
+
+.gear-icon {
+    cursor: pointer;
+}

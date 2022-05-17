@@ -1,0 +1,26 @@
+.offset-item {
+    font-size: 20px;
+    padding: 1px 5px 0px;
+    cursor: pointer;
+}
+
+.offset-icon {
+    cursor: pointer;
+}
+
+.offset-item-selected {
+    font-size: 20px;
+    color: white;
+    background-color: rgb(167,128,181);
+    padding: 1px 5px 0px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.pagination-box {
+    display: flex;
+    width: 100%;
+    padding: 10px 20px;
+    align-items: end;
+    justify-content: end;
+}

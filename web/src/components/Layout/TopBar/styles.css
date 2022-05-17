@@ -1,0 +1,38 @@
+.top-bar {
+    height: 50px;
+    padding: 4px;
+    display: flex;
+    box-shadow: 3px 0 11px -2px #999999;
+    border-bottom: 1px solid #aeaeae;
+}
+
+.top-bar-logo {
+    height: 100%;
+}
+
+.burguer-button-box {
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 47px;
+    display: flex;
+    font-size: 27px;
+    border-radius: 5px;
+    margin-right: 20px;
+    color: #6a6a6a;
+    cursor: pointer;
+}
+
+.burguer-button-box-active {
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 47px;
+    display: flex;
+    font-size: 27px;
+    border-radius: 5px;
+    margin-right: 20px;
+    color: #ffffff;
+    cursor: pointer;
+    background-color: rgb(167,128,181);
+}
