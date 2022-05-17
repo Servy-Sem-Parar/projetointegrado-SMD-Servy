@@ -135,6 +135,11 @@ npm start
       <td class="tg-c3ow" style="text-align: center;">Notificação de aulas</td>
       <td class="tg-c3ow" style="text-align: center;"><a target="_blank" href="" target="_blank" rel="noopener noreferrer">código</a></td>
     </tr>
+    <tr>
+      <td class="tg-0pky"><span style="font-weight:bold">RFG0017</span></td>
+      <td class="tg-c3ow" style="text-align: center;">Listagem de materiais</td>
+      <td class="tg-c3ow" style="text-align: center;"><a target="_blank" href="" target="_blank" rel="noopener noreferrer">código</a></td>
+    </tr>
   </tbody>
 </table>
 
