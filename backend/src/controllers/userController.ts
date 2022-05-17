@@ -1,41 +1,53 @@
 import { Request, Response } from 'express';
 import User from '@models/user';
+import IUser from '@interfaces/user';
 import HttpError from '@models/errors/HttpError';
+import CrudController from './crudController';
 import mongoose from '../database';
+import Role from '../enums/role';
 
 require('express-async-errors');
 
-async function createUser(name: string, password: string, email: string): User {
-  if (await User.findOne({ email })) throw new HttpError('Usuário já cadastrado', 409);
+class UserController extends CrudController<IUser, typeof User> {
+  override getEntity() {
+    return User;
+  }
 
-  const user = new User({
-    _id: new mongoose.Types.ObjectId(),
-    name,
-    password,
-    email,
-  });
+  override populate(entity) {
+    return entity;
+  }
 
-  const result = await user.save();
+  override async createFromParameters(request: Request): Promise<IUser> {
+    const { email } = request.body;
 
-  return result;
+    if (await User.findOne({ email })) {
+      throw new HttpError('Usuário já cadastrado', 409);
+    }
+
+    return super.createFromParameters(request);
+  }
+
+  override async updateFromParameters(request: Request): Promise<IUser> {
+    const user = await User.findById(request.userId);
+    // se o usuario tentar alterar a propria role
+    if (request.body.role && user.role !== request.body.role && user.role !== Role.ADMIN) {
+      throw new HttpError('Forbidden', 403);
+    }
+
+    return super.updateFromParameters(request);
+  }
+
+  professoras = async (request: Request, response: Response): Promise<Response> => {
+    const result = await User.find({ role: Role.TEACHER }).exec();
+
+    return response.status(200).json({ data: result });
+  };
+
+  alunas = async (request: Request, response: Response): Promise<Response> => {
+    const result = await User.find({ role: Role.STUDENT }).exec();
+
+    return response.status(200).json({ data: result });
+  };
 }
 
-const create = async (request: Request, response: Response) => {
-  const { name, password, email } = request.body;
-
-  const result = await createUser(name, password, email);
-
-  return response.status(201).json({ user: result });
-};
-
-const list = async (request: Request, response: Response) => {
-  const users = await User.find().exec();
-
-  return response.status(200).json({ users });
-};
-
-export default {
-  create,
-  list,
-  createUser,
-};
+export default new UserController();

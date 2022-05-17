@@ -1,11 +1,13 @@
 import IUser from '@interfaces/user';
 import { Schema } from 'mongoose';
 import bcrypt from 'bcryptjs';
+import paginate from 'mongoose-paginate-v2';
 import mongoose from '../database';
+import Role from '../enums/role';
 
 require('mongoose-type-email');
 
-const UserSchema = new Schema({
+const UserSchema = new Schema<IUser>({
   name: {
     type: String,
     required: true,
@@ -21,11 +23,18 @@ const UserSchema = new Schema({
     required: true,
     select: false,
   },
+  role: {
+    type: String,
+    default: Role.STUDENT,
+    enum: Role,
+  },
   createdAt: {
     type: 'Date',
     default: Date.now,
   },
 });
+
+UserSchema.plugin(paginate);
 
 UserSchema.pre('save', async function (next) {
   const hash = await bcrypt.hash(this.password, 10);

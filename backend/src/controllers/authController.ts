@@ -13,7 +13,7 @@ function generateToken(userId) {
   return jwt.sign({ id: userId }, config.secretJwt, { expiresIn: 86400 });
 }
 
-const login = async (request: Request, response: Response) => {
+const login = async (request: Request, response: Response): Promise<Response> => {
   const { email, password } = request.body;
 
   const user = await User.findOne({ email }).select('+password');
@@ -26,16 +26,26 @@ const login = async (request: Request, response: Response) => {
 
   const token = generateToken(user.id);
 
-  delete user.password;
-  response.send({ user, token });
+  user.password = undefined;
+  return response.send({ user, token });
 };
 
-const register = async (request: Request, response: Response) => {
+const register = async (request: Request, response: Response): Promise<Response> => {
   const { name, password, email } = request.body;
 
-  const user = await userController.createUser(name, password, email);
+  if (await User.findOne({ email })) throw new HttpError('Usuário já cadastrado', 409);
+
+  const result = new User({
+    _id: new mongoose.Types.ObjectId(),
+    name,
+    password,
+    email,
+  });
+
+  const user = await result.save();
   const token = generateToken(user.id);
 
+  user.password = undefined;
   return response.status(201).json({ user, token });
 };
 
