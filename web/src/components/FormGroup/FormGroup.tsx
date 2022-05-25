@@ -1,19 +1,26 @@
-import "./styles.css"
+import "./FormGroup.css"
+
+export type inputTypes = 'text' | 'select' | 'password';
+export type inputSizes = '33' | '66' | '50' | '100';
 
 interface IFormGroupProps {
-    type: 'text' | 'select',
-    size: '33' | '66' | '50' | '100',
+    type: inputTypes,
+    size: inputSizes,
     label: string,
     placeholder: string,
     id: string,
+    defaultValue?: string,
 }
 
-function _generateInput(props: {type: string, placeholder: string, id: string}) {
+function _generateInput(props: IFormGroupProps) {
     let input;
 
     switch(props.type) {
         case 'text':
-            input = _generateTextInput(props.placeholder, props.id)
+            input = _generateTextInput(props)
+            break;
+        case 'password':
+            input = _generateTextInput(props)
             break;
         default:
             break;
@@ -22,9 +29,9 @@ function _generateInput(props: {type: string, placeholder: string, id: string}) 
     return input;
 }
 
-function _generateTextInput(placeholder: string, id: string) {
+function _generateTextInput(props: IFormGroupProps) {
     return (
-        <input className="form-control-input" id={id} placeholder={placeholder} type={"text"} />
+        <input className="form-control-input" defaultValue={props.defaultValue} id={props.id} placeholder={props.placeholder} type={props.type} />
     )
 }
 

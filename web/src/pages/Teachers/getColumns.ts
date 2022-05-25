@@ -1,3 +1,5 @@
+import { openSaveModal } from "./ModalsProvider"
+
 export function getColumns() {
     return (
         [
@@ -28,14 +30,14 @@ export function getColumns() {
                 actions: [
                     {
                         label: "Remover",
-                        callback: (entityId: string)=>{
-                            console.log("Remove", entityId)
+                        callback: (entity: Record<string, unknown>)=>{
+                            console.log("Remove", entity)
                         }
                     },
                     {
                         label: "Editar",
-                        callback: (entityId: string)=>{
-                            console.log("Edit", entityId)
+                        callback: (entity: Record<string, unknown>)=>{
+                            openSaveModal(entity)
                         }
                     },
                 ],

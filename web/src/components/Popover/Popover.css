@@ -17,6 +17,7 @@
     justify-content: space-between;
     display: flex;
     cursor: pointer;
+    color: rgb(167,128,181);
 }
 .popover-icon {
     margin-left: 5px;

@@ -3,10 +3,10 @@ import {FaUserGraduate} from "react-icons/fa";
 import {MdAutoGraph} from "react-icons/md";
 import {BsCalendarDayFill} from "react-icons/bs";
 import {SiGoogleclassroom} from "react-icons/si";
-import {BsCardChecklist} from "react-icons/bs";
-import {BiLogOut} from "react-icons/bi"
-import "./styles.css";
+import {BiLogOut} from "react-icons/bi";
 import logout from "../../../Tools/logout";
+
+import "./SideBar.css";
 
 interface ISideBarProps {
     sideBarIsOpen: boolean;
@@ -50,12 +50,6 @@ function SideBar(props: ISideBarProps) {
                         className="side-bar-icon"
                     />
                     <div className="side-bar-item-text-content">Planejamento</div>
-                </div>
-                <div onClick={()=>{window.location.pathname = "provas"}} className={ testSideBar("provas") ? "side-bar-item-active" : "side-bar-item"}>
-                    <BsCardChecklist
-                        className="side-bar-icon"
-                    />
-                    <div className="side-bar-item-text-content">Provas</div>
                 </div>
             </div>
             <div onClick={()=>{logout()}} className={"logout-buttom"}>

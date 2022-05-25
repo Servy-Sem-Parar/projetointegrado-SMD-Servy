@@ -1,7 +1,8 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import SideBar from './SideBar/SideBar';
-import "./styles.css"
 import TopBar from './TopBar/TopBar';
+
+import "./Layout.css";
 
 interface ILayoutProps {
     children: ReactNode;
@@ -37,7 +38,6 @@ function Layout(props: ILayoutProps) {
                 <div className={!routesWithOutLayout.includes(window.location.pathname) ? 'layout-content': "no-layout"}>
                     {props.children}
                 </div>
-                
             </div>
         </div>
     ) 

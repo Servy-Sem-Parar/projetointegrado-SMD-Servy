@@ -1,0 +1,70 @@
+.save-modal-blur {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    top: 0;
+    left: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.save-modal {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    width: 80%;
+}
+
+.save-modal-header {
+    width: 100%;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.save-modal-close-icon {
+    cursor: pointer;
+    opacity: 0.5;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.save-modal-close-icon:hover {
+    opacity: 1;
+}
+
+.save-modal-title {
+    font-weight: 600;
+}
+
+.save-modal-body {
+    width: 100%;
+}
+
+.save-modal-footer-button {
+    margin-right: 20px;
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    background-color: rgb(167,128,181);
+    border: 0px;
+    padding: 10px;
+    min-width: 100px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 0 13px #999999;
+}
+
+.save-modal-footer-button:last-child {
+    margin-right: 0px;
+}
+
+.save-modal-footer {
+    margin-top: 10px;
+    justify-content: end;
+    display: flex;
+ }

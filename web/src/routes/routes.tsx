@@ -3,13 +3,12 @@ import {
     Routes,
     Route,
   } from "react-router-dom";
-import Classes from "../pages/Classes";
-import Dashboard from "../pages/Dashboard";
-import LoginPage from "../pages/LoginPage";
-import Planing from "../pages/Planing";
-import Students from "../pages/Students";
-import Teachers from "../pages/Teachers";
-import Tests from "../pages/Tests";
+import Classes from "../pages/Classes/Classes";
+import Dashboard from "../pages/Home/Home";
+import LoginPage from "../pages/LoginPage/LoginPage";
+import Planing from "../pages/Planing/Planing";
+import Students from "../pages/Students/Students";
+import Teachers from "../pages/Teachers/Teachers";
 
 function Router() {
     return (
@@ -21,7 +20,6 @@ function Router() {
                 <Route path="alunas" element={<Students/>}/>
                 <Route path="turmas" element={<Classes/>}/>
                 <Route path="planejamento" element={<Planing/>}/>
-                <Route path="provas" element={<Tests/>}/>
             </Routes>
         </BrowserRouter>
     )

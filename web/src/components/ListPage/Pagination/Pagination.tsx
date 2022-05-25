@@ -14,9 +14,14 @@ function generatePaginationItems(offset: number, total: number, setItems: (items
     const maxButton = total/10
     initOffset = initOffset - 2;
 
+    if(initOffset+5 > maxButton) {
+        initOffset = maxButton-5;
+    }
+
     if(initOffset < 0) {
         initOffset = 0;
     }
+    
     console.log("pr", initOffset, maxButton)
     for(let i = initOffset; i < maxButton; i++) {
         if(i < initOffset + 5) {

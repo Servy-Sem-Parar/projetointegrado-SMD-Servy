@@ -2,7 +2,7 @@ import React from 'react';
 import Logo from "../../assets/logo.png" 
 import FormGroup from '../../components/FormGroup/FormGroup';
 
-import "./styles.css"
+import "./LoginPage.css"
 
 function LoginPage() {
   return (
@@ -24,14 +24,14 @@ function LoginPage() {
               id={"email"}
             />
             <FormGroup
-              type={'text'}
+              type={'password'}
               size={'100'}
               label={"Senha:"}
               placeholder={"Digite sua senha"}
               id={"password"}
             />
             <div className="forgot-password-span">Esqueci minha senha</div>
-            <button className="login-button">Entrar</button>
+            <button className="login-button" onClick={()=>{window.location.pathname = "dashboard"}}>Entrar</button>
           </div>
         </div>
       </div>

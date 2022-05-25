@@ -7,10 +7,10 @@ import "./Popover.css"
 
 interface IPopoverProps {
     control: number;
-    entityId: string;
+    entity: Record<string, unknown>;
     actions?: {
         label: string,
-        callback: (entityId: string)=>void
+        callback: (entity: Record<string, unknown>)=>void
     }[]
 }
 
@@ -75,7 +75,7 @@ export function Popover(props: IPopoverProps) {
                         props.actions && props.actions.map(action=>{
                             return (
                                 <div className="popover-item" onClick={()=>{
-                                    action.callback(props.entityId)
+                                    action.callback(props.entity)
                                 }}>
                                     {action.label}
                                     {getActionIcon(action.label)}

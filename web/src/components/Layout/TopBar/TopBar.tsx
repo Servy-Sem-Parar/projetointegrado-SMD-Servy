@@ -1,6 +1,7 @@
-import LogoImage from "../../../assets/logo.png"
-import "./styles.css";
-import { GiHamburgerMenu } from "react-icons/gi"
+import LogoImage from "../../../assets/logo.png";
+import { GiHamburgerMenu } from "react-icons/gi";
+
+import "./TopBar.css";
 
 interface ITopBarProps {
     sideBarIsOpen: boolean;
