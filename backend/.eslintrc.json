@@ -21,6 +21,7 @@
       "import/no-unresolved": "off",
       "no-shadow": "off",
       "arrow-body-style": "off",
-      "class-methods-use-this": "off"
+      "class-methods-use-this": "off",
+      "linebreak-style": "off"
     }
 }

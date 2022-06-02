@@ -7,7 +7,7 @@ interface ISaveModalProps {
     closeModal: ()=>void;
     targetEntity: Record<string, unknown>;
     fields: Record<string, unknown>[];
-    footerButtons?: {
+    footerButtons: {
         callback: ()=>void;
         label: string;
     }[]
@@ -37,6 +37,11 @@ export function SaveModal(props: ISaveModalProps) {
                                     placeholder={field.placeholder as string}
                                     id={field.id as string}
                                     defaultValue={field.defaultValue as string}
+                                    onChange={field.onChange as (value: string | Date)=>void}
+                                    options={field.options as {value: string, label: string}[]}
+                                    validations={field.validations as string[]}
+                                    errorMessage={field.errorMessage as string}
+                                    setFieldValidation={field.setFieldValidation as (field: string, value: string)=>void}
                                 />
                             )
                         })
@@ -44,8 +49,13 @@ export function SaveModal(props: ISaveModalProps) {
                 </div>
                 <div className="save-modal-footer">
                     <div className="save-modal-footer-buttons-container">
-                        <button className="save-modal-footer-button">Cancelar</button>
-                        <button className="save-modal-footer-button">Salvar</button>
+                        {
+                            props.footerButtons.map(button=>{
+                                return (
+                                    <button className="save-modal-footer-button" onClick={()=>{button.callback()}}>{button.label}</button>
+                                )
+                            })
+                        }
                     </div>
                 </div>
             </div>

@@ -3,6 +3,7 @@ import SideBar from './SideBar/SideBar';
 import TopBar from './TopBar/TopBar';
 
 import "./Layout.css";
+import { Loader } from '../Loader/Loader';
 
 interface ILayoutProps {
     children: ReactNode;
@@ -21,6 +22,7 @@ function Layout(props: ILayoutProps) {
 
     return(
         <div style={{width: "100%", height: "100%"}}>
+            <Loader/>
             {!routesWithOutLayout.includes(window.location.pathname) && 
                 <TopBar
                     sideBarIsOpen={sideBarIsOpen}
