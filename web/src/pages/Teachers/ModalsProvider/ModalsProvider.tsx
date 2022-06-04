@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { openLoader } from "../../components/Loader/Loader";
-import { SaveModal } from "../../components/SaveModal/SaveModal"
-import { validateAllInputs } from "../../Tools/validateInputs";
+import { alertError, alertSuccess } from "../../../components/Alert/Alert";
+import { SaveModal } from "../../../components/SaveModal/SaveModal"
+import { validateAllInputs } from "../../../Tools/validateInputs";
 import { fieldValidations, getSaveModalFields } from "./getSaveModalFields";
 
 export let openSaveModal:(targetEntity?: Record<string, unknown>)=>void;
@@ -61,12 +61,14 @@ export function ModalsProvider() {
                                     const validationResult = validateAllInputs({entity, validations: fieldValidations})
                                     
                                     if(validationResult.success) {
+                                        alertSuccess("Usuário criado com sucesso.")
                                         console.log("ent", entity)
                                         setEntity({});
                                         setTargetEntity({});
                                         setIsOpenSaveModal(false); 
                                         setErrorMessages({});
                                     } else {
+                                        alertError("Um ou mais campos não estão corretamente preenchidos.")
                                         setErrorMessages(validationResult.errors)
                                     }
                                 }

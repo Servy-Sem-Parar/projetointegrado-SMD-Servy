@@ -4,6 +4,8 @@ import TopBar from './TopBar/TopBar';
 
 import "./Layout.css";
 import { Loader } from '../Loader/Loader';
+import { Alert } from '../Alert/Alert';
+import { isAuth } from '../../routes/routes';
 
 interface ILayoutProps {
     children: ReactNode;
@@ -23,7 +25,8 @@ function Layout(props: ILayoutProps) {
     return(
         <div style={{width: "100%", height: "100%"}}>
             <Loader/>
-            {!routesWithOutLayout.includes(window.location.pathname) && 
+            <Alert/>
+            {!routesWithOutLayout.includes(window.location.pathname) && isAuth() && 
                 <TopBar
                     sideBarIsOpen={sideBarIsOpen}
                     changeSideBarState={(value: boolean)=>{
@@ -31,13 +34,13 @@ function Layout(props: ILayoutProps) {
                     }}
                 />
             }
-            <div className={!routesWithOutLayout.includes(window.location.pathname) ? 'layout-body' : "no-layout"}>
-                {!routesWithOutLayout.includes(window.location.pathname) && 
+            <div className={!routesWithOutLayout.includes(window.location.pathname) && isAuth() ? 'layout-body' : "no-layout"}>
+                {!routesWithOutLayout.includes(window.location.pathname) && isAuth() &&
                     <SideBar
                         sideBarIsOpen={sideBarIsOpen}
                     />
                 }
-                <div className={!routesWithOutLayout.includes(window.location.pathname) ? 'layout-content': "no-layout"}>
+                <div className={!routesWithOutLayout.includes(window.location.pathname) && isAuth() ? 'layout-content': "no-layout"}>
                     {props.children}
                 </div>
             </div>

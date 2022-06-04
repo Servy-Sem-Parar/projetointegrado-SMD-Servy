@@ -1,4 +1,4 @@
-import { openSaveModal } from "./ModalsProvider"
+import { openSaveModal } from "./ModalsProvider/ModalsProvider"
 
 export function getColumns() {
     return (

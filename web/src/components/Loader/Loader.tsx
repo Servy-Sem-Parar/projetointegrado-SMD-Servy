@@ -8,13 +8,13 @@ export function Loader() {
     const [loader, setLoader] = useState(0);
 
     openLoader = ()=>{
-        const newLoader = loader+1;
-        setLoader(newLoader)
+        const newLoader = loader;
+        setLoader(newLoader+1)
     }
 
     closeLoader = ()=>{
-        const newLoader = loader-1;
-        setLoader(newLoader)
+        const newLoader = loader;
+        setLoader(newLoader-1)
     }
 
     return (

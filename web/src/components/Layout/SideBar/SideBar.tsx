@@ -1,9 +1,9 @@
 import {GiTeacher} from "react-icons/gi";
 import {FaUserGraduate} from "react-icons/fa";
-import {MdAutoGraph} from "react-icons/md";
 import {BsCalendarDayFill} from "react-icons/bs";
 import {SiGoogleclassroom} from "react-icons/si";
 import {BiLogOut} from "react-icons/bi";
+import {AiFillHome} from "react-icons/ai";
 import logout from "../../../Tools/logout";
 
 import "./SideBar.css";
@@ -21,11 +21,11 @@ function SideBar(props: ISideBarProps) {
     return (
         <div className={`side-bar ${props.sideBarIsOpen === false && "side-bar-closed"}`}>
             <div className="side-bar-body">
-                <div onClick={()=>{window.location.pathname = "dashboard"}} className={ testSideBar("dashboard") ? "side-bar-item-active" : "side-bar-item"}>
-                    <MdAutoGraph
+                <div onClick={()=>{window.location.pathname = "home"}} className={ testSideBar("home") ? "side-bar-item-active" : "side-bar-item"}>
+                    <AiFillHome
                         className="side-bar-icon"
                     />
-                    <div className="side-bar-item-text-content">Dashboard</div>
+                    <div className="side-bar-item-text-content">Home</div>
                 </div>
                 <div onClick={()=>{window.location.pathname = "professoras"}} className={ testSideBar("professoras") ? "side-bar-item-active" : "side-bar-item"}>
                     <GiTeacher

@@ -15,7 +15,7 @@ export async function makeConnection(props: IMakeConnectionProps) {
     });
     const url = buildUrl(props.suffix, props.entityId, props.otherQueryStrings);
     const body = props.body ? props.body : {};
-    const response = await connectoToServer(api, url, props.method, body);
+    const response = await connectToServer(api, url, props.method, body);
 
     return response;
 }
@@ -44,8 +44,8 @@ function buildUrl(
         url = url+"?"
         Object.keys(otherQueryStrings).forEach((key, index)=>{
             url = `${url}${key}=${otherQueryStrings[key]}`
-            if(index+1 > Object.keys(otherQueryStrings).length) {
-                url = url + "&"
+            if(index+1 <= Object.keys(otherQueryStrings).length-1) {
+                url = url+"&"
             }
         })
     }
@@ -53,9 +53,8 @@ function buildUrl(
     return url;
 }
 
-async function connectoToServer(api: AxiosInstance, url: string, method: string, body?: Record<string, unknown>) {
+async function connectToServer(api: AxiosInstance, url: string, method: string, body?: Record<string, unknown>) {
     let response;
-    console.log("1", body)
     switch(method) {
         case "get":
             response = await _get(api, url, body)

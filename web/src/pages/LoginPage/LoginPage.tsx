@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Logo from "../../assets/logo.png" 
+import { alertError } from '../../components/Alert/Alert';
 import FormGroup from '../../components/FormGroup/FormGroup';
 import { closeLoader, openLoader } from '../../components/Loader/Loader';
 import { makeConnection } from '../../Tools/makeConnection';
@@ -23,7 +24,37 @@ function LoginPage() {
         <div className='login-form-box'>
           <div className="login-box-main-title">Bem vinda!</div>
           <div className="login-box-sub-title">Acesse sua conta</div>
-          <div style={{width: "100%", marginTop: "10px"}}>
+          <form style={{width: "100%", marginTop: "10px"}} onSubmit={async (e)=>{
+            e.preventDefault();
+            openLoader();
+            try {
+              const response = await makeConnection({
+                method: "post",
+                suffix: "auth/login",
+                body: {
+                  email,
+                  password
+                }
+              });
+              localStorage.setItem("token", "Bearer " + response?.data.token);
+              localStorage.setItem("user", response?.data.user);
+              if(window.location.pathname === "/") {
+                window.location.pathname = "home";
+              } else {
+                window.location.reload();
+              }
+            } catch (err) {
+              const error = err as {
+                response: {
+                  data: {
+                    error: string
+                  }
+                }
+              }
+              alertError(error.response.data.error)
+            }
+            closeLoader();
+          }}>
             <FormGroup
               type={'text'}
               size={'100'}
@@ -62,24 +93,11 @@ function LoginPage() {
             <div className="forgot-password-span">Esqueci minha senha</div>
             <button 
               className="login-button" 
-              onClick={async ()=>{
-                openLoader();
-                const user = await makeConnection({
-                  method: "post",
-                  suffix: "auth/login",
-                  body: {
-                    email,
-                    password
-                  }
-                });
-                closeLoader();
-                console.log("user", user)
-                //window.location.pathname = "dashboard";
-              }}
+              type='submit'
             >
               Entrar
             </button>
-          </div>
+          </form>
         </div>
       </div>
     </div>

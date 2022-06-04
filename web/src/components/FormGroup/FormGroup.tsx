@@ -73,6 +73,7 @@ function _generateSelectInput(props: IFormGroupProps) {
             onChange={(event)=>{
                 if(props.onChange) {
                     if(props.validations) {
+                        console.log("ene", event.target.value)
                         const validationError = validateInput(event.target.value, props.validations as string[]);
                         if(props.setFieldValidation){
                             props.setFieldValidation(props.id, validationError as string)

@@ -8,6 +8,7 @@
 
 .top-bar-logo {
     height: 100%;
+    cursor: pointer;
 }
 
 .burguer-button-box {

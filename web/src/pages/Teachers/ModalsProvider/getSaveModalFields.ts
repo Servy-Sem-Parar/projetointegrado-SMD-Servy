@@ -28,7 +28,7 @@ export function getSaveModalFields(props: IGetSaveModalFieldsProps) {
                 }
             },
             {
-                id: "permission",
+                id: "role",
                 label: "Permissão",
                 type: "select",
                 defaultValue: props.initialEntity && props.initialEntity.role ? props.initialEntity.role : "",
