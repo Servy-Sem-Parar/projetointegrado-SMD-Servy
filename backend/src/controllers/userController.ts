@@ -5,6 +5,8 @@ import HttpError from '@models/errors/HttpError';
 import CrudController from './crudController';
 import mongoose from '../database';
 import Role from '../enums/role';
+import { ParamsDictionary } from 'express-serve-static-core';
+import { ParsedQs } from 'qs';
 
 require('express-async-errors');
 
@@ -37,17 +39,16 @@ class UserController extends CrudController<IUser, typeof User> {
     return super.updateFromParameters(request);
   }
 
-  professoras = async (request: Request, response: Response): Promise<Response> => {
-    const result = await User.find({ role: Role.TEACHER }).exec();
-
-    return response.status(200).json({ data: result });
-  };
-
-  alunas = async (request: Request, response: Response): Promise<Response> => {
-    const result = await User.find({ role: Role.STUDENT }).exec();
-
-    return response.status(200).json({ data: result });
-  };
+  override prepareQuery(request: Request, query: mongoose.FilterQuery<IUser>): void {
+    const {name, role} = request.query
+    if (name) {
+      query.name = {$regex: new RegExp(name as string), $options: "i"}
+    }
+    if (role) {
+      query.role = role
+    }
+  }
+ 
 }
 
 export default new UserController();

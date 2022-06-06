@@ -1,4 +1,4 @@
-import { Document } from 'moongose';
+import { Document } from 'mongoose';
 import Role from '../enums/role';
 import ITurma from './turma';
 

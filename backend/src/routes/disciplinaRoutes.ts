@@ -7,8 +7,8 @@ const router = express.Router();
 
 router.get('/', roleMiddleware([Role.TEACHER, Role.STUDENT]), disciplinaController.list);
 router.get('/:id', roleMiddleware([Role.TEACHER, Role.STUDENT]), disciplinaController.read);
-router.post('/:id', roleMiddleware([Role.TEACHER]), disciplinaController.update);
+router.put('/:id', roleMiddleware([Role.TEACHER]), disciplinaController.update);
 router.delete('/:id', roleMiddleware([Role.TEACHER]), disciplinaController.delete);
-router.put('/', roleMiddleware([Role.TEACHER]), disciplinaController.create);
+router.post('/', roleMiddleware([Role.TEACHER]), disciplinaController.create);
 
 export default router;
