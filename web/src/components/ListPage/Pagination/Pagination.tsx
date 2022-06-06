@@ -22,13 +22,12 @@ function generatePaginationItems(offset: number, total: number, setItems: (items
         initOffset = 0;
     }
     
-    console.log("pr", initOffset, maxButton)
     for(let i = initOffset; i < maxButton; i++) {
         if(i < initOffset + 5) {
             items.push(i+1)
         }
     }
-    console.log("res", items)
+    
     setItems(items)
 }
 

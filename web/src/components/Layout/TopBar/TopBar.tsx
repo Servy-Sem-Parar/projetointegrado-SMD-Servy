@@ -15,7 +15,7 @@ function TopBar(props:ITopBarProps) {
             <div onClick={()=>{ props.changeSideBarState(!props.sideBarIsOpen) }} className={!props.sideBarIsOpen ? "burguer-button-box-active" : "burguer-button-box"}>
                 <GiHamburgerMenu/>
             </div>
-            <img src={LogoImage} alt="logo" className="top-bar-logo" />
+            <img onClick={()=>{window.location.pathname = "home"}} src={LogoImage} alt="logo" className="top-bar-logo" />
         </div>
     )
 }

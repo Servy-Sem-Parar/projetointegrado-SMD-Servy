@@ -1,9 +1,10 @@
 import "./ListPage.css";
 import {GoPlus} from "react-icons/go";
 import {FaSearch} from "react-icons/fa";
-import { Popover } from "../Popover/Popover";
+import { Popover } from "./Popover/Popover";
 //import { useState } from "react";
 import { Pagination } from "./Pagination/Pagination";
+import { useState } from "react";
 
 interface IListPageProps {
     title: string,
@@ -20,6 +21,7 @@ interface IListPageProps {
             value: string,
         }[]
     }[],
+    filtersSearchCallBack?: (filters: Record<string, unknown>)=>void,
     offset: number,
     setOffset: (offset: number)=>void,
     total: number,
@@ -38,7 +40,7 @@ interface IAction {
 }
 
 export function ListPage(props: IListPageProps) {
-    //const [filters, setFilters] = useState({})
+    const [filters, setFilters] = useState<Record<string, unknown>>({})
 
     return (
         <div className="list_page_body">
@@ -61,6 +63,12 @@ export function ListPage(props: IListPageProps) {
                                         <input
                                             placeholder={filter.placeholder}
                                             className="filter-input"
+                                            onChange={(e)=>{
+                                                const value = e.target.value;
+                                                const newFilters = {...filters}
+                                                newFilters[filter.control] = value;
+                                                setFilters(newFilters)
+                                            }}
                                         />
                                     )
                                 } else {
@@ -69,8 +77,14 @@ export function ListPage(props: IListPageProps) {
                                             placeholder={filter.placeholder}
                                             className="filter-input"
                                             defaultValue={""}
+                                            onChange={(e)=>{
+                                                const value = e.target.value;
+                                                const newFilters = {...filters}
+                                                newFilters[filter.control] = value;
+                                                setFilters(newFilters)
+                                            }}
                                         >
-                                            <option value={""} disabled hidden>{filter.placeholder}</option>
+                                            <option value={""} /*disabled hidden*/>{"Todos"}</option>
                                             {
                                                 filter.options && filter.options.map((option)=>{
                                                     return(
@@ -86,6 +100,11 @@ export function ListPage(props: IListPageProps) {
                     </div>
                     <button
                         className="filter-searchButton"
+                        onClick={()=>{
+                            if(props.filtersSearchCallBack) {
+                                props.filtersSearchCallBack(filters);
+                            }
+                        }}
                     >
                         <FaSearch />
                     </button>

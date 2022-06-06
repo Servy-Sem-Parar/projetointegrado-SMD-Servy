@@ -22,9 +22,13 @@
     border-radius: 10px;
     border: 1px solid #aeaeae;
     padding: 7px;
-    font-size: 18px;
+    font-size: 15px;
     width: 100%;
     margin-top: 4px;
+}
+
+.is-invalid-field {
+    border: 1px solid red;
 }
 
 .form-control-input:focus{
@@ -38,4 +42,10 @@
 .input-label {
     font-weight: bold;
     font-size: 16px;
+}
+
+.is-invalid-label {
+    font-size: 15px;
+    margin-left: 6px;
+    color: red;
 }

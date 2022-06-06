@@ -1,27 +1,77 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Logo from "../../assets/logo.png" 
+import { alertError } from '../../components/Alert/Alert';
 import FormGroup from '../../components/FormGroup/FormGroup';
+import { closeLoader, openLoader } from '../../components/Loader/Loader';
+import { makeConnection } from '../../Tools/makeConnection';
 
 import "./LoginPage.css"
 
 function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [validations, setValidations] = useState<Record<string, string>>({
+    email: "",
+    password: "",
+  });
+
   return (
     <div className='login-page-body'>
       <div className='login-box'>
         <div className='login-logo-container'>
             <img className="login-logo-image" src={Logo} alt="logo"/>
-            {/*<div className='login-logo-subtitle'>Meninas ensinando meninas</div>*/}
         </div>
         <div className='login-form-box'>
           <div className="login-box-main-title">Bem vinda!</div>
           <div className="login-box-sub-title">Acesse sua conta</div>
-          <div style={{width: "100%", marginTop: "10px"}}>
+          <form style={{width: "100%", marginTop: "10px"}} onSubmit={async (e)=>{
+            e.preventDefault();
+            openLoader();
+            try {
+              const response = await makeConnection({
+                method: "post",
+                suffix: "auth/login",
+                body: {
+                  email,
+                  password
+                }
+              });
+              localStorage.setItem("token", "Bearer " + response?.data.token);
+              localStorage.setItem("user", response?.data.user);
+              if(window.location.pathname === "/") {
+                window.location.pathname = "home";
+              } else {
+                window.location.reload();
+              }
+            } catch (err) {
+              const error = err as {
+                response: {
+                  data: {
+                    error: string
+                  }
+                }
+              }
+              alertError(error.response.data.error)
+            }
+            closeLoader();
+          }}>
             <FormGroup
               type={'text'}
               size={'100'}
               label={"Email:"}
               placeholder={"Digite seu e-mail"}
               id={"email"}
+              validations={["mandatory"]}
+              errorMessage={validations.email && validations.email}
+              setFieldValidation={(field: string, value: string)=>{
+                console.log(field, value)
+                const newValidations = {...validations}
+                newValidations[field] = value;
+                setValidations(newValidations)
+              }}
+              onChange={(value)=>{
+                setEmail(value as string)
+              }}
             />
             <FormGroup
               type={'password'}
@@ -29,10 +79,25 @@ function LoginPage() {
               label={"Senha:"}
               placeholder={"Digite sua senha"}
               id={"password"}
+              validations={["mandatory"]}
+              errorMessage={validations.password && validations.password}
+              setFieldValidation={(field: string, value: string)=>{
+                const newValidations = {...validations}
+                newValidations[field] = value;
+                setValidations(newValidations)
+              }}
+              onChange={(value)=>{
+                setPassword(value as string)
+              }}
             />
             <div className="forgot-password-span">Esqueci minha senha</div>
-            <button className="login-button" onClick={()=>{window.location.pathname = "dashboard"}}>Entrar</button>
-          </div>
+            <button 
+              className="login-button" 
+              type='submit'
+            >
+              Entrar
+            </button>
+          </form>
         </div>
       </div>
     </div>

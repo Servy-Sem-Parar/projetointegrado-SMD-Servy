@@ -1,17 +1,26 @@
 import { useEffect, useState } from "react"
 import { ListPage } from "../../components/ListPage/ListPage";
-import { SaveModal } from "../../components/SaveModal/SaveModal";
 import { teachersArray } from "./data"
 import { getColumns } from "./getColumns";
-import { ModalsProvider, openSaveModal } from "./ModalsProvider";
+import { ModalsProvider, openSaveModal } from "./ModalsProvider/ModalsProvider";
+import { getEntities } from "./requester";
 
 function Teachers() {
     const [entities, setEntities] = useState<Record<string, unknown>[]>([]);
     const [offset, setOffset] = useState(0);
+    const [filters, setFilters] = useState<Record<string, unknown>>({});
 
     useEffect(()=>{
-        setEntities(teachersArray)
+        getEntities(offset).then(entities=>{
+            setEntities(entities)
+        })
     }, [])
+
+    useEffect(()=>{
+        getEntities(offset, filters).then(entities=>{
+            setEntities(entities)
+        })
+    }, [offset, filters])
 
     return (
         <div>
@@ -35,17 +44,21 @@ function Teachers() {
                     },
                     {
                         placeholder: "Filtrar por permissão",
-                        control: "permission",
+                        control: "role",
                         type: "select",
                         options: [
-                            {label: "Professora", value: "professora"},
+                            {label: "Professora", value: "teacher"},
                             {label: "Admin", value: "admin"},
                         ]
                     },
                 ]}
+                filtersSearchCallBack={(filters: Record<string, unknown>)=>{
+                    setFilters(filters);
+                    setOffset(0);
+                }}
                 offset={offset}
                 setOffset={(offset: number)=>{
-                    setOffset(offset)
+                    setOffset(offset);
                 }}
                 total={100}
             />
