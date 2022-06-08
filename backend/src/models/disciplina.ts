@@ -11,7 +11,6 @@ const DisciplinaSchema = new Schema<IDisciplina>({
   },
   description: {
     type: String,
-    required: true,
   },
 });
 
