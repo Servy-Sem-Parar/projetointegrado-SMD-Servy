@@ -1,4 +1,4 @@
-import { Document } from 'moongose';
+import { Document } from 'mongoose';
 import mongoose from '../database';
 import IDisciplina from './disciplina';
 import IMaterial from './material';

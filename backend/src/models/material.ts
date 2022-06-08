@@ -7,10 +7,13 @@ const MaterialSchema = new Schema<IMaterial>({
   name: {
     type: String,
     required: true,
-    unique: true,
   },
   link: {
     type: String,
+    required: true,
+  },
+  date: {
+    type: Date,
     required: true,
   },
 });
