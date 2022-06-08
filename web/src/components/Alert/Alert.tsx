@@ -14,14 +14,14 @@ export function Alert() {
         setSuccess(true);
         setMessage(message);
         setShowAlert(true);
-        setTimeout(()=>{setShowAlert(false)}, 10000)
+        setTimeout(()=>{setShowAlert(false)}, 5000)
     }
 
     alertError = (message:string)=>{
         setSuccess(false);
         setMessage(message);
         setShowAlert(true);
-        setTimeout(()=>{setShowAlert(false)}, 10000)
+        setTimeout(()=>{setShowAlert(false)}, 5000)
     }
 
     return (

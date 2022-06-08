@@ -1,4 +1,4 @@
-import { openSaveModal } from "./ModalsProvider/ModalsProvider"
+import { openDeleteModal, openSaveModal } from "./ModalsProvider/ModalsProvider"
 
 export function getColumns() {
     return (
@@ -21,7 +21,7 @@ export function getColumns() {
             {
                 type: "string",
                 label: "Permissão",
-                control: "role",
+                control: "permission",
             },
             {
                 type: "action",
@@ -31,7 +31,7 @@ export function getColumns() {
                     {
                         label: "Remover",
                         callback: (entity: Record<string, unknown>)=>{
-                            console.log("Remove", entity)
+                            openDeleteModal(entity)
                         }
                     },
                     {

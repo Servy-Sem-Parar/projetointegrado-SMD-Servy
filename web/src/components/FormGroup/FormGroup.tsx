@@ -4,7 +4,7 @@ import "./FormGroup.css"
 export type inputTypes = 'text' | 'select' | 'password';
 export type inputSizes = '33' | '66' | '50' | '100';
 
-interface IFormGroupProps {
+export interface IFormGroupProps {
     type: inputTypes,
     size: inputSizes,
     label: string,
@@ -15,6 +15,7 @@ interface IFormGroupProps {
     validations?: string[],
     errorMessage?: string,
     setFieldValidation?: (field: string, value: string)=>void,
+    matchValue?: string;
     options?: {
         label: string,
         value: string,
@@ -48,7 +49,7 @@ function _generateTextInput(props: IFormGroupProps) {
             onChange={(event)=>{
                 if(props.onChange) {
                     if(props.validations) {
-                        const validationError = validateInput(event.target.value, props.validations as string[]);
+                        const validationError = validateInput(event.target.value, props.validations as string[], props.matchValue);
                         if(props.setFieldValidation){
                             props.setFieldValidation(props.id, validationError as string)
                         }

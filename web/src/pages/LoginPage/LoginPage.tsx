@@ -36,12 +36,16 @@ function LoginPage() {
                   password
                 }
               });
-              localStorage.setItem("token", "Bearer " + response?.data.token);
-              localStorage.setItem("user", response?.data.user);
-              if(window.location.pathname === "/") {
-                window.location.pathname = "home";
+              if(response?.data.user.role === "student") {
+                alertError("Alunas devem acessar a plataforma pelo aplicativo.")
               } else {
-                window.location.reload();
+                localStorage.setItem("token", "Bearer " + response?.data.token);
+                localStorage.setItem("user", response?.data.user);
+                if(window.location.pathname === "/") {
+                  window.location.pathname = "home";
+                } else {
+                  window.location.reload();
+                }
               }
             } catch (err) {
               const error = err as {

@@ -9,13 +9,7 @@ function Teachers() {
     const [entities, setEntities] = useState<Record<string, unknown>[]>([]);
     const [offset, setOffset] = useState(0);
     const [filters, setFilters] = useState<Record<string, unknown>>({});
-
-    useEffect(()=>{
-        getEntities(offset).then(entities=>{
-            setEntities(entities)
-        })
-    }, [])
-
+    
     useEffect(()=>{
         getEntities(offset, filters).then(entities=>{
             setEntities(entities)

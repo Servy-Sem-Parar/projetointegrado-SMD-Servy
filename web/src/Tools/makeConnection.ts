@@ -10,7 +10,7 @@ interface IMakeConnectionProps {
 
 export async function makeConnection(props: IMakeConnectionProps) {
     const api = axios.create({
-        baseURL: "http://localhost:4000",
+        baseURL: process.env.REACT_APP_BACKEND_URL,//"http://localhost:4000",
         headers: generateHeader(),
     });
     const url = buildUrl(props.suffix, props.entityId, props.otherQueryStrings);

@@ -1,4 +1,4 @@
-import FormGroup, { inputSizes, inputTypes } from "../FormGroup/FormGroup";
+import FormGroup, { IFormGroupProps, inputSizes, inputTypes } from "../FormGroup/FormGroup";
 import "./SaveModal.css";
 
 interface ISaveModalProps {
@@ -6,7 +6,7 @@ interface ISaveModalProps {
     showModal: boolean;
     closeModal: ()=>void;
     targetEntity: Record<string, unknown>;
-    fields: Record<string, unknown>[];
+    fields: IFormGroupProps[];//Record<string, unknown>[];
     footerButtons: {
         callback: ()=>void;
         label: string;
@@ -42,6 +42,7 @@ export function SaveModal(props: ISaveModalProps) {
                                     validations={field.validations as string[]}
                                     errorMessage={field.errorMessage as string}
                                     setFieldValidation={field.setFieldValidation as (field: string, value: string)=>void}
+                                    matchValue={field.matchValue as string}
                                 />
                             )
                         })

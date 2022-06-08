@@ -1,23 +1,38 @@
 import { useState } from "react";
 import { alertError, alertSuccess } from "../../../components/Alert/Alert";
+import { DeleteModal } from "../../../components/DeleteModal/DeleteModal";
 import { SaveModal } from "../../../components/SaveModal/SaveModal"
 import { validateAllInputs } from "../../../Tools/validateInputs";
+import { deleteEntity } from "../requester";
 import { fieldValidations, getSaveModalFields } from "./getSaveModalFields";
 
 export let openSaveModal:(targetEntity?: Record<string, unknown>)=>void;
+export let openDeleteModal:(targetEntity: Record<string, unknown>)=>void;
 
 export function ModalsProvider() {
-    const [targetEntity, setTargetEntity] = useState<Record<string, unknown>>({})
+    const [targetEntity, setTargetEntity] = useState<Record<string, unknown>>({});
     const [isOpenSaveModal, setIsOpenSaveModal] = useState(false);
     const [errorMessages, setErrorMessages] = useState<Record<string, string>>({});
-    const [entity, setEntity] = useState<Record<string, unknown>>({})
+    const [entity, setEntity] = useState<Record<string, unknown>>({});
+    const [isEdit, setIsEdit] = useState(false);
+    const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
 
     openSaveModal = (targetEntity?: Record<string, unknown>)=>{ 
         if(targetEntity){
+            if(targetEntity._id) {
+                setIsEdit(true);
+            } 
             setTargetEntity({...targetEntity}); 
             setEntity({...targetEntity})
+        } else {
+            setIsEdit(false);
         }
         setIsOpenSaveModal(true) 
+    }
+
+    openDeleteModal = (targetEntity: Record<string, unknown>)=>{ 
+        setTargetEntity({...targetEntity}); 
+        setIsOpenDeleteModal(true) 
     }
 
     return (
@@ -25,7 +40,7 @@ export function ModalsProvider() {
             {
                 isOpenSaveModal && 
                     <SaveModal
-                        titleLabel={targetEntity.id ? "Editar Professora" : "Nova Professora"}
+                        titleLabel={isEdit ? "Editar Professora" : "Nova Professora"}
                         showModal={isOpenSaveModal}
                         closeModal={()=>{setIsOpenSaveModal(false); setTargetEntity({}); setErrorMessages({});}}
                         targetEntity={targetEntity}
@@ -43,6 +58,8 @@ export function ModalsProvider() {
                                     newValidation[field] = value;
                                     setErrorMessages(newValidation);
                                 },
+                                isEdit,
+                                passwordValue: entity.password ? entity.password as string : "",
                             })
                         }
                         footerButtons={[
@@ -58,7 +75,7 @@ export function ModalsProvider() {
                             {
                                 label: "Salvar",
                                 callback: ()=>{
-                                    const validationResult = validateAllInputs({entity, validations: fieldValidations})
+                                    const validationResult = validateAllInputs({entity, validations: fieldValidations, matchValue: entity.password ? entity.password as string : ""})
                                     
                                     if(validationResult.success) {
                                         alertSuccess("Usuário criado com sucesso.")
@@ -74,6 +91,16 @@ export function ModalsProvider() {
                                 }
                             },
                         ]}
+                    />
+            }
+            {
+                isOpenDeleteModal && 
+                    <DeleteModal
+                        titleLabel={"Remover professora"}
+                        showModal={isOpenDeleteModal}
+                        closeModal={()=>{setIsOpenDeleteModal(false)}}
+                        callback={()=>{deleteEntity(targetEntity._id as string)}}
+                        bodyLabel={"Essa ação ira remover a professora."}
                     />
             }
         </div>
