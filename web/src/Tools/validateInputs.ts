@@ -31,26 +31,35 @@ export function validateAllInputs(props: IValidateInputsProps) {
                     validationResult.success = false;
                     validationResult.errors[key] = "As Senhas não coincidem";
                 }
+            } else if(validation === "mandatoryArray") {
+                if(!validateMandatoryArray(props.entity[key] as string[])) {
+                    validationResult.success = false;
+                    validationResult.errors[key] = "Selecione ao menos uma opção";
+                }
             }
         })
     })
     return validationResult;
 }
 
-export function validateInput(field: string, validations: string[], matchValue?: string) {
+export function validateInput(field: string | string[], validations: string[], matchValue?: string) {
     let error = "";
     validations.forEach(validation=>{
         if(validation === "mandatory") {
-            if(!validateMandatory(field)) {
+            if(!validateMandatory(field as string)) {
                 error = "Campo obrigatório";
             }
         } else if(validation === "password") {
-            if(!validatePassword(field)) {
+            if(!validatePassword(field as string)) {
                 error = "A senha deve ter ao menos 8 digitos";
             }
         } else if(validation === "matchValue") {
-            if(!validateRetypePassword(field, matchValue)) {
+            if(!validateRetypePassword(field as string, matchValue)) {
                 error = "As Senhas não coincidem";
+            }
+        } else if(validation === "mandatoryArray") {
+            if(!validateMandatoryArray(field as string[])) {
+                error = "Selecione ao menos uma opção";
             }
         }
     })
@@ -75,6 +84,14 @@ export function validatePassword(field: string) {
 
 export function validateRetypePassword(field: string, matchValue?: string) {
     if(!field || field !== matchValue) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+export function validateMandatoryArray(field: string[]) {
+    if(!field || field.length < 1) {
         return false;
     } else {
         return true;

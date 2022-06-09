@@ -4,7 +4,7 @@ import {FaSearch} from "react-icons/fa";
 import { Popover } from "./Popover/Popover";
 //import { useState } from "react";
 import { Pagination } from "./Pagination/Pagination";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface IListPageProps {
     title: string,
@@ -12,6 +12,7 @@ interface IListPageProps {
     columns: IColumn[],
     titleButtonLabel: string,
     titleButtonCallback: ()=>void,
+    defaultFilter?: Record<string, unknown>,
     filters?: {
         placeholder: string,
         control: string,
@@ -40,7 +41,13 @@ interface IAction {
 }
 
 export function ListPage(props: IListPageProps) {
-    const [filters, setFilters] = useState<Record<string, unknown>>({})
+    const [filters, setFilters] = useState<Record<string, unknown>>({});
+
+    useEffect(()=>{
+        if(props.defaultFilter) {
+            setFilters(props.defaultFilter);
+        }
+    }, [props.defaultFilter])
 
     return (
         <div className="list_page_body">
@@ -137,7 +144,7 @@ export function ListPage(props: IListPageProps) {
                                                     {entity[column.control] ? entity[column.control] as string : "---" }
                                                 </td>
                                             )
-                                        } else if (column.type === "action") {
+                                        } else {
                                             return (
                                                 <Popover
                                                     control={index}

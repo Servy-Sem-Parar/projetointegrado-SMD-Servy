@@ -3,7 +3,8 @@ import { alertError, alertSuccess } from "../../../components/Alert/Alert";
 import { DeleteModal } from "../../../components/DeleteModal/DeleteModal";
 import { SaveModal } from "../../../components/SaveModal/SaveModal"
 import { validateAllInputs } from "../../../Tools/validateInputs";
-import { deleteEntity } from "../requester";
+import { createEntity, deleteEntity, editEntity } from "../requester";
+import { updateEntities } from "../Teachers";
 import { fieldValidations, getSaveModalFields } from "./getSaveModalFields";
 
 export let openSaveModal:(targetEntity?: Record<string, unknown>)=>void;
@@ -48,7 +49,7 @@ export function ModalsProvider() {
                             getSaveModalFields({
                                 initialEntity: targetEntity, 
                                 errorMessages, 
-                                onChange: (field: string, value: string | Date)=>{
+                                onChange: (field: string, value: string | Date | string[] )=>{
                                     const newEntity = {...entity}
                                     newEntity[field] = value;
                                     setEntity(newEntity)
@@ -74,16 +75,39 @@ export function ModalsProvider() {
                             },
                             {
                                 label: "Salvar",
-                                callback: ()=>{
-                                    const validationResult = validateAllInputs({entity, validations: fieldValidations, matchValue: entity.password ? entity.password as string : ""})
+                                callback: async ()=>{
+                                    const validations = {...fieldValidations}
+                                    if(isEdit) {
+                                        validations.password = [];
+                                        validations.retypePassword = [];
+                                    }
+                                    //console.log("cv", validations, isEdit)
+                                    const validationResult = validateAllInputs({entity, validations, matchValue: entity.password ? entity.password as string : ""})
                                     
                                     if(validationResult.success) {
-                                        alertSuccess("Usuário criado com sucesso.")
-                                        console.log("ent", entity)
-                                        setEntity({});
-                                        setTargetEntity({});
-                                        setIsOpenSaveModal(false); 
-                                        setErrorMessages({});
+                                        if(isEdit) {
+                                            const success = await editEntity(entity, targetEntity._id as string);//.then(success=>{
+                                                if(success) {
+                                                    alertSuccess("Usuário editado com sucesso.")
+                                                    setEntity({});
+                                                    setTargetEntity({});
+                                                    setIsOpenSaveModal(false); 
+                                                    setErrorMessages({});
+                                                    updateEntities();
+                                                }
+                                            //});
+                                        } else {
+                                            const success = await createEntity(entity);//.then(success=>{
+                                                if(success) {
+                                                    alertSuccess("Usuário criado com sucesso.")
+                                                    setEntity({});
+                                                    setTargetEntity({});
+                                                    setIsOpenSaveModal(false); 
+                                                    setErrorMessages({});
+                                                    updateEntities();
+                                                }
+                                            //});
+                                        }
                                     } else {
                                         alertError("Um ou mais campos não estão corretamente preenchidos.")
                                         setErrorMessages(validationResult.errors)
@@ -99,7 +123,12 @@ export function ModalsProvider() {
                         titleLabel={"Remover professora"}
                         showModal={isOpenDeleteModal}
                         closeModal={()=>{setIsOpenDeleteModal(false)}}
-                        callback={()=>{deleteEntity(targetEntity._id as string)}}
+                        callback={()=>{
+                            deleteEntity(targetEntity._id as string);
+                            setIsOpenDeleteModal(false);
+                            setTargetEntity({});
+                            updateEntities();
+                        }}
                         bodyLabel={"Essa ação ira remover a professora."}
                     />
             }

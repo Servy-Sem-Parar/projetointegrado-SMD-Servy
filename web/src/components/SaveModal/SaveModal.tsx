@@ -37,7 +37,7 @@ export function SaveModal(props: ISaveModalProps) {
                                     placeholder={field.placeholder as string}
                                     id={field.id as string}
                                     defaultValue={field.defaultValue as string}
-                                    onChange={field.onChange as (value: string | Date)=>void}
+                                    onChange={field.onChange as (value: string | string[] | Date)=>void}
                                     options={field.options as {value: string, label: string}[]}
                                     validations={field.validations as string[]}
                                     errorMessage={field.errorMessage as string}

@@ -17,10 +17,13 @@ function getPermissionLabel(permission: string) {
 }
 
 export async function getEntities(offset: number, filters?: Record<string, unknown>) {
-    const suffix = "user/professoras";
+    const suffix = "user";
     const method = "get";
     const otherQueryStrings: Record<string, unknown> = { offset };
-    let entities = [];
+    let result = {
+        data: [],
+        total: 1,
+    };
 
     if(filters) {
         Object.keys(filters).forEach((key)=>{
@@ -37,23 +40,27 @@ export async function getEntities(offset: number, filters?: Record<string, unkno
             method,
             otherQueryStrings
         });
-        entities = response?.data.data.map((entity: Record<string, unknown>)=>{
+        const entities = response?.data.data.map((entity: Record<string, unknown>)=>{
             return {
                 permission: getPermissionLabel(entity.role as string),
                 ...entity
             }
         })
+        result = {
+            data: entities,
+            total: response?.data.total
+        }
     } catch(err) {
         console.error(err);
     }
     closeLoader();
 
-    return entities;
+    return result;
 }
 
-export async function createEntities(body: Record<string, unknown>) {
-    const suffix = "user/professoras";
-    const method = "put";
+export async function createEntity(body: Record<string, unknown>) {
+    const suffix = "user";
+    const method = "post";
     let success = false;
 
     openLoader();
@@ -74,9 +81,9 @@ export async function createEntities(body: Record<string, unknown>) {
     return success;
 }
 
-export async function editEntities(body: Record<string, unknown>, entityId: string) {
-    const suffix = "user/professoras";
-    const method = "post";
+export async function editEntity(body: Record<string, unknown>, entityId: string) {
+    const suffix = "user";
+    const method = "put";
     let success = false;
 
     openLoader();
