@@ -9,7 +9,10 @@ const DisciplinaSchema = new Schema<IDisciplina>({
     required: true,
     unique: true,
   },
-  description: {
+  icon: {
+    type: String,
+  },
+  color: {
     type: String,
   },
 });

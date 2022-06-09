@@ -17,7 +17,7 @@ function getPermissionLabel(permission: string) {
 }
 
 export async function getEntities(offset: number, filters?: Record<string, unknown>) {
-    const suffix = "user";
+    const suffix = "user/professoras";
     const method = "get";
     const otherQueryStrings: Record<string, unknown> = { offset };
     let result = {

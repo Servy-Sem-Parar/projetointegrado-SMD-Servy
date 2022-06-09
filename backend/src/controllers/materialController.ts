@@ -16,6 +16,14 @@ class MaterialController extends CrudController<IMaterial, typeof Material> {
   override populate(entity) {
     return entity;
   }
+
+  override prepareQuery(request: Request, query: mongoose.FilterQuery<IMaterial>, options: any): void {
+    const {name} = request.query
+    if (name) {
+      query.name = {$regex: new RegExp(name as string), $options: "i"}
+    }
+  }
+
 }
 
 export default new MaterialController();

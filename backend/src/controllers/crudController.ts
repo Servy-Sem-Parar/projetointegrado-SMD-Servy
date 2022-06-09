@@ -15,8 +15,16 @@ abstract class CrudController<I, T extends Model<I>> {
     return entity;
   }
 
-  prepareQuery(request: Request, query: FilterQuery<I>): void {
+  prepareQuery(request: Request, query: FilterQuery<I>, options: any): void {
 
+  }
+
+  posCreate(result: I, request:Request): void {
+    this.posUpdate(result, request)
+  }
+
+  posUpdate(result: I, request:Request): void {
+    
   }
 
   async createFromParameters(request: Request): Promise<Document<unknown, any, I> & I> {
@@ -44,19 +52,19 @@ abstract class CrudController<I, T extends Model<I>> {
 
   create = async (request: Request, response: Response): Promise<Response> => {
     const result = await this.createFromParameters(request);
-
+    this.posCreate(result, request)
     return response.status(201).json({ data: result });
   };
 
   read = async (request: Request, response: Response): Promise<Response> => {
     const result = await this.populate(this.getEntity().findById(request.params.id)).exec();
-
+    
     return response.status(200).json({ data: result });
   };
 
   update = async (request: Request, response: Response): Promise<Response> => {
     const result = await this.updateFromParameters(request);
-
+    this.posUpdate(result, request)
     return response.status(200).json({ data: result });
   };
 
@@ -67,6 +75,14 @@ abstract class CrudController<I, T extends Model<I>> {
   };
 
   list = async (request: Request, response: Response): Promise<Response> => {
+    const pesquisa = this.pesquisaPadrao(request)
+
+    const result = await this.getEntity().paginate(...pesquisa)
+
+    return response.status(200).json({ data: result.docs, total: result.totalPages });
+  };
+
+  pesquisaPadrao = (request: Request): any => {
     const {
       offset,
       order = "id",
@@ -75,20 +91,15 @@ abstract class CrudController<I, T extends Model<I>> {
 
     const query: FilterQuery<I> = {};
     
-    this.prepareQuery(request, query)
-
     const options = {
       sort: { [sort as string]: order === "desc" ? -1 : 1 },
     };
 
-    const result = await this.getEntity().paginate(query, {
-      offset,
-      limit: 10,
-      options,
-    })
+    this.prepareQuery(request, query, options)
 
-    return response.status(200).json({ data: result.docs, total: result.totalPages });
-  };
+    return [query, {offset, limit: 10, options}]
+  }
+
 }
 
 export default CrudController;
