@@ -28,7 +28,7 @@ interface IListPageProps {
     total: number,
 }
 
-interface IColumn {
+export interface IColumn {
     type: string,
     label: string,
     control: string,

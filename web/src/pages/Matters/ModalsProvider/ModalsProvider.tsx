@@ -4,7 +4,7 @@ import { DeleteModal } from "../../../components/DeleteModal/DeleteModal";
 import { SaveModal } from "../../../components/SaveModal/SaveModal"
 import { validateAllInputs } from "../../../Tools/validateInputs";
 import { createEntity, deleteEntity, editEntity } from "../requester";
-import { updateEntities } from "../Teachers";
+import { updateEntities } from "../Matters";
 import { fieldValidations, getSaveModalFields } from "./getSaveModalFields";
 
 export let openSaveModal:(targetEntity?: Record<string, unknown>)=>void;
@@ -24,16 +24,16 @@ export function ModalsProvider() {
                 setIsEdit(true);
             } 
             setTargetEntity({...targetEntity}); 
-            setEntity({...targetEntity})
+            setEntity({...targetEntity});
         } else {
             setIsEdit(false);
         }
-        setIsOpenSaveModal(true) 
+        setIsOpenSaveModal(true);
     }
 
     openDeleteModal = (targetEntity: Record<string, unknown>)=>{ 
         setTargetEntity({...targetEntity}); 
-        setIsOpenDeleteModal(true) 
+        setIsOpenDeleteModal(true);
     }
 
     return (
@@ -41,7 +41,7 @@ export function ModalsProvider() {
             {
                 isOpenSaveModal && 
                     <SaveModal
-                        titleLabel={isEdit ? "Editar professora" : "Nova professora"}
+                        titleLabel={isEdit ? "Editar disciplina" : "Nova disciplina"}
                         showModal={isOpenSaveModal}
                         closeModal={()=>{setIsOpenSaveModal(false); setTargetEntity({}); setErrorMessages({});}}
                         targetEntity={targetEntity}
@@ -52,15 +52,13 @@ export function ModalsProvider() {
                                 onChange: (field: string, value: string | Date | string[] )=>{
                                     const newEntity = {...entity}
                                     newEntity[field] = value;
-                                    setEntity(newEntity)
+                                    setEntity(newEntity);
                                 },
                                 setFieldValidation: (field: string, value: string)=>{
                                     const newValidation = {...errorMessages};
                                     newValidation[field] = value;
                                     setErrorMessages(newValidation);
                                 },
-                                isEdit,
-                                passwordValue: entity.password ? entity.password as string : "",
                             })
                         }
                         footerButtons={[
@@ -68,7 +66,7 @@ export function ModalsProvider() {
                                 label: "Cancelar",
                                 callback: ()=>{
                                     setTargetEntity({});
-                                    setEntity({})
+                                    setEntity({});
                                     setIsOpenSaveModal(false); 
                                     setErrorMessages({});
                                 }
@@ -76,18 +74,14 @@ export function ModalsProvider() {
                             {
                                 label: "Salvar",
                                 callback: async ()=>{
-                                    const validations = {...fieldValidations}
-                                    if(isEdit) {
-                                        validations.password = [];
-                                        validations.retypePassword = [];
-                                    }
-                                    const validationResult = validateAllInputs({entity, validations, matchValue: entity.password ? entity.password as string : ""})
+                                    const validations = {...fieldValidations};
+                                    const validationResult = validateAllInputs({entity, validations});
                                     
                                     if(validationResult.success) {
                                         if(isEdit) {
-                                            const success = await editEntity(entity, targetEntity._id as string);//.then(success=>{
+                                            const success = await editEntity(entity, targetEntity._id as string);
                                             if(success) {
-                                                alertSuccess("Usuário editado com sucesso.")
+                                                alertSuccess("Disciplina editada com sucesso.");
                                                 setEntity({});
                                                 setTargetEntity({});
                                                 setIsOpenSaveModal(false); 
@@ -97,7 +91,7 @@ export function ModalsProvider() {
                                         } else {
                                             const success = await createEntity(entity);
                                             if(success) {
-                                                alertSuccess("Professora cadastrada com sucesso.")
+                                                alertSuccess("Disciplina criada com sucesso.");
                                                 setEntity({});
                                                 setTargetEntity({});
                                                 setIsOpenSaveModal(false); 
@@ -106,8 +100,8 @@ export function ModalsProvider() {
                                             }
                                         }
                                     } else {
-                                        alertError("Um ou mais campos não estão corretamente preenchidos.")
-                                        setErrorMessages(validationResult.errors)
+                                        alertError("Um ou mais campos não estão corretamente preenchidos.");
+                                        setErrorMessages(validationResult.errors);
                                     }
                                 }
                             },
@@ -117,7 +111,7 @@ export function ModalsProvider() {
             {
                 isOpenDeleteModal && 
                     <DeleteModal
-                        titleLabel={"Remover professora"}
+                        titleLabel={"Remover disciplina"}
                         showModal={isOpenDeleteModal}
                         closeModal={()=>{setIsOpenDeleteModal(false)}}
                         callback={()=>{
@@ -126,7 +120,7 @@ export function ModalsProvider() {
                             setTargetEntity({});
                             updateEntities();
                         }}
-                        bodyLabel={"Essa ação ira remover a professora."}
+                        bodyLabel={"Essa ação ira remover a disciplina."}
                     />
             }
         </div>
