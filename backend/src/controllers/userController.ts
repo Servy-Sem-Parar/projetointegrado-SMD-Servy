@@ -40,15 +40,43 @@ class UserController extends CrudController<IUser, typeof User> {
   }
 
   override prepareQuery(request: Request, query: mongoose.FilterQuery<IUser>): void {
-    const {name, role} = request.query
+    const {name, email, role} = request.query
     if (name) {
       query.name = {$regex: new RegExp(name as string), $options: "i"}
+    }
+    if (email) {
+      query.email = {$regex: new RegExp(email as string), $options: "i"}
     }
     if (role) {
       query.role = role
     }
   }
  
+  professoras = async (request: Request, response: Response): Promise<Response> => {
+    const pesquisa = this.pesquisaPadrao(request)
+    pesquisa[0] = {
+      ...pesquisa[0],
+      $or: [
+        { 'role': 'admin' },
+        { 'role': 'teacher' }
+      ]
+    }
+    const result = await this.getEntity().paginate(...pesquisa)
+
+    return response.status(200).json({ data: result.docs, total: result.totalPages });
+  };
+
+  alunas = async (request: Request, response: Response): Promise<Response> => {
+    const pesquisa = this.pesquisaPadrao(request)
+    pesquisa[0] = {
+      ...pesquisa[0],
+      role: 'student'
+    }
+    const result = await this.getEntity().paginate(...pesquisa)
+
+    return response.status(200).json({ data: result.docs, total: result.totalPages });
+  };
+
 }
 
 export default new UserController();

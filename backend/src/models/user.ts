@@ -23,6 +23,9 @@ const UserSchema = new Schema<IUser>({
     required: true,
     select: false,
   },
+  phone_number: {
+    type: String,
+  },
   role: {
     type: String,
     default: Role.STUDENT,

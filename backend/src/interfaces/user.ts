@@ -5,6 +5,7 @@ import ITurma from './turma';
 interface IUser extends Document {
   name: String;
   email: String;
+  phone_number: String;
   password: String;
   createdAt: Date;
   role: Role;

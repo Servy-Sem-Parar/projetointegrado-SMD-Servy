@@ -67,6 +67,14 @@ abstract class CrudController<I, T extends Model<I>> {
   };
 
   list = async (request: Request, response: Response): Promise<Response> => {
+    const pesquisa = this.pesquisaPadrao(request)
+
+    const result = await this.getEntity().paginate(...pesquisa)
+
+    return response.status(200).json({ data: result.docs, total: result.totalPages });
+  };
+
+  pesquisaPadrao = (request: Request): any => {
     const {
       offset,
       order = "id",
@@ -81,14 +89,9 @@ abstract class CrudController<I, T extends Model<I>> {
       sort: { [sort as string]: order === "desc" ? -1 : 1 },
     };
 
-    const result = await this.getEntity().paginate(query, {
-      offset,
-      limit: 10,
-      options,
-    })
+    return [query, {offset, limit: 10, options}]
+  }
 
-    return response.status(200).json({ data: result.docs, total: result.totalPages });
-  };
 }
 
 export default CrudController;
