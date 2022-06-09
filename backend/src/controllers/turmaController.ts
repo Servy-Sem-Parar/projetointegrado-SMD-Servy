@@ -20,6 +20,11 @@ class TurmaController extends CrudController<ITurma, typeof Turma> {
       .populate('teachers')
       .populate('students');
   }
+
+  override prepareQuery(request: Request, query: mongoose.FilterQuery<ITurma>, options: any): void {
+    options.populate = ['teachers', 'students', 'materiais', 'disciplina']
+  }
+
 }
 
 export default new TurmaController();
