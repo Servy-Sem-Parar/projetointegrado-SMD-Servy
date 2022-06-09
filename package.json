@@ -1,7 +1,0 @@
-{
-    "scripts": {
-        "dev": "cd backend && ts-node-dev -r tsconfig-paths/register --respawn -T --ignore-watch node-modules --no-notify src/server.ts",
-        "build": "cd backend && babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
-        "start": "cd backend && node dist/server.js"
-      }
-}
