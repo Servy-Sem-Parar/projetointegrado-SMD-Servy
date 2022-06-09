@@ -23,6 +23,10 @@ class TurmaController extends CrudController<ITurma, typeof Turma> {
 
   override prepareQuery(request: Request, query: mongoose.FilterQuery<ITurma>, options: any): void {
     options.populate = ['teachers', 'students', 'materiais', 'disciplina']
+    const {name} = request.query
+    if (name) {
+      query.name = {$regex: new RegExp(name as string), $options: "i"}
+    }
   }
 
 }

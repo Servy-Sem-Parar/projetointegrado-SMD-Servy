@@ -29,6 +29,12 @@ const TurmaSchema = new Schema<ITurma>({
     ref: 'Disciplina',
     required: true,
   },
+  description: {
+    type: String
+  },
+  informations: {
+    type: String
+  }
 });
 
 TurmaSchema.plugin(paginate);

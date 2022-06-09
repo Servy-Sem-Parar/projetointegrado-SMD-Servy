@@ -6,10 +6,12 @@ import IUser from './user';
 
 interface ITurma extends Document {
   name: String;
-  teachers: IUser[],
-  students: IUser[],
-  materiais: IMaterial[],
-  disciplina: IDisciplina
+  teachers: IUser[];
+  students: IUser[];
+  materiais: IMaterial[];
+  disciplina: IDisciplina;
+  description: String;
+  informations: String;
 }
 
 export default ITurma;

@@ -16,6 +16,14 @@ class DisciplinaController extends CrudController<IDisciplina, typeof Disciplina
   override populate(entity) {
     return entity;
   }
+  
+  override prepareQuery(request: Request, query: mongoose.FilterQuery<IDisciplina>, options: any): void {
+    const {name} = request.query
+    if (name) {
+      query.name = {$regex: new RegExp(name as string), $options: "i"}
+    }
+  }
+
 }
 
 export default new DisciplinaController();
