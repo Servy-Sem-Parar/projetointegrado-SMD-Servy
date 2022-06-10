@@ -12,7 +12,7 @@ const DisciplinaSchema = new Schema<IDisciplina>({
   icon: {
     type: String,
   },
-  color: {
+  description: {
     type: String,
   },
 });

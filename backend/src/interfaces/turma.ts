@@ -12,6 +12,7 @@ interface ITurma extends Document {
   disciplina: IDisciplina;
   description: String;
   informations: String;
+  color: String;
 }
 
 export default ITurma;
