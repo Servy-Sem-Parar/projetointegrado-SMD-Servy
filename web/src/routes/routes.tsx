@@ -6,6 +6,7 @@ import {
 import Classes from "../pages/Classes/Classes";
 import Home from "../pages/Home/Home";
 import LoginPage from "../pages/LoginPage/LoginPage";
+import Matters from "../pages/Matters/Matters";
 import Planing from "../pages/Planing/Planing";
 import Students from "../pages/Students/Students";
 import Teachers from "../pages/Teachers/Teachers";
@@ -27,6 +28,7 @@ function Router() {
                 <Route path="alunas" element={isAuth() ? <Students/> : <LoginPage/>}/>
                 <Route path="turmas" element={isAuth() ? <Classes/> : <LoginPage/>}/>
                 <Route path="planejamento" element={isAuth() ? <Planing/> : <LoginPage/>}/>
+                <Route path="disciplina" element={isAuth() ? <Matters/> : <LoginPage/>}/>
             </Routes>
         </BrowserRouter>
     )

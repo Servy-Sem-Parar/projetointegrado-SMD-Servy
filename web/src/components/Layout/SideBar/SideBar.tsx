@@ -4,9 +4,11 @@ import {BsCalendarDayFill} from "react-icons/bs";
 import {SiGoogleclassroom} from "react-icons/si";
 import {BiLogOut} from "react-icons/bi";
 import {AiFillHome} from "react-icons/ai";
+import {MdOutlineClass} from "react-icons/md"
 import logout from "../../../Tools/logout";
 
 import "./SideBar.css";
+import { getUserPermission } from "../../../Tools/getUserPermission";
 
 interface ISideBarProps {
     sideBarIsOpen: boolean;
@@ -17,6 +19,7 @@ function testSideBar(route: string) {
 }
 
 function SideBar(props: ISideBarProps) {
+    const permission = getUserPermission();
 
     return (
         <div className={`side-bar ${props.sideBarIsOpen === false && "side-bar-closed"}`}>
@@ -27,17 +30,23 @@ function SideBar(props: ISideBarProps) {
                     />
                     <div className="side-bar-item-text-content">Home</div>
                 </div>
-                <div onClick={()=>{window.location.pathname = "professoras"}} className={ testSideBar("professoras") ? "side-bar-item-active" : "side-bar-item"}>
+                {permission === "admin" && <div onClick={()=>{window.location.pathname = "professoras"}} className={ testSideBar("professoras") ? "side-bar-item-active" : "side-bar-item"}>
                     <GiTeacher
                         className="side-bar-icon"
                     />
                     <div className="side-bar-item-text-content">Professoras</div>
-                </div>
-                <div onClick={()=>{window.location.pathname = "alunas"}} className={ testSideBar("alunas") ? "side-bar-item-active" : "side-bar-item"}>
+                </div>}
+                {permission === "admin" && <div onClick={()=>{window.location.pathname = "alunas"}} className={ testSideBar("alunas") ? "side-bar-item-active" : "side-bar-item"}>
                     <FaUserGraduate
                         className="side-bar-icon"
                     />
                     <div className="side-bar-item-text-content">Alunas</div>
+                </div>}
+                <div onClick={()=>{window.location.pathname = "disciplinas"}} className={ testSideBar("disciplinas") ? "side-bar-item-active" : "side-bar-item"}>
+                    <MdOutlineClass
+                        className="side-bar-icon"
+                    />
+                    <div className="side-bar-item-text-content">Disciplinas</div>
                 </div>
                 <div onClick={()=>{window.location.pathname = "turmas"}} className={ testSideBar("turmas") ? "side-bar-item-active" : "side-bar-item"}>
                     <SiGoogleclassroom
@@ -45,12 +54,12 @@ function SideBar(props: ISideBarProps) {
                     />
                     <div className="side-bar-item-text-content">Turmas</div>
                 </div>
-                <div onClick={()=>{window.location.pathname = "planejamento"}} className={ testSideBar("planejamento") ? "side-bar-item-active" : "side-bar-item"}>
+                {/*<div onClick={()=>{window.location.pathname = "planejamento"}} className={ testSideBar("planejamento") ? "side-bar-item-active" : "side-bar-item"}>
                     <BsCalendarDayFill
                         className="side-bar-icon"
                     />
                     <div className="side-bar-item-text-content">Planejamento</div>
-                </div>
+                </div>*/}
             </div>
             <div onClick={()=>{logout()}} className={"logout-buttom"}>
                 <BiLogOut
