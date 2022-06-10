@@ -28,7 +28,7 @@ function Router() {
                 <Route path="alunas" element={isAuth() ? <Students/> : <LoginPage/>}/>
                 <Route path="turmas" element={isAuth() ? <Classes/> : <LoginPage/>}/>
                 <Route path="planejamento" element={isAuth() ? <Planing/> : <LoginPage/>}/>
-                <Route path="disciplina" element={isAuth() ? <Matters/> : <LoginPage/>}/>
+                <Route path="disciplinas" element={isAuth() ? <Matters/> : <LoginPage/>}/>
             </Routes>
         </BrowserRouter>
     )

@@ -24,15 +24,15 @@ export function getColumns() {
             control: "action",
             actions: [
                 {
-                    label: "Remover",
-                    callback: (entity: Record<string, unknown>)=>{
-                        openDeleteModal(entity);
-                    }
-                },
-                {
                     label: "Editar",
                     callback: (entity: Record<string, unknown>)=>{
                         openSaveModal(entity);
+                    }
+                },
+                {
+                    label: "Remover",
+                    callback: (entity: Record<string, unknown>)=>{
+                        openDeleteModal(entity);
                     }
                 },
             ],

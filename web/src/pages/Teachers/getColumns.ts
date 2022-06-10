@@ -11,7 +11,7 @@ export function getColumns() {
             {
                 type: "string",
                 label: "Telefone",
-                control: "phone_number",
+                control: "phone",
             },
             {
                 type: "string",
@@ -29,15 +29,15 @@ export function getColumns() {
                 control: "action",
                 actions: [
                     {
-                        label: "Remover",
-                        callback: (entity: Record<string, unknown>)=>{
-                            openDeleteModal(entity)
-                        }
-                    },
-                    {
                         label: "Editar",
                         callback: (entity: Record<string, unknown>)=>{
                             openSaveModal(entity)
+                        }
+                    },
+                    {
+                        label: "Remover",
+                        callback: (entity: Record<string, unknown>)=>{
+                            openDeleteModal(entity)
                         }
                     },
                 ],

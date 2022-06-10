@@ -10,9 +10,9 @@
 }
 
 .list-page-title {
-    font-weight: 600;
-    color: rgb(167,128,181);
-    font-size: 30px;
+    font-weight: bold;
+    /*color: rgb(167,128,181);*/
+    font-size: 48px;
 }
 
 .title-button {
@@ -21,7 +21,7 @@
     font-size: 15px;
     font-weight: 600;
     color: white;
-    background-color: rgb(167,128,181);
+    background-color: #F97E0D;
     box-shadow: 0 0 13px #999999;
     align-items: center;
     justify-content: center;
@@ -36,9 +36,9 @@
 }
 
 .list-page-table-line {
-    background-color: rgb(167,128,181);
+    /*background-color: rgb(167,128,181);
     color: white;
-    font-weight: 600;
+    font-weight: 600;*/
     height: 50px;
 }
 
@@ -103,7 +103,8 @@
     font-size: 15px;
     padding: 5px;
     border-radius: 5px;
-    border: 1px solid #aeaeae;
+    border: 1px solid #F97E0D;
+    font-family: 'Dosis';
 }
 
 .filter-input:focus{
@@ -115,7 +116,7 @@
     /*margin: 0px 10px;*/
     border: 0px;
     border-radius: 6px;
-    background-color: rgb(167,128,181);
+    background-color: #F97E0D;
     color: white;
     font-size: 17px;
     box-shadow: 0 0 13px #999999;

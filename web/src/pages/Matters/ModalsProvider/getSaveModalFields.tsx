@@ -10,6 +10,7 @@ interface IGetSaveModalFieldsProps {
 export const fieldValidations = {
     name: ["mandatory"],
     description: [],
+    icon: []
 }
 
 export function getSaveModalFields(props: IGetSaveModalFieldsProps) {
@@ -41,7 +42,7 @@ export function getSaveModalFields(props: IGetSaveModalFieldsProps) {
             onChange: (value: string | Date | string[])=>{
                 props.onChange("description", value);
             }
-        },        
+        },       
     ]
 
     return fields;

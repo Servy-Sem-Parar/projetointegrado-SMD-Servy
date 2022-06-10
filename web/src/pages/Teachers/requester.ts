@@ -1,4 +1,5 @@
 import { closeLoader, openLoader } from "../../components/Loader/Loader";
+import { formatPhoneNumberToShow } from "../../Tools/formatPhoneNumberToShow";
 import { makeConnection } from "../../Tools/makeConnection"
 
 function getPermissionLabel(permission: string) {
@@ -42,6 +43,7 @@ export async function getEntities(offset: number, filters?: Record<string, unkno
         });
         const entities = response?.data.data.map((entity: Record<string, unknown>)=>{
             return {
+                phone: entity.phone_number ? formatPhoneNumberToShow(entity.phone_number as string) : "",
                 permission: getPermissionLabel(entity.role as string),
                 ...entity
             }

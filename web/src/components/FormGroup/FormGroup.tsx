@@ -19,7 +19,7 @@ export interface IFormGroupProps {
     setFieldValidation?: (field: string, value: string)=>void,
     matchValue?: string;
     options?: {
-        label: string,
+        label: string | JSX.Element,
         value: string,
     }[]
 }
@@ -89,7 +89,7 @@ function _generateMultiSelectInput(props: IFormGroupProps) {
                 control: styles => ({ 
                     display:"flex",
                     borderRadius: "10px",
-                    border: "1px solid #aeaeae",
+                    border: "1px solid #F97E0D",
                     marginTop: "4px",
                 }),
                 

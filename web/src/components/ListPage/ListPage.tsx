@@ -130,7 +130,12 @@ export function ListPage(props: IListPageProps) {
                 {
                     props.entities.map((entity, index)=>{
                         return (
-                            <tr className="list-page-table-line">
+                            <tr 
+                                className="list-page-table-line"
+                                style={{
+                                    backgroundColor: index%2 === 0 ? "#F8E3FF" : "#F1C8FF",
+                                }}
+                            >
                                 {
                                     props.columns.map(column=>{
                                         if(column.type === "string") {

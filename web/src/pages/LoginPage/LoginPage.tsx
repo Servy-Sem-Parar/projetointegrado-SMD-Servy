@@ -40,7 +40,7 @@ function LoginPage() {
                 alertError("Alunas devem acessar a plataforma pelo aplicativo.")
               } else {
                 localStorage.setItem("token", "Bearer " + response?.data.token);
-                localStorage.setItem("user", response?.data.user);
+                localStorage.setItem("user", JSON.stringify(response?.data.user));
                 if(window.location.pathname === "/") {
                   window.location.pathname = "home";
                 } else {
