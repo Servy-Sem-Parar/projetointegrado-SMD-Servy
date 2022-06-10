@@ -26,18 +26,21 @@ function Layout(props: ILayoutProps) {
         <div style={{width: "100%", height: "100%"}}>
             <Loader/>
             <Alert/>
-            {!routesWithOutLayout.includes(window.location.pathname) && isAuth() && 
+            {/*!routesWithOutLayout.includes(window.location.pathname) && isAuth() && 
                 <TopBar
                     sideBarIsOpen={sideBarIsOpen}
                     changeSideBarState={(value: boolean)=>{
                         setSideBarIsOpen(value)
                     }}
                 />
-            }
+            */}
             <div className={!routesWithOutLayout.includes(window.location.pathname) && isAuth() ? 'layout-body' : "no-layout"}>
                 {!routesWithOutLayout.includes(window.location.pathname) && isAuth() &&
                     <SideBar
                         sideBarIsOpen={sideBarIsOpen}
+                        changeSideBarState={(value: boolean)=>{
+                            setSideBarIsOpen(value)
+                        }}
                     />
                 }
                 <div className={!routesWithOutLayout.includes(window.location.pathname) && isAuth() ? 'layout-content': "no-layout"}>

@@ -5,29 +5,29 @@ export let openLoader: ()=>void;
 export let closeLoader: ()=>void;
 
 export function Loader() {
-    const [loader, setLoader] = useState(0);
+    const [loader, setLoader] = useState(false);
 
     /*useEffect(()=>{
         console.log("loader", loader)
     }, [loader])*/
 
     openLoader = ()=>{
-        const newLoader = loader;
-        setLoader(newLoader+1);
-        console.log("open", newLoader);
+        //const newLoader = loader;
+        setLoader(true);
+        //console.log("open", newLoader);
     }
 
     closeLoader = ()=>{
-        const newLoader = loader;
-        setLoader(newLoader-1);
-        console.log("close", newLoader);
+        //const newLoader = loader;
+        setLoader(false);
+        //console.log("close", newLoader);
     }
 
     return (
         <div 
             className="save-modal-blur"
             style={{
-                display: loader > 0 ? "flex" : "none",
+                display: loader === true ? "flex" : "none",
                 zIndex: 20,
             }}
         >
