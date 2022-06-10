@@ -1,6 +1,8 @@
 .side-bar {
-    width: 250px;
+    width: 210px;
     display: flex;
+    max-width: 210px;
+    min-width: 210px;
     flex-direction: column;
     justify-content: space-between;
     transition-duration: 0.5s;
@@ -8,7 +10,9 @@
 }
 
 .side-bar-closed {
-    width: 55px !important;
+    width: 55px;
+    max-width: 55px;
+    min-width: 55px;
 }
 
 .side-bar-closed .side-bar-item-text-content {
