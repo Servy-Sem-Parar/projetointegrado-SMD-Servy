@@ -34,6 +34,9 @@ const TurmaSchema = new Schema<ITurma>({
   },
   informations: {
     type: String
+  },
+  color: {
+    type: String
   }
 });
 
