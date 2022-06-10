@@ -8,6 +8,7 @@ import authMiddleware from './middlewares/authMiddleware';
 import turmaRoutes from './routes/turmaRoutes';
 import materialRoutes from './routes/materialRoutes';
 import disciplinaRoutes from './routes/disciplinaRoutes';
+import aulaRoutes from './routes/aulaRoutes';
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use('/user', userRoutes);
 app.use('/disciplina', disciplinaRoutes);
 app.use('/material', materialRoutes);
 app.use('/turma', turmaRoutes);
+app.use('/aula', aulaRoutes);
 
 app.use(errorMiddleware);
 

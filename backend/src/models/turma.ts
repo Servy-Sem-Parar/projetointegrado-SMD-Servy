@@ -20,9 +20,9 @@ const TurmaSchema = new Schema<ITurma>({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   }],
-  materiais: [{
+  aulas: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Material',
+    ref: 'Aula',
   }],
   disciplina: {
     type: mongoose.Schema.Types.ObjectId,

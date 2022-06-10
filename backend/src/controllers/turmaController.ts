@@ -16,13 +16,13 @@ class TurmaController extends CrudController<ITurma, typeof Turma> {
   override populate(entity) {
     return entity
       .populate('disciplina')
-      .populate('materiais')
+      .populate('aulas')
       .populate('teachers')
       .populate('students');
   }
 
   override prepareQuery(request: Request, query: mongoose.FilterQuery<ITurma>, options: any): void {
-    options.populate = ['teachers', 'students', 'materiais', 'disciplina']
+    options.populate = ['teachers', 'students', 'aulas', 'disciplina']
     const {name} = request.query
     if (name) {
       query.name = {$regex: new RegExp(name as string), $options: "i"}
