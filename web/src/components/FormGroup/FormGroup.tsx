@@ -57,7 +57,6 @@ function _generateMultiSelectInput(props: IFormGroupProps) {
             isMulti={true}
             id={props.id}
             placeholder={props.placeholder}
-            //className={`form-control-input ${props.errorMessage && "is-invalid-field"}`}
             styles={{
                 valueContainer: styles => ({
                     alignItems: "center",
@@ -159,7 +158,6 @@ function _generateSelectInput(props: IFormGroupProps) {
             onChange={(event)=>{
                 if(props.onChange) {
                     if(props.validations) {
-                        console.log("ene", event.target.value)
                         const validationError = validateInput(event.target.value, props.validations as string[]);
                         if(props.setFieldValidation){
                             props.setFieldValidation(props.id, validationError as string)

@@ -11,7 +11,6 @@
 
 .list-page-title {
     font-weight: bold;
-    /*color: rgb(167,128,181);*/
     font-size: 48px;
 }
 
@@ -36,9 +35,6 @@
 }
 
 .list-page-table-line {
-    /*background-color: rgb(167,128,181);
-    color: white;
-    font-weight: 600;*/
     height: 50px;
 }
 
@@ -51,11 +47,9 @@
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
-/**/
 
 .list-table-header-item {
     overflow-wrap: anywhere;
-    /*max-width: 400px;*/
     text-align: start;
     padding: 10px 20px;
     font-size: 15px;
@@ -64,7 +58,6 @@
 
 .list-table-line-item {
     overflow-wrap: anywhere;
-    /*max-width: 400px;*/
     padding: 10px 20px;
     font-size: 15px;
 }
@@ -72,7 +65,6 @@
 .table-body {
     background-color: white;
     box-shadow: 0 0 13px #999999;
-    /*padding: 20px;*/
     border-radius: 10px;
 }
 
@@ -113,7 +105,6 @@
 
 .filter-searchButton {
     padding: 8px 7px 3px;
-    /*margin: 0px 10px;*/
     border: 0px;
     border-radius: 6px;
     background-color: #F97E0D;

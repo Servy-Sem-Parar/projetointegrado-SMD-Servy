@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { ListPage } from "../../components/ListPage/ListPage";
-//import { teachersArray } from "./data"
 import { getColumns } from "./getColumns";
 import { ModalsProvider, openSaveModal } from "./ModalsProvider/ModalsProvider";
 import { getEntities } from "./requester";

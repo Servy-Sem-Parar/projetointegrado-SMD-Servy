@@ -29,7 +29,6 @@ export function PhoneNumberInput(props: IPhoneNumberInputProps) {
             value={phone}
             onChange={(phone)=>{
                 setPhone(phone);
-                console.log("phone", phone)
                 if(props.onChange) {
                     if(props.validations) {
                         const validationError = validateInput(phone, props.validations as string[]);

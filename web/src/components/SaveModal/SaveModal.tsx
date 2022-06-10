@@ -6,7 +6,7 @@ interface ISaveModalProps {
     showModal: boolean;
     closeModal: ()=>void;
     targetEntity: Record<string, unknown>;
-    fields: IFormGroupProps[];//Record<string, unknown>[];
+    fields: IFormGroupProps[];
     footerButtons: {
         callback: ()=>void;
         label: string;

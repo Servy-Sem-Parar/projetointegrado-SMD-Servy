@@ -7,20 +7,12 @@ export let closeLoader: ()=>void;
 export function Loader() {
     const [loader, setLoader] = useState(false);
 
-    /*useEffect(()=>{
-        console.log("loader", loader)
-    }, [loader])*/
-
     openLoader = ()=>{
-        //const newLoader = loader;
         setLoader(true);
-        //console.log("open", newLoader);
     }
 
     closeLoader = ()=>{
-        //const newLoader = loader;
         setLoader(false);
-        //console.log("close", newLoader);
     }
 
     return (

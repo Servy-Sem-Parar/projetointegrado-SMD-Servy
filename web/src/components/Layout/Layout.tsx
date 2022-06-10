@@ -1,6 +1,5 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import SideBar from './SideBar/SideBar';
-import TopBar from './TopBar/TopBar';
 
 import "./Layout.css";
 import { Loader } from '../Loader/Loader';
@@ -26,14 +25,6 @@ function Layout(props: ILayoutProps) {
         <div style={{width: "100%", height: "100%"}}>
             <Loader/>
             <Alert/>
-            {/*!routesWithOutLayout.includes(window.location.pathname) && isAuth() && 
-                <TopBar
-                    sideBarIsOpen={sideBarIsOpen}
-                    changeSideBarState={(value: boolean)=>{
-                        setSideBarIsOpen(value)
-                    }}
-                />
-            */}
             <div className={!routesWithOutLayout.includes(window.location.pathname) && isAuth() ? 'layout-body' : "no-layout"}>
                 {!routesWithOutLayout.includes(window.location.pathname) && isAuth() &&
                     <SideBar

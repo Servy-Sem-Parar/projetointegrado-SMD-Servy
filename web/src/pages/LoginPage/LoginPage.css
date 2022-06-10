@@ -1,5 +1,4 @@
 .login-logo-container {
-    /*width:65%;*/
     width: calc(100% - 430px);
     height: 100% !important;
     display: flex;
@@ -15,7 +14,6 @@
 }
 
 .login-form-box {
-    /*width: 35%;*/
     width: 430px;
     display: flex;
     align-items: center;

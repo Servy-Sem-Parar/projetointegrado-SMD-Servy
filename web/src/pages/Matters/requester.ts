@@ -34,7 +34,7 @@ export async function getEntities(offset: number, filters?: Record<string, unkno
         console.error(err);
     }
     closeLoader();
-    console.log("rs", result)
+
     return result;
 }
 

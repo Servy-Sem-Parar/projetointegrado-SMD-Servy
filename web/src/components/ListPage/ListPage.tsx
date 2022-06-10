@@ -2,7 +2,6 @@ import "./ListPage.css";
 import {GoPlus} from "react-icons/go";
 import {FaSearch} from "react-icons/fa";
 import { Popover } from "./Popover/Popover";
-//import { useState } from "react";
 import { Pagination } from "./Pagination/Pagination";
 import { useEffect, useState } from "react";
 
@@ -91,7 +90,7 @@ export function ListPage(props: IListPageProps) {
                                                 setFilters(newFilters)
                                             }}
                                         >
-                                            <option value={""} /*disabled hidden*/>{"Todos"}</option>
+                                            <option value={""}>{"Todos"}</option>
                                             {
                                                 filter.options && filter.options.map((option)=>{
                                                     return(

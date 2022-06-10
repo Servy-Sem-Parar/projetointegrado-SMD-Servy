@@ -85,7 +85,7 @@ export function ModalsProvider() {
                                     
                                     if(validationResult.success) {
                                         if(isEdit) {
-                                            const success = await editEntity(entity, targetEntity._id as string);//.then(success=>{
+                                            const success = await editEntity(entity, targetEntity._id as string);
                                             if(success) {
                                                 alertSuccess("Usuário editado com sucesso.")
                                                 setEntity({});

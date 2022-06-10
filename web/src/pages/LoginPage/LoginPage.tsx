@@ -68,7 +68,6 @@ function LoginPage() {
               validations={["mandatory"]}
               errorMessage={validations.email && validations.email}
               setFieldValidation={(field: string, value: string)=>{
-                console.log(field, value)
                 const newValidations = {...validations}
                 newValidations[field] = value;
                 setValidations(newValidations)

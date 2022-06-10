@@ -1,6 +1,5 @@
 import {GiHamburgerMenu, GiTeacher} from "react-icons/gi";
 import {FaUserGraduate} from "react-icons/fa";
-import {BsCalendarDayFill} from "react-icons/bs";
 import {SiGoogleclassroom} from "react-icons/si";
 import {BiLogOut} from "react-icons/bi";
 import {AiFillHome} from "react-icons/ai";
@@ -62,12 +61,6 @@ function SideBar(props: ISideBarProps) {
                     />
                     <div className="side-bar-item-text-content">Turmas</div>
                 </div>
-                {/*<div onClick={()=>{window.location.pathname = "planejamento"}} className={ testSideBar("planejamento") ? "side-bar-item-active" : "side-bar-item"}>
-                    <BsCalendarDayFill
-                        className="side-bar-icon"
-                    />
-                    <div className="side-bar-item-text-content">Planejamento</div>
-                </div>*/}
             </div>
             <div onClick={()=>{logout()}} className={"logout-buttom"}>
                 <BiLogOut
