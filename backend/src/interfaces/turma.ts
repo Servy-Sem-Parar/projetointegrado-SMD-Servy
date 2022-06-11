@@ -14,6 +14,7 @@ interface ITurma extends Document {
   description: String;
   informations: String;
   color: String;
+  level: String;
 }
 
 export default ITurma;
