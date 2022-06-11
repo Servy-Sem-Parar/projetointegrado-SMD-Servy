@@ -78,6 +78,12 @@ class UserController extends CrudController<IUser, typeof User> {
   );
    
   }
+
+  override async posRead(user: IUser): Promise<void> {
+    const roleField = user.role === 'teacher' || user.role === 'admin' ? 'teachers' : 'students'
+    const turmas = await Turma.find({[roleField]: user._id}).exec()
+    user._doc.turmas = turmas
+  }
  
   professoras = async (request: Request, response: Response): Promise<Response> => {
     const pesquisa = this.pesquisaPadrao(request)
