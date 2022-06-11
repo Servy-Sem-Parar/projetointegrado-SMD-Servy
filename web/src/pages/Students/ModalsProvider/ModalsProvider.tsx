@@ -4,7 +4,7 @@ import { DeleteModal } from "../../../components/DeleteModal/DeleteModal";
 import { SaveModal } from "../../../components/SaveModal/SaveModal"
 import { validateAllInputs } from "../../../Tools/validateInputs";
 import { createEntity, deleteEntity, editEntity } from "../requester";
-import { updateEntities } from "../Teachers";
+import { updateEntities } from "../Students";
 import { fieldValidations, getSaveModalFields } from "./getSaveModalFields";
 
 export let openSaveModal:(targetEntity?: Record<string, unknown>)=>void;
@@ -41,7 +41,7 @@ export function ModalsProvider() {
             {
                 isOpenSaveModal && 
                     <SaveModal
-                        titleLabel={isEdit ? "Editar professora" : "Nova professora"}
+                        titleLabel={isEdit ? "Editar aluna" : "Nova aluna"}
                         showModal={isOpenSaveModal}
                         closeModal={()=>{setIsOpenSaveModal(false); setTargetEntity({}); setErrorMessages({});}}
                         targetEntity={targetEntity}
@@ -87,7 +87,7 @@ export function ModalsProvider() {
                                         if(isEdit) {
                                             const success = await editEntity(entity, targetEntity._id as string);
                                             if(success) {
-                                                alertSuccess("Professora editada com sucesso.")
+                                                alertSuccess("Aluna editado com sucesso.")
                                                 setEntity({});
                                                 setTargetEntity({});
                                                 setIsOpenSaveModal(false); 
@@ -95,9 +95,13 @@ export function ModalsProvider() {
                                                 updateEntities();
                                             }
                                         } else {
-                                            const success = await createEntity(entity);
+                                            const entityToCreate = {
+                                                role: "student",
+                                                ...entity
+                                            };
+                                            const success = await createEntity(entityToCreate);
                                             if(success) {
-                                                alertSuccess("Professora cadastrada com sucesso.")
+                                                alertSuccess("Aluna cadastrada com sucesso.")
                                                 setEntity({});
                                                 setTargetEntity({});
                                                 setIsOpenSaveModal(false); 
@@ -117,7 +121,7 @@ export function ModalsProvider() {
             {
                 isOpenDeleteModal && 
                     <DeleteModal
-                        titleLabel={"Remover professora"}
+                        titleLabel={"Remover aluna"}
                         showModal={isOpenDeleteModal}
                         closeModal={()=>{setIsOpenDeleteModal(false)}}
                         callback={()=>{
@@ -126,7 +130,7 @@ export function ModalsProvider() {
                             setTargetEntity({});
                             updateEntities();
                         }}
-                        bodyLabel={"Essa ação irá remover a professora."}
+                        bodyLabel={"Essa ação irá remover a aluna."}
                     />
             }
         </div>

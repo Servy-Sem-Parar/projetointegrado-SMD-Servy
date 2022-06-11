@@ -76,7 +76,6 @@ export function ModalsProvider() {
                                 callback: async ()=>{
                                     const validations = {...fieldValidations};
                                     const validationResult = validateAllInputs({entity, validations});
-                                    
                                     if(validationResult.success) {
                                         if(isEdit) {
                                             const success = await editEntity(entity, targetEntity._id as string);
@@ -120,7 +119,7 @@ export function ModalsProvider() {
                             setTargetEntity({});
                             updateEntities();
                         }}
-                        bodyLabel={"Essa ação ira remover a disciplina."}
+                        bodyLabel={"Essa ação irá remover a disciplina."}
                     />
             }
         </div>

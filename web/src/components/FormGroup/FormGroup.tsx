@@ -3,7 +3,7 @@ import "./FormGroup.css"
 import { PhoneNumberInput } from "./PhoneNumberInput/PhoneNumberInput";
 import Select, { StylesConfig } from 'react-select';
 
-export type inputTypes = 'text' | 'select' | 'password' | "phone_number" | "multiSelect";
+export type inputTypes = 'text' | 'select' | 'password' | "phone_number" | "multiSelect" | "iconSelect";
 export type inputSizes = '33' | '66' | '50' | '100';
 
 export interface IFormGroupProps {
@@ -43,6 +43,9 @@ function _generateInput(props: IFormGroupProps) {
         case 'multiSelect':
             input = _generateMultiSelectInput(props)
             break;
+        case 'iconSelect':
+            input = _generateIconSelectInput(props)
+            break;
         default:
             break;
     }
@@ -76,6 +79,7 @@ function _generateMultiSelectInput(props: IFormGroupProps) {
                 input: styles =>({
                     ...styles,
                     fontSize: "15px",
+                    caretColor: "transparent"
                 }),
                 placeholder: styles =>({
                     ...styles,
@@ -177,6 +181,66 @@ function _generateSelectInput(props: IFormGroupProps) {
                     })
                 }
             </select>
+    )
+}
+
+function _generateIconSelectInput(props: IFormGroupProps) {
+    return (
+        <Select
+            options={props.options}
+            id={props.id}
+            placeholder={props.placeholder}
+            styles={{
+                valueContainer: styles => ({
+                    alignItems: "center",
+                    display: "flex",
+                    padding: "0px 7px",
+                    width: "100%",
+                }),
+                singleValue: styles =>({
+                    ...styles,
+                    fontSize: "15px",
+                }),
+                option: styles =>({
+                    ...styles,
+                    fontSize: "15px",
+                }),
+                input: styles =>({
+                    ...styles,
+                    fontSize: "15px",
+                    caretColor: "transparent"
+                }),
+                placeholder: styles =>({
+                    ...styles,
+                    fontSize: "15px",
+                }),
+                noOptionsMessage: styles =>({
+                    ...styles,
+                    fontSize: "15px",
+                }),
+                control: styles => ({ 
+                    display:"flex",
+                    borderRadius: "10px",
+                    border: "1px solid #F97E0D",
+                    marginTop: "4px",
+                }),
+                
+            } as StylesConfig}
+            defaultValue={props.defaultValue as string}
+            onChange={(selectedOptionValue)=>{
+                const selectedOption = selectedOptionValue as Record<string, string>;
+                if(props.onChange) {
+                    const value = selectedOption.value;
+                    if(props.validations) {
+                        const validationError = validateInput(value, props.validations as string[], props.matchValue);
+                        if(props.setFieldValidation){
+                            props.setFieldValidation(props.id, validationError as string)
+                        }
+                    }
+                    props.onChange(value);
+                }
+            }}
+        />
     )
 }
 

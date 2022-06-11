@@ -1,4 +1,5 @@
 import { IFormGroupProps } from "../../../components/FormGroup/FormGroup";
+import { getIconOptions } from "../../../Tools/getIconOptions";
 
 interface IGetSaveModalFieldsProps {
     initialEntity: Record<string, unknown>;
@@ -9,8 +10,7 @@ interface IGetSaveModalFieldsProps {
 
 export const fieldValidations = {
     name: ["mandatory"],
-    description: [],
-    icon: []
+    icon: ["mandatory"]
 }
 
 export function getSaveModalFields(props: IGetSaveModalFieldsProps) {
@@ -30,19 +30,20 @@ export function getSaveModalFields(props: IGetSaveModalFieldsProps) {
             }
         },
         {
-            id: "description",
-            label: "Descrição",
-            type: "text",
-            defaultValue: props.initialEntity && props.initialEntity.description ? props.initialEntity.description as string : "",
-            errorMessage: props.errorMessages && props.errorMessages.description ? props.errorMessages.description : "",
-            validations: fieldValidations.description && fieldValidations.description,
-            placeholder: "",
+            id: "icon",
+            label: "Ícone",
+            type: "iconSelect",
+            defaultValue: props.initialEntity && props.initialEntity.icon ? props.initialEntity.icon as string : "",
+            errorMessage: props.errorMessages && props.errorMessages.icon ? props.errorMessages.icon : "",
+            validations: fieldValidations.icon && fieldValidations.icon,
+            placeholder: "Selecione um ícone",
             size: "100",
             setFieldValidation: props.setFieldValidation,
+            options: getIconOptions(),
             onChange: (value: string | Date | string[])=>{
-                props.onChange("description", value);
+                props.onChange("icon", value)
             }
-        },       
+        },        
     ]
 
     return fields;

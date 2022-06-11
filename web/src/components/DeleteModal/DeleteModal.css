@@ -1,22 +1,10 @@
-.save-modal-blur {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    top: 0;
-    left: 0;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .delete-modal {
     padding: 20px;
     border-radius: 10px;
     background-color: white;
     width: 60%;
     max-width: 500px;
+    margin: auto;
 }
 
 .save-modal-header {

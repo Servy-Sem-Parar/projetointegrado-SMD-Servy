@@ -1,5 +1,4 @@
 import { closeLoader, openLoader } from "../../components/Loader/Loader";
-import { formatPhoneNumberToShow } from "../../Tools/formatPhoneNumberToShow";
 import { makeConnection } from "../../Tools/makeConnection"
 
 interface IResult {
@@ -9,31 +8,14 @@ interface IResult {
 
 function _formatEntities(entity: Record<string, unknown>) {
     const formatedEntity = {
-        phone: entity.phone_number ? formatPhoneNumberToShow(entity.phone_number as string) : "",
-        permission: getPermissionLabel(entity.role as string),
         ...entity
     }
 
     return formatedEntity;
 }
 
-function getPermissionLabel(permission: string) {
-    let permissionLabel = ""
-
-    switch(permission) {
-        case "teacher":
-            permissionLabel = "Professora";
-            break;
-        case "admin":
-            permissionLabel = "Administradora";
-            break;
-    }
-
-    return permissionLabel;
-}
-
 export async function getEntities(offset: number, filters?: Record<string, unknown>) {
-    const suffix = "user/professoras";
+    const suffix = "turma";
     const method = "get";
     const otherQueryStrings: Record<string, unknown> = { offset };
     let result: IResult = {
@@ -72,7 +54,7 @@ export async function getEntities(offset: number, filters?: Record<string, unkno
 }
 
 export async function createEntity(body: Record<string, unknown>) {
-    const suffix = "user";
+    const suffix = "turma";
     const method = "post";
     let success = false;
 
@@ -95,7 +77,7 @@ export async function createEntity(body: Record<string, unknown>) {
 }
 
 export async function editEntity(body: Record<string, unknown>, entityId: string) {
-    const suffix = "user";
+    const suffix = "turma";
     const method = "put";
     let success = false;
 
@@ -119,7 +101,7 @@ export async function editEntity(body: Record<string, unknown>, entityId: string
 }
 
 export async function deleteEntity(entityId: string) {
-    const suffix = "user";
+    const suffix = "turma";
     const method = "delete";
     let success = false;
 

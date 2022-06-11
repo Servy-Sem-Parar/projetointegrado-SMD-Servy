@@ -20,11 +20,6 @@ export function getColumns() {
                 control: "email",
             },
             {
-                type: "string",
-                label: "Permissão",
-                control: "permission",
-            },
-            {
                 type: "action",
                 label: "Ações",
                 control: "action",
