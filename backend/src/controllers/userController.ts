@@ -41,7 +41,7 @@ class UserController extends CrudController<IUser, typeof User> {
   }
 
   override prepareQuery(request: Request, query: mongoose.FilterQuery<IUser>, options: any): void {
-    const {name, email, role} = request.query
+    const {name, email, role, status} = request.query
     if (name) {
       query.name = {$regex: new RegExp(name as string), $options: "i"}
     }
@@ -50,6 +50,9 @@ class UserController extends CrudController<IUser, typeof User> {
     }
     if (role) {
       query.role = role
+    }
+    if (status) {
+      query.status = status
     }
   }
 
