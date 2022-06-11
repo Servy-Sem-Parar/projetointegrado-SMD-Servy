@@ -57,12 +57,6 @@ export function ListPage(props: IListPageProps) {
             <header className="list-page-header">
                 <h1 className="list-page-title">{props.title}</h1>
                 <div style={{display: "flex"}}>
-                    <button className="title-button" onClick={()=>{props.titleButtonCallback()}}>
-                        <GoPlus
-                            className="title-button-icon"
-                        />
-                        {props.titleButtonLabel}
-                    </button>
                     {props.secondaryButtonLabel && props.secondaryButtonCallback &&
                         <button className="title-button" onClick={()=>{props.secondaryButtonCallback && props.secondaryButtonCallback()}}>
                             <MdCheckCircle
@@ -71,6 +65,12 @@ export function ListPage(props: IListPageProps) {
                             {props.secondaryButtonLabel}
                         </button>
                     }
+                    <button className="title-button" onClick={()=>{props.titleButtonCallback()}}>
+                        <GoPlus
+                            className="title-button-icon"
+                        />
+                        {props.titleButtonLabel}
+                    </button>
                 </div>
             </header>
             {props.filters && 
