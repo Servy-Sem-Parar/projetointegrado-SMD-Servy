@@ -5,6 +5,7 @@ import paginate from 'mongoose-paginate-v2';
 import mongoose from '../database';
 import Role from '../enums/role';
 import UserStatus from '../enums/userStatus';
+import SchoolType from 'src/enums/schoolType';
 
 require('mongoose-type-email');
 
@@ -39,6 +40,12 @@ const UserSchema = new Schema<IUser>({
     type: String,
     default: UserStatus.APPROVED,
     enum: UserStatus,
+  },
+  schoolType: {
+    type: String,
+    default: SchoolType.PUBLIC,
+    enum: SchoolType,
+    required: true,
   },
   createdAt: {
     type: 'Date',
