@@ -8,6 +8,9 @@ interface IResult {
 
 function _formatEntities(entity: Record<string, unknown>) {
     const formatedEntity = {
+        icon: (entity.disciplina as Record<string, unknown>).icon,
+        studentsCount: `${(entity.students as Record<string, unknown>[]).length} alunas`,
+        aulasCount: `${(entity.aulas as Record<string, unknown>[]).length} aulas cadastradas`,
         ...entity
     }
 
@@ -121,4 +124,37 @@ export async function deleteEntity(entityId: string) {
     closeLoader();
 
     return success;
+}
+
+export async function getDisciplinas() {
+    const suffix = "disciplina";
+    const method = "get";
+    const otherQueryStrings: Record<string, unknown> = { 
+        sort: "name",
+        order: "asc",
+        offset: 0,
+        limit: 10000,
+    };
+    let options: Record<string, unknown>[] = [];
+
+    openLoader();
+    
+    try {
+        const response = await makeConnection({
+            suffix,
+            method,
+            otherQueryStrings
+        });
+        options= (response?.data.data as Record<string, unknown>[]).map((entity)=>{
+            return {
+                label: entity.name,
+                value: entity._id
+            }
+        });
+    } catch(err) {
+        console.error(err);
+    }
+    closeLoader();
+
+    return options;
 }

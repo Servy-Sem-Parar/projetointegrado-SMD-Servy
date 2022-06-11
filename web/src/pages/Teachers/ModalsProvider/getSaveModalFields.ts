@@ -7,6 +7,7 @@ interface IGetSaveModalFieldsProps {
     setFieldValidation: (field: string, value: string)=>void;
     isEdit: boolean;
     passwordValue?: string,
+    turmas: Record<string, unknown>[]
 }
 
 export const fieldValidations = {
@@ -64,10 +65,7 @@ export function getSaveModalFields(props: IGetSaveModalFieldsProps) {
             placeholder: "Selecione uma ou mais turmas",
             size: "100",
             setFieldValidation: props.setFieldValidation,
-            options: [
-                {label: "Administradora", value: "admin"},
-                {label: "Professora", value: "teacher"},
-            ],
+            options: props.turmas as {label: string, value: string}[],
             onChange: (value: string | Date | string[])=>{
                 props.onChange("turmas", value)
             }
