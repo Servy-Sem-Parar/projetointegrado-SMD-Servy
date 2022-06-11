@@ -1,6 +1,7 @@
 import {IoIosRocket} from "react-icons/io";
 import {AiFillCalculator} from "react-icons/ai";
-import "./Options.css"
+import {MdScience, MdEco} from "react-icons/md";
+import "./Options.css";
 
 const iconsArray = [
     {
@@ -14,6 +15,20 @@ const iconsArray = [
         label: "Calculadora",
         value: "calculator",
         component: <AiFillCalculator
+            className="icon-renderer-class"
+        />
+    },
+    {
+        label: "Folha",
+        value: "leaf",
+        component: <MdEco
+            className="icon-renderer-class"
+        />
+    },
+    {
+        label: "Proveta",
+        value: "proveta",
+        component: <MdScience
             className="icon-renderer-class"
         />
     }

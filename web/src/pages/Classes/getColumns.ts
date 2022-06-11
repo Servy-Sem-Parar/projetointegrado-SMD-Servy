@@ -1,13 +1,11 @@
 import { IColumn } from "../../components/ListPage/ListPage"
-import { getUserPermission } from "../../Tools/getUserPermission";
 import { openDeleteModal, openSaveModal } from "./ModalsProvider/ModalsProvider"
 
 export function getColumns() {
-    const permission = getUserPermission();
     const columns: IColumn[]  = [
         {
             type: "icon",
-            label: "Ícone",
+            label: "",
             control: "icon",
         },
         {
@@ -30,10 +28,7 @@ export function getColumns() {
             label: "Aulas",
             control: "aulasCount",
         },
-    ]
-
-    if(permission === "admin") {
-        columns.push({
+        {
             type: "action",
             label: "Ações",
             control: "action",
@@ -51,8 +46,8 @@ export function getColumns() {
                     }
                 },
             ],
-        },)
-    }
+        }
+    ]
 
     return columns;
 }

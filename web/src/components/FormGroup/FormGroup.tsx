@@ -2,8 +2,9 @@ import { validateInput } from "../../Tools/validateInputs";
 import "./FormGroup.css"
 import { PhoneNumberInput } from "./PhoneNumberInput/PhoneNumberInput";
 import Select, { StylesConfig } from 'react-select';
+import { GithubPicker } from 'react-color';
 
-export type inputTypes = 'text' | 'select' | 'password' | "phone_number" | "multiSelect" | "iconSelect";
+export type inputTypes = 'text' | 'select' | 'password' | "phone_number" | "multiSelect" | "iconSelect" | "color";
 export type inputSizes = '33' | '66' | '50' | '100';
 
 export interface IFormGroupProps {
@@ -46,11 +47,35 @@ function _generateInput(props: IFormGroupProps) {
         case 'iconSelect':
             input = _generateIconSelectInput(props)
             break;
+        case 'color':
+            input = _generateColorInput(props)
+            break;
         default:
             break;
     }
 
     return input;
+}
+
+function _generateColorInput(props: IFormGroupProps) {
+    return (
+        <GithubPicker
+            onChangeComplete={(value)=>{
+                const color = value.hex as string;
+                if(props.onChange) {
+                    if(props.validations) {
+                        const validationError = validateInput(color, props.validations as string[]);
+                        if(props.setFieldValidation){
+                            props.setFieldValidation(props.id, validationError as string)
+                        }
+                    }
+                    props.onChange(color);
+                }
+            }}
+            colors={["#A96BC6", "#F8961E", "#F9844A", "#277DA1", "#90BE6D"]}
+            
+        />
+    )
 }
 
 function _generateMultiSelectInput(props: IFormGroupProps) {
@@ -66,6 +91,7 @@ function _generateMultiSelectInput(props: IFormGroupProps) {
                     display: "flex",
                     padding: "0px 7px",
                     width: "100%",
+                    flexWrap: "wrap",
                 }),
                 multiValue: styles =>({
                     ...styles,
@@ -95,9 +121,8 @@ function _generateMultiSelectInput(props: IFormGroupProps) {
                     border: "1px solid #F97E0D",
                     marginTop: "4px",
                 }),
-                
             } as StylesConfig}
-            defaultValue={props.defaultValue as Record<string, string>[]}
+            defaultValue={props.defaultValue as unknown as string[]}
             onChange={(selectedOptionsValues)=>{
                 const selectedOptions = selectedOptionsValues as unknown as Record<string, string>[]
                 if(props.onChange) {

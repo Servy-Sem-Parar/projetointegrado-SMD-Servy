@@ -110,8 +110,9 @@
 }
 
 .top-bar-logo {
-    height: 40px;
     cursor: pointer;
+    width: 100%;
+    padding: 20px 10px 0px;
 }
 
 .burguer-button-box {
@@ -148,7 +149,6 @@
 }
 
 .side-bar-logo-container {
-    display: flex;
     margin-top: 20px; 
     margin-bottom: 10px;
 }
