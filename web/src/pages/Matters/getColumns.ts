@@ -6,14 +6,14 @@ export function getColumns() {
     const permission = getUserPermission();
     const columns: IColumn[] = [
         {
-            type: "string",
-            label: "Nome",
-            control: "name",
+            type: "icon",
+            label: "Ícone",
+            control: "iconName",
         },
         {
             type: "string",
-            label: "Descrição",
-            control: "description",
+            label: "Nome",
+            control: "name",
         },
     ];
 

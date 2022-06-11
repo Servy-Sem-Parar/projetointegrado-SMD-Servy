@@ -4,6 +4,8 @@ import {FaSearch} from "react-icons/fa";
 import { Popover } from "./Popover/Popover";
 import { Pagination } from "./Pagination/Pagination";
 import { useEffect, useState } from "react";
+import { getIconByName } from "../../Tools/getIconByName";
+import { MdCheckCircle } from "react-icons/md";
 
 interface IListPageProps {
     title: string,
@@ -11,6 +13,8 @@ interface IListPageProps {
     columns: IColumn[],
     titleButtonLabel: string,
     titleButtonCallback: ()=>void,
+    secondaryButtonLabel?: string,
+    secondaryButtonCallback?: ()=>void,
     defaultFilter?: Record<string, unknown>,
     filters?: {
         placeholder: string,
@@ -52,15 +56,33 @@ export function ListPage(props: IListPageProps) {
         <div className="list_page_body">
             <header className="list-page-header">
                 <h1 className="list-page-title">{props.title}</h1>
-                <button className="title-button" onClick={()=>{props.titleButtonCallback()}}>
-                    <GoPlus
-                        className="title-button-icon"
-                    />
-                    {props.titleButtonLabel}
-                </button>
+                <div style={{display: "flex"}}>
+                    <button className="title-button" onClick={()=>{props.titleButtonCallback()}}>
+                        <GoPlus
+                            className="title-button-icon"
+                        />
+                        {props.titleButtonLabel}
+                    </button>
+                    {props.secondaryButtonLabel && props.secondaryButtonCallback &&
+                        <button className="title-button" onClick={()=>{props.secondaryButtonCallback && props.secondaryButtonCallback()}}>
+                            <MdCheckCircle
+                                className="title-button-icon"
+                            />
+                            {props.secondaryButtonLabel}
+                        </button>
+                    }
+                </div>
             </header>
             {props.filters && 
-                <div className="filter-box">
+                <form 
+                    className="filter-box"
+                    onSubmit={(e)=>{
+                        e.preventDefault();
+                        if(props.filtersSearchCallBack) {
+                            props.filtersSearchCallBack(filters);
+                        }
+                    }}
+                >
                     <div className="filter-inputs-area">
                         {
                             props.filters.map(filter=>{
@@ -106,15 +128,10 @@ export function ListPage(props: IListPageProps) {
                     </div>
                     <button
                         className="filter-searchButton"
-                        onClick={()=>{
-                            if(props.filtersSearchCallBack) {
-                                props.filtersSearchCallBack(filters);
-                            }
-                        }}
                     >
                         <FaSearch />
                     </button>
-                </div>
+                </form>
             }
             <table  style={{width: "100%", borderSpacing: "0px 10px"}}>
                 <tr>
@@ -142,10 +159,25 @@ export function ListPage(props: IListPageProps) {
                                                 <td 
                                                     className="list-table-line-item" 
                                                     style={{ 
-                                                        width: `${(100/(props.columns.length-1))}%`,
+                                                        minWidth: `${(100/(props.columns.length-1))}%`,
                                                     }}
                                                 >
                                                     {entity[column.control] ? entity[column.control] as string : "---" }
+                                                </td>
+                                            )
+                                        } else if(column.type === "icon") {
+                                            return (
+                                                <td 
+                                                    className="list-table-line-item" 
+                                                    id={`gear-${column.control}`}
+                                                    style={{
+                                                        width: "120px", 
+                                                        minWidth: `120px`,
+                                                        textAlign: "center",
+                                                        position: "relative",
+                                                    }}
+                                                >
+                                                    {entity[column.control] ? getIconByName(entity[column.control] as string) as JSX.Element : ""}
                                                 </td>
                                             )
                                         } else {

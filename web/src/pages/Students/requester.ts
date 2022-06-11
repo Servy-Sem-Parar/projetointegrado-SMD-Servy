@@ -10,30 +10,14 @@ interface IResult {
 function _formatEntities(entity: Record<string, unknown>) {
     const formatedEntity = {
         phone: entity.phone_number ? formatPhoneNumberToShow(entity.phone_number as string) : "",
-        permission: getPermissionLabel(entity.role as string),
         ...entity
     }
 
     return formatedEntity;
 }
 
-function getPermissionLabel(permission: string) {
-    let permissionLabel = ""
-
-    switch(permission) {
-        case "teacher":
-            permissionLabel = "Professora";
-            break;
-        case "admin":
-            permissionLabel = "Administradora";
-            break;
-    }
-
-    return permissionLabel;
-}
-
 export async function getEntities(offset: number, filters?: Record<string, unknown>) {
-    const suffix = "user/professoras";
+    const suffix = "user/alunas";
     const method = "get";
     const otherQueryStrings: Record<string, unknown> = { offset };
     let result: IResult = {

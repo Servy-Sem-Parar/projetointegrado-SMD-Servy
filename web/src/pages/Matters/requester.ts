@@ -1,11 +1,31 @@
 import { closeLoader, openLoader } from "../../components/Loader/Loader";
+import { getIconOptions } from "../../Tools/getIconOptions";
 import { makeConnection } from "../../Tools/makeConnection"
+
+interface IResult {
+    data: Record<string, unknown>[];
+    total: number;
+}
+
+function _formatEntities(entity: Record<string, unknown>) {
+    const icons = getIconOptions();
+    let iconDefaultValue;
+    icons.forEach((icon)=>{
+        if(icon.value === entity.icon) {
+            iconDefaultValue = icon;
+        }
+    })
+    entity.iconName = entity.icon;
+    entity.icon = iconDefaultValue;
+
+    return entity;
+}
 
 export async function getEntities(offset: number, filters?: Record<string, unknown>) {
     const suffix = "disciplina";
     const method = "get";
     const otherQueryStrings: Record<string, unknown> = { offset };
-    let result = {
+    let result: IResult = {
         data: [],
         total: 1,
     };
@@ -25,7 +45,9 @@ export async function getEntities(offset: number, filters?: Record<string, unkno
             method,
             otherQueryStrings
         });
-        const entities = response?.data.data;
+        const entities = (response?.data.data as Record<string, unknown>[]).map((entity)=>{
+            return _formatEntities(entity as Record<string, unknown>);
+        });
         result = {
             data: entities,
             total: response?.data.data.total
@@ -62,7 +84,7 @@ export async function createEntity(body: Record<string, unknown>) {
 }
 
 export async function editEntity(body: Record<string, unknown>, entityId: string) {
-    const suffix = "materias";
+    const suffix = "disciplina";
     const method = "put";
     let success = false;
 

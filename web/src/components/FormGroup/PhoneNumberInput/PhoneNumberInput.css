@@ -16,3 +16,7 @@
 .country-name {
     font-size: 15px;
 }
+
+.react-tel-input .country-list {
+    max-height: 100px !important;
+}

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import {FadeLoader} from "react-spinners"
+import {FadeLoader} from "react-spinners";
+import "./Loader.css";
 
 export let openLoader: ()=>void;
 export let closeLoader: ()=>void;
@@ -17,7 +18,7 @@ export function Loader() {
 
     return (
         <div 
-            className="save-modal-blur"
+            className="loader-blur"
             style={{
                 display: loader === true ? "flex" : "none",
                 zIndex: 20,

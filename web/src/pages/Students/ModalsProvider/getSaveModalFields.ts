@@ -11,13 +11,13 @@ interface IGetSaveModalFieldsProps {
 
 export const fieldValidations = {
     name: ["mandatory"],
-    role: ["mandatory"],
     password: ["password", "mandatory"],
     retypePassword: ["matchValue", "mandatory"],
     email: ["mandatory"],
     phone_number: [],
     turmas: [],
-    address: [],
+    address: ["mandatory"],
+    schoolType: ["mandatory"]
 }
 
 export function getSaveModalFields(props: IGetSaveModalFieldsProps) {
@@ -36,24 +36,6 @@ export function getSaveModalFields(props: IGetSaveModalFieldsProps) {
                 props.onChange("name", value)
             }
         },
-        {
-            id: "role",
-            label: "Permissão",
-            type: "select",
-            defaultValue: props.initialEntity && props.initialEntity.role ? props.initialEntity.role as string : "",
-            errorMessage: props.errorMessages && props.errorMessages.role ? props.errorMessages.role : "",
-            validations: fieldValidations.role && fieldValidations.role,
-            placeholder: "Selecione uma permissão",
-            size: "100",
-            setFieldValidation: props.setFieldValidation,
-            options: [
-                {label: "Administradora", value: "admin"},
-                {label: "Professora", value: "teacher"},
-            ],
-            onChange: (value: string | Date | string[])=>{
-                props.onChange("role", value)
-            }
-        }, 
         {
             id: "turmas",
             label: "Turmas",
@@ -98,6 +80,24 @@ export function getSaveModalFields(props: IGetSaveModalFieldsProps) {
             setFieldValidation: props.setFieldValidation,
             onChange: (value: string | Date | string[])=>{
                 props.onChange("phone_number", value)
+            }
+        },
+        {
+            id: "schoolType",
+            label: "Tipo de escola",
+            type: "select",
+            defaultValue: props.initialEntity && props.initialEntity.schoolType ? props.initialEntity.schoolType as string : "",
+            errorMessage: props.errorMessages && props.errorMessages.schoolType ? props.errorMessages.schoolType : "",
+            validations: fieldValidations.schoolType && fieldValidations.schoolType,
+            placeholder: "Selecione o tipo de escola",
+            size: "100",
+            setFieldValidation: props.setFieldValidation,
+            options: [
+                {label: "Pública", value: "public"},
+                {label: "Particular", value: "private"},
+            ],
+            onChange: (value: string | Date | string[])=>{
+                props.onChange("schoolType", value)
             }
         },
         {
