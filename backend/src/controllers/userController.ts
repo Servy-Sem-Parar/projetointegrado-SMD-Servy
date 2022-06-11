@@ -68,7 +68,7 @@ class UserController extends CrudController<IUser, typeof User> {
       { "multi": true },
     )
     await Turma.updateMany(
-      { "_id": { "$in": [novasTurmas] } },
+      { "_id": { "$in": novasTurmas } },
       { "$addToSet": { [roleField]: userId } },
       { "multi": true },
     );
