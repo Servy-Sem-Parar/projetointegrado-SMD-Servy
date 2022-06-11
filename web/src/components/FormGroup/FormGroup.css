@@ -50,3 +50,18 @@
     margin-left: 6px;
     color: red;
 }
+
+.login-mulher-container img {
+    width: 400px;
+    max-width: 70%;
+}
+
+.login-mulher-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
