@@ -3,8 +3,8 @@ import { alertError, alertSuccess } from "../../../components/Alert/Alert";
 import { DeleteModal } from "../../../components/DeleteModal/DeleteModal";
 import { SaveModal } from "../../../components/SaveModal/SaveModal"
 import { validateAllInputs } from "../../../Tools/validateInputs";
-import { createEntity, deleteEntity, editEntity, getEntity, getTurmas } from "../requester";
-import { updateEntities } from "../Teachers";
+import { createEntity, deleteEntity, editEntity, getDisciplinas } from "../requester";
+import { updateEntities } from "../Classes";
 import { fieldValidations, getSaveModalFields } from "./getSaveModalFields";
 
 export let openSaveModal:(targetEntity?: Record<string, unknown>)=>void;
@@ -17,11 +17,11 @@ export function ModalsProvider() {
     const [entity, setEntity] = useState<Record<string, unknown>>({});
     const [isEdit, setIsEdit] = useState(false);
     const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
-    const [turmas, setTurmas] = useState<Record<string, unknown>[]>([]);
+    const [disciplinas, setDisciplinas] = useState<Record<string, unknown>[]>([]);
 
     useEffect(()=>{
-        getTurmas().then(options=>{
-            setTurmas(options);
+        getDisciplinas().then(options=>{
+            setDisciplinas(options);
         })
     }, [])
 
@@ -30,20 +30,17 @@ export function ModalsProvider() {
             if(targetEntity._id) {
                 setIsEdit(true);
             } 
-            getEntity(targetEntity._id as string).then(resp=>{
-                setTargetEntity({...resp}); 
-                setEntity({...resp})
-            })
-            
+            setTargetEntity({...targetEntity}); 
+            setEntity({...targetEntity});
         } else {
             setIsEdit(false);
         }
-        setIsOpenSaveModal(true) 
+        setIsOpenSaveModal(true);
     }
 
     openDeleteModal = (targetEntity: Record<string, unknown>)=>{ 
         setTargetEntity({...targetEntity}); 
-        setIsOpenDeleteModal(true) 
+        setIsOpenDeleteModal(true);
     }
 
     return (
@@ -51,7 +48,7 @@ export function ModalsProvider() {
             {
                 isOpenSaveModal && 
                     <SaveModal
-                        titleLabel={isEdit ? "Editar professora" : "Nova professora"}
+                        titleLabel={isEdit ? "Editar turma" : "Nova turma"}
                         showModal={isOpenSaveModal}
                         closeModal={()=>{setIsOpenSaveModal(false); setTargetEntity({}); setErrorMessages({});}}
                         targetEntity={targetEntity}
@@ -62,16 +59,14 @@ export function ModalsProvider() {
                                 onChange: (field: string, value: string | Date | string[] )=>{
                                     const newEntity = {...entity}
                                     newEntity[field] = value;
-                                    setEntity(newEntity)
+                                    setEntity(newEntity);
                                 },
                                 setFieldValidation: (field: string, value: string)=>{
                                     const newValidation = {...errorMessages};
                                     newValidation[field] = value;
                                     setErrorMessages(newValidation);
                                 },
-                                isEdit,
-                                passwordValue: entity.password ? entity.password as string : "",
-                                turmas
+                                disciplinas
                             })
                         }
                         footerButtons={[
@@ -79,7 +74,7 @@ export function ModalsProvider() {
                                 label: "Cancelar",
                                 callback: ()=>{
                                     setTargetEntity({});
-                                    setEntity({})
+                                    setEntity({});
                                     setIsOpenSaveModal(false); 
                                     setErrorMessages({});
                                 }
@@ -87,18 +82,13 @@ export function ModalsProvider() {
                             {
                                 label: "Salvar",
                                 callback: async ()=>{
-                                    const validations = {...fieldValidations}
-                                    if(isEdit) {
-                                        validations.password = [];
-                                        validations.retypePassword = [];
-                                    }
-                                    const validationResult = validateAllInputs({entity, validations, matchValue: entity.password ? entity.password as string : ""})
-                                    
+                                    const validations = {...fieldValidations};
+                                    const validationResult = validateAllInputs({entity, validations});
                                     if(validationResult.success) {
                                         if(isEdit) {
                                             const success = await editEntity(entity, targetEntity._id as string);
                                             if(success) {
-                                                alertSuccess("Professora editada com sucesso.")
+                                                alertSuccess("Turma editada com sucesso.");
                                                 setEntity({});
                                                 setTargetEntity({});
                                                 setIsOpenSaveModal(false); 
@@ -108,7 +98,7 @@ export function ModalsProvider() {
                                         } else {
                                             const success = await createEntity(entity);
                                             if(success) {
-                                                alertSuccess("Professora cadastrada com sucesso.")
+                                                alertSuccess("Turma criada com sucesso.");
                                                 setEntity({});
                                                 setTargetEntity({});
                                                 setIsOpenSaveModal(false); 
@@ -117,8 +107,8 @@ export function ModalsProvider() {
                                             }
                                         }
                                     } else {
-                                        alertError("Um ou mais campos não estão corretamente preenchidos.")
-                                        setErrorMessages(validationResult.errors)
+                                        alertError("Um ou mais campos não estão corretamente preenchidos.");
+                                        setErrorMessages(validationResult.errors);
                                     }
                                 }
                             },
@@ -128,7 +118,7 @@ export function ModalsProvider() {
             {
                 isOpenDeleteModal && 
                     <DeleteModal
-                        titleLabel={"Remover professora"}
+                        titleLabel={"Remover turma"}
                         showModal={isOpenDeleteModal}
                         closeModal={()=>{setIsOpenDeleteModal(false)}}
                         callback={()=>{
@@ -137,7 +127,7 @@ export function ModalsProvider() {
                             setTargetEntity({});
                             updateEntities();
                         }}
-                        bodyLabel={"Essa ação irá remover a professora."}
+                        bodyLabel={"Essa ação irá remover a turma."}
                     />
             }
         </div>

@@ -12,7 +12,8 @@ function Matters() {
     const [offset, setOffset] = useState(0);
     const [filters, setFilters] = useState<Record<string, unknown>>({
         sort: "name",
-        order: "asc"
+        order: "asc",
+        limit: 10,
     });
     
     updateEntities = ()=>{
@@ -47,7 +48,8 @@ function Matters() {
                 ]}
                 defaultFilter={{
                     sort: "name",
-                    order: "asc"
+                    order: "asc",
+                    limit: 10,
                 }}
                 filtersSearchCallBack={(filters: Record<string, unknown>)=>{
                     setFilters(filters);

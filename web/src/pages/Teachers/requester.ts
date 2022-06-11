@@ -140,3 +140,66 @@ export async function deleteEntity(entityId: string) {
 
     return success;
 }
+
+export async function getTurmas() {
+    const suffix = "turma";
+    const method = "get";
+    const otherQueryStrings: Record<string, unknown> = { 
+        sort: "name",
+        order: "asc",
+        offset: 0,
+        limit: 10000,
+    };
+    let options: Record<string, unknown>[] = [];
+
+    openLoader();
+    
+    try {
+        const response = await makeConnection({
+            suffix,
+            method,
+            otherQueryStrings
+        });
+        options= (response?.data.data as Record<string, unknown>[]).map((entity)=>{
+            return {
+                label: entity.name,
+                value: entity._id
+            }
+        });
+    } catch(err) {
+        console.error(err);
+    }
+    closeLoader();
+
+    return options;
+}
+
+export async function getEntity(id: string){
+    const suffix = "user";
+    const method = "get";
+    let entity: Record<string, unknown> = {};
+
+    openLoader();
+    
+    try {
+        const response = await makeConnection({
+            suffix,
+            method,
+            entityId: id,
+        });
+        entity = response?.data.data;
+        const turmas = (entity.turmas as Record<string, unknown>[]).map(turma=>{
+            return ({
+                label: turma.name,
+                value: turma._id
+            })
+        })
+        entity.turmas = turmas;
+    } catch(err) {
+        console.error(err);
+    }
+
+    closeLoader()
+    
+    return entity;
+}

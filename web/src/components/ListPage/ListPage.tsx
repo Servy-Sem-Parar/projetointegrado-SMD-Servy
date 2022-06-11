@@ -149,7 +149,7 @@ export function ListPage(props: IListPageProps) {
                             <tr 
                                 className="list-page-table-line"
                                 style={{
-                                    backgroundColor: index%2 === 0 ? "#F8E3FF" : "#F1C8FF",
+                                    backgroundColor: entity.color ? entity.color as string : index%2 === 0 ? "#F8E3FF" : "#F1C8FF",
                                 }}
                             >
                                 {
