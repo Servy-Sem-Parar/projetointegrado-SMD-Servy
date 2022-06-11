@@ -29,14 +29,11 @@ class AulaController extends CrudController<IAula, typeof Aula> {
     }
   }
 
-  override posUpdate(result: IAula, request: Request): void {
-    console.log(result)
-    Turma.updateMany(
+  override async posUpdate(result: IAula, request: Request): Promise<void> {
+    await Turma.updateMany(
       { "_id": { "$in": [result.turma._id] } },
       { "$addToSet": { "aulas": result._id } },
       { "multi": true },
-      function(err,numAffected) {
-      }
     )
   }
 
