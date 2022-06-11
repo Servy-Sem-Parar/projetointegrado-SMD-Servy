@@ -29,12 +29,11 @@ export function ModalsProvider() {
         if(targetEntity){
             if(targetEntity._id) {
                 setIsEdit(true);
+                getEntity(targetEntity._id as string).then(resp=>{
+                    setTargetEntity({...resp}); 
+                    setEntity({...resp})
+                })
             } 
-            getEntity(targetEntity._id as string).then(resp=>{
-                setTargetEntity({...resp}); 
-                setEntity({...resp})
-            })
-            
         } else {
             setIsEdit(false);
         }
@@ -47,9 +46,9 @@ export function ModalsProvider() {
     }
 
     return (
-        <div>
+        <>
             {
-                isOpenSaveModal && 
+                ((isOpenSaveModal && !isEdit) || (isOpenSaveModal && isEdit && targetEntity && targetEntity._id)) && 
                     <SaveModal
                         titleLabel={isEdit ? "Editar professora" : "Nova professora"}
                         showModal={isOpenSaveModal}
@@ -140,6 +139,6 @@ export function ModalsProvider() {
                         bodyLabel={"Essa ação irá remover a professora."}
                     />
             }
-        </div>
+        </>
     )
 }

@@ -1,3 +1,4 @@
+import { alertError } from "../../components/Alert/Alert";
 import { closeLoader, openLoader } from "../../components/Loader/Loader";
 import { makeConnection } from "../../Tools/makeConnection"
 
@@ -7,6 +8,31 @@ interface IResult {
 }
 
 function _formatEntities(entity: Record<string, unknown>) {
+    let studentsDefaultValue: Record<string, unknown>[] = [];
+    let students: string[] = [];
+    let teachersDefaultValue: Record<string, unknown>[] = [];
+    let teachers: string[] = [];
+
+    (entity.teachers as Record<string, unknown>[]).forEach(teacher=>{
+        teachersDefaultValue.push({
+            label: teacher.name,
+            value: teacher._id,
+        })
+        teachers.push(teacher._id as string)
+    });
+    (entity.students as Record<string, unknown>[]).forEach(student=>{
+        studentsDefaultValue.push({
+            label: student.name,
+            value: student._id,
+        })
+        students.push(student._id as string)
+    });
+
+    entity.teachersDefaultValue = teachersDefaultValue;
+    entity.studentsDefaultValue = studentsDefaultValue;
+    entity.students = students;
+    entity.teachers = teachers;
+
     const formatedEntity = {
         icon: (entity.disciplina as Record<string, unknown>).icon,
         studentsCount: `${(entity.students as Record<string, unknown>[]).length} alunas`,
@@ -49,7 +75,14 @@ export async function getEntities(offset: number, filters?: Record<string, unkno
             total: response?.data.total
         }
     } catch(err) {
-        console.error(err);
+        const error = err as {
+            response: {
+              data: {
+                error: string
+              }
+            }
+        }
+        alertError(error.response.data.error);
     }
     closeLoader();
 
@@ -71,7 +104,14 @@ export async function createEntity(body: Record<string, unknown>) {
         });
         success = response ? true : false;
     } catch(err) {
-        console.error(err);
+        const error = err as {
+            response: {
+              data: {
+                error: string
+              }
+            }
+        }
+        alertError(error.response.data.error);
     }
 
     closeLoader();
@@ -95,7 +135,14 @@ export async function editEntity(body: Record<string, unknown>, entityId: string
         });
         success = response ? true : false;
     } catch(err) {
-        console.error(err);
+        const error = err as {
+            response: {
+              data: {
+                error: string
+              }
+            }
+        }
+        alertError(error.response.data.error);
     }
     
     closeLoader();
@@ -118,7 +165,14 @@ export async function deleteEntity(entityId: string) {
         });
         success = response ? true : false;
     } catch(err) {
-        console.error(err);
+        const error = err as {
+            response: {
+              data: {
+                error: string
+              }
+            }
+        }
+        alertError(error.response.data.error);
     }
     
     closeLoader();
@@ -152,7 +206,94 @@ export async function getDisciplinas() {
             }
         });
     } catch(err) {
-        console.error(err);
+        const error = err as {
+            response: {
+              data: {
+                error: string
+              }
+            }
+        }
+        alertError(error.response.data.error);
+    }
+    closeLoader();
+
+    return options;
+}
+
+export async function getTeachers() {
+    const suffix = "user/professoras";
+    const method = "get";
+    const otherQueryStrings: Record<string, unknown> = { 
+        sort: "name",
+        order: "asc",
+        offset: 0,
+        limit: 10000,
+    };
+    let options: Record<string, unknown>[] = [];
+
+    openLoader();
+    
+    try {
+        const response = await makeConnection({
+            suffix,
+            method,
+            otherQueryStrings
+        });
+        options= (response?.data.data as Record<string, unknown>[]).map((entity)=>{
+            return {
+                label: entity.name,
+                value: entity._id
+            }
+        });
+    } catch(err) {
+        const error = err as {
+            response: {
+              data: {
+                error: string
+              }
+            }
+        }
+        alertError(error.response.data.error);
+    }
+    closeLoader();
+
+    return options;
+}
+
+export async function getStudents() {
+    const suffix = "user/alunas";
+    const method = "get";
+    const otherQueryStrings: Record<string, unknown> = { 
+        sort: "name",
+        order: "asc",
+        offset: 0,
+        limit: 10000,
+    };
+    let options: Record<string, unknown>[] = [];
+
+    openLoader();
+    
+    try {
+        const response = await makeConnection({
+            suffix,
+            method,
+            otherQueryStrings
+        });
+        options= (response?.data.data as Record<string, unknown>[]).map((entity)=>{
+            return {
+                label: entity.name,
+                value: entity._id
+            }
+        });
+    } catch(err) {
+        const error = err as {
+            response: {
+              data: {
+                error: string
+              }
+            }
+        }
+        alertError(error.response.data.error);
     }
     closeLoader();
 

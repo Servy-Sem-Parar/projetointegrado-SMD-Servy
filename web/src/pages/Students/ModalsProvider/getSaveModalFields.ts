@@ -7,6 +7,7 @@ interface IGetSaveModalFieldsProps {
     setFieldValidation: (field: string, value: string)=>void;
     isEdit: boolean;
     passwordValue?: string,
+    turmas: Record<string, unknown>[]
 }
 
 export const fieldValidations = {
@@ -40,16 +41,13 @@ export function getSaveModalFields(props: IGetSaveModalFieldsProps) {
             id: "turmas",
             label: "Turmas",
             type: "multiSelect",
-            defaultValue: props.initialEntity && props.initialEntity.turmas ? props.initialEntity.turmas as string : "",
+            defaultValue: props.initialEntity && props.initialEntity.turmasDefaultValue ? props.initialEntity.turmasDefaultValue as string : "",
             errorMessage: props.errorMessages && props.errorMessages.turmas ? props.errorMessages.turmas : "",
             validations: fieldValidations.turmas && fieldValidations.turmas,
             placeholder: "Selecione uma ou mais turmas",
             size: "100",
             setFieldValidation: props.setFieldValidation,
-            options: [
-                {label: "Administradora", value: "admin"},
-                {label: "Professora", value: "teacher"},
-            ],
+            options: props.turmas as {label: string, value: string}[],
             onChange: (value: string | Date | string[])=>{
                 props.onChange("turmas", value)
             }

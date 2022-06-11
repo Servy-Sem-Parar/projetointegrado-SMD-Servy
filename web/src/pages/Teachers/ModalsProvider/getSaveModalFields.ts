@@ -59,7 +59,7 @@ export function getSaveModalFields(props: IGetSaveModalFieldsProps) {
             id: "turmas",
             label: "Turmas",
             type: "multiSelect",
-            defaultValue: props.initialEntity && props.initialEntity.turmas ? props.initialEntity.turmas as string : "",
+            defaultValue: props.initialEntity && props.initialEntity.turmasDefaultValue ? props.initialEntity.turmasDefaultValue as Record<string, string>[] : [],
             errorMessage: props.errorMessages && props.errorMessages.turmas ? props.errorMessages.turmas : "",
             validations: fieldValidations.turmas && fieldValidations.turmas,
             placeholder: "Selecione uma ou mais turmas",

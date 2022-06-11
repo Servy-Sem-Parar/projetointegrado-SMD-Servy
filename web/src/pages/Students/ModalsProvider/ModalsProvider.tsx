@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { alertError, alertSuccess } from "../../../components/Alert/Alert";
 import { DeleteModal } from "../../../components/DeleteModal/DeleteModal";
 import { SaveModal } from "../../../components/SaveModal/SaveModal"
 import { validateAllInputs } from "../../../Tools/validateInputs";
-import { createEntity, deleteEntity, editEntity } from "../requester";
+import { createEntity, deleteEntity, editEntity, getEntity, getTurmas } from "../requester";
 import { updateEntities } from "../Students";
 import { fieldValidations, getSaveModalFields } from "./getSaveModalFields";
 
@@ -17,14 +17,23 @@ export function ModalsProvider() {
     const [entity, setEntity] = useState<Record<string, unknown>>({});
     const [isEdit, setIsEdit] = useState(false);
     const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+    const [turmas, setTurmas] = useState<Record<string, unknown>[]>([]);
+
+    useEffect(()=>{
+        getTurmas().then(options=>{
+            setTurmas(options);
+        })
+    }, [])
 
     openSaveModal = (targetEntity?: Record<string, unknown>)=>{ 
         if(targetEntity){
             if(targetEntity._id) {
                 setIsEdit(true);
+                getEntity(targetEntity._id as string).then(resp=>{
+                    setTargetEntity({...resp}); 
+                    setEntity({...resp})
+                })
             } 
-            setTargetEntity({...targetEntity}); 
-            setEntity({...targetEntity})
         } else {
             setIsEdit(false);
         }
@@ -37,9 +46,9 @@ export function ModalsProvider() {
     }
 
     return (
-        <div>
+        <>
             {
-                isOpenSaveModal && 
+                ((isOpenSaveModal && !isEdit) || (isOpenSaveModal && isEdit && targetEntity && targetEntity._id)) && 
                     <SaveModal
                         titleLabel={isEdit ? "Editar aluna" : "Nova aluna"}
                         showModal={isOpenSaveModal}
@@ -61,6 +70,7 @@ export function ModalsProvider() {
                                 },
                                 isEdit,
                                 passwordValue: entity.password ? entity.password as string : "",
+                                turmas
                             })
                         }
                         footerButtons={[
@@ -133,6 +143,6 @@ export function ModalsProvider() {
                         bodyLabel={"Essa ação irá remover a aluna."}
                     />
             }
-        </div>
+        </>
     )
 }

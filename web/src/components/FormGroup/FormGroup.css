@@ -18,6 +18,20 @@
     margin-top: 10px;
 }
 
+.github-picker {
+    width: fit-content !important;
+    margin-top: 5px;
+}
+
+.github-picker span {
+    margin: 3px;
+    border-radius: 3px;
+}
+
+.github-picker span div span div {
+    border-radius: 3px;
+}
+
 .form-control-input {
     border-radius: 10px;
     border: 1px solid #F97E0D;

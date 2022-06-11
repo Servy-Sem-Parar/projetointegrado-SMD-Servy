@@ -1,3 +1,11 @@
 .icon-renderer-class {
     margin-left: 5px;
 }
+
+.icon-table-class {
+    font-size: 40px; 
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+    text-align: center;
+}

@@ -1,3 +1,4 @@
+import { alertError } from "../../components/Alert/Alert";
 import { closeLoader, openLoader } from "../../components/Loader/Loader";
 import { getIconOptions } from "../../Tools/getIconOptions";
 import { makeConnection } from "../../Tools/makeConnection"
@@ -53,7 +54,14 @@ export async function getEntities(offset: number, filters?: Record<string, unkno
             total: response?.data.data.total
         }
     } catch(err) {
-        console.error(err);
+        const error = err as {
+            response: {
+              data: {
+                error: string
+              }
+            }
+        }
+        alertError(error.response.data.error);
     }
     closeLoader();
 
@@ -75,7 +83,14 @@ export async function createEntity(body: Record<string, unknown>) {
         });
         success = response ? true : false;
     } catch(err) {
-        console.error(err);
+        const error = err as {
+            response: {
+              data: {
+                error: string
+              }
+            }
+        }
+        alertError(error.response.data.error);
     }
 
     closeLoader();
@@ -99,7 +114,14 @@ export async function editEntity(body: Record<string, unknown>, entityId: string
         });
         success = response ? true : false;
     } catch(err) {
-        console.error(err);
+        const error = err as {
+            response: {
+              data: {
+                error: string
+              }
+            }
+        }
+        alertError(error.response.data.error);
     }
     
     closeLoader();
@@ -122,7 +144,14 @@ export async function deleteEntity(entityId: string) {
         });
         success = response ? true : false;
     } catch(err) {
-        console.error(err);
+        const error = err as {
+            response: {
+              data: {
+                error: string
+              }
+            }
+        }
+        alertError(error.response.data.error);
     }
     
     closeLoader();

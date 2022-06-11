@@ -3,7 +3,7 @@ import { alertError, alertSuccess } from "../../../components/Alert/Alert";
 import { DeleteModal } from "../../../components/DeleteModal/DeleteModal";
 import { SaveModal } from "../../../components/SaveModal/SaveModal"
 import { validateAllInputs } from "../../../Tools/validateInputs";
-import { createEntity, deleteEntity, editEntity, getDisciplinas } from "../requester";
+import { createEntity, deleteEntity, editEntity, getDisciplinas, getStudents, getTeachers } from "../requester";
 import { updateEntities } from "../Classes";
 import { fieldValidations, getSaveModalFields } from "./getSaveModalFields";
 
@@ -18,10 +18,18 @@ export function ModalsProvider() {
     const [isEdit, setIsEdit] = useState(false);
     const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
     const [disciplinas, setDisciplinas] = useState<Record<string, unknown>[]>([]);
+    const [teachers, setTeachers] = useState<Record<string, unknown>[]>([]);
+    const [students, setStudents] = useState<Record<string, unknown>[]>([]);
 
     useEffect(()=>{
-        getDisciplinas().then(options=>{
-            setDisciplinas(options);
+        Promise.all([
+            getDisciplinas(),
+            getTeachers(),
+            getStudents(),
+        ]).then(responses=>{
+            setDisciplinas(responses[0]);
+            setTeachers(responses[1]);
+            setStudents(responses[2]);
         })
     }, [])
 
@@ -66,7 +74,9 @@ export function ModalsProvider() {
                                     newValidation[field] = value;
                                     setErrorMessages(newValidation);
                                 },
-                                disciplinas
+                                disciplinas,
+                                teachers,
+                                students
                             })
                         }
                         footerButtons={[

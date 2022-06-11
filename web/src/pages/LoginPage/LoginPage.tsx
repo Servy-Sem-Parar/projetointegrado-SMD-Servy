@@ -1,4 +1,4 @@
-import React, { EventHandler, FormEvent, FormEventHandler, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import Mulher from "../../assets/mulher.png" 
 import { alertError } from '../../components/Alert/Alert';
 import FormGroup from '../../components/FormGroup/FormGroup';
@@ -46,7 +46,7 @@ function LoginPage() {
           }
         }
       }
-      alertError(error.response.data.error)
+      alertError(error.response.data.error);
     }
     closeLoader();
   }

@@ -1,25 +1,27 @@
 import {IoIosRocket} from "react-icons/io";
 import {AiFillCalculator} from "react-icons/ai";
 import {BsBook} from "react-icons/bs";
+import {MdScience, MdEco} from "react-icons/md";
+import "./Options.css";
+
+const icons: Record<string, unknown> = {
+    rocket: <div className="icon-table-class"><IoIosRocket/></div>,
+    calculator: <div className="icon-table-class"><AiFillCalculator/></div>,
+    leaf: <div className="icon-table-class"><MdEco/></div>,
+    proveta: <div className="icon-table-class"><MdScience/></div>,
+    default: <div className="icon-table-class"><BsBook/></div>,
+}
 
 export function getIconByName(iconName: string) {
-    let icon = <div style={{fontSize: "40px", display: "flex", justifyContent: "center", alignItems: "center", textAlign: "center"}}>
-            <BsBook/>
-        </div>
+    let icon = icons.default;
 
-    switch (iconName) {
-        case "rocket":
-            icon = <div style={{fontSize: "40px", display: "flex", justifyContent: "center", alignItems: "center", textAlign: "center"}}>
-                        <IoIosRocket/>
-                    </div>
-            break;
-        case "calculator":
-            icon = <div style={{fontSize: "40px", display: "flex", justifyContent: "center", alignItems: "center", textAlign: "center"}}>
-                <AiFillCalculator/>
-            </div>
-            break;
-        default:
-            break;
+    if([
+        "rocket",
+        "calculator",
+        "leaf",
+        "proveta"
+    ].includes(iconName)) {
+        icon = icons[iconName];
     }
 
     return icon;

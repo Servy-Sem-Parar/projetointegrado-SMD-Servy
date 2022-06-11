@@ -1,3 +1,4 @@
+import { alertError } from "../../components/Alert/Alert";
 import { closeLoader, openLoader } from "../../components/Loader/Loader";
 import { formatPhoneNumberToShow } from "../../Tools/formatPhoneNumberToShow";
 import { makeConnection } from "../../Tools/makeConnection"
@@ -48,7 +49,14 @@ export async function getEntities(offset: number, filters?: Record<string, unkno
             total: response?.data.total
         }
     } catch(err) {
-        console.error(err);
+        const error = err as {
+            response: {
+              data: {
+                error: string
+              }
+            }
+        }
+        alertError(error.response.data.error);
     }
     closeLoader();
 
@@ -70,7 +78,14 @@ export async function createEntity(body: Record<string, unknown>) {
         });
         success = response ? true : false;
     } catch(err) {
-        console.error(err);
+        const error = err as {
+            response: {
+              data: {
+                error: string
+              }
+            }
+        }
+        alertError(error.response.data.error);
     }
 
     closeLoader();
@@ -94,12 +109,59 @@ export async function editEntity(body: Record<string, unknown>, entityId: string
         });
         success = response ? true : false;
     } catch(err) {
-        console.error(err);
+        const error = err as {
+            response: {
+              data: {
+                error: string
+              }
+            }
+        }
+        alertError(error.response.data.error);
     }
     
     closeLoader();
 
     return success;
+}
+
+export async function getTurmas() {
+    const suffix = "turma";
+    const method = "get";
+    const otherQueryStrings: Record<string, unknown> = { 
+        sort: "name",
+        order: "asc",
+        offset: 0,
+        limit: 10000,
+    };
+    let options: Record<string, unknown>[] = [];
+
+    openLoader();
+    
+    try {
+        const response = await makeConnection({
+            suffix,
+            method,
+            otherQueryStrings
+        });
+        options= (response?.data.data as Record<string, unknown>[]).map((entity)=>{
+            return {
+                label: entity.name,
+                value: entity._id
+            }
+        });
+    } catch(err) {
+        const error = err as {
+            response: {
+              data: {
+                error: string
+              }
+            }
+        }
+        alertError(error.response.data.error);
+    }
+    closeLoader();
+
+    return options;
 }
 
 export async function deleteEntity(entityId: string) {
@@ -117,10 +179,58 @@ export async function deleteEntity(entityId: string) {
         });
         success = response ? true : false;
     } catch(err) {
-        console.error(err);
+        const error = err as {
+            response: {
+              data: {
+                error: string
+              }
+            }
+        }
+        alertError(error.response.data.error);
     }
     
     closeLoader();
 
     return success;
+}
+
+export async function getEntity(id: string){
+    const suffix = "user";
+    const method = "get";
+    let entity: Record<string, unknown> = {};
+
+    openLoader();
+    
+    try {
+        const response = await makeConnection({
+            suffix,
+            method,
+            entityId: id,
+        });
+        entity = response?.data.data;
+        let turmasDefaultValue: Record<string, unknown>[] = []; 
+        let turmas: string[] = []; 
+        (entity.turmas as Record<string, unknown>[]).forEach(turma=>{
+            turmasDefaultValue.push({
+                label: turma.name,
+                value: turma._id
+            })
+            turmas.push(turma._id as string);
+        })
+        entity.turmas = turmas;
+        entity.turmasDefaultValue = turmasDefaultValue;
+    } catch(err) {
+        const error = err as {
+            response: {
+              data: {
+                error: string
+              }
+            }
+        }
+        alertError(error.response.data.error);
+    }
+
+    closeLoader()
+    
+    return entity;
 }

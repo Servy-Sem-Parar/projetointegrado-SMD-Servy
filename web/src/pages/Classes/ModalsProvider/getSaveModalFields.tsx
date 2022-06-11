@@ -5,7 +5,9 @@ interface IGetSaveModalFieldsProps {
     errorMessages: Record<string, string>;
     onChange: (field: string, value: string | Date | string[])=>void;
     setFieldValidation: (field: string, value: string)=>void;
-    disciplinas: Record<string, unknown>[]
+    disciplinas: Record<string, unknown>[];
+    teachers: Record<string, unknown>[];
+    students: Record<string, unknown>[];
 }
 
 export const fieldValidations = {
@@ -15,6 +17,8 @@ export const fieldValidations = {
     informations: [],
     disciplina: ["mandatory"],
     color: ["mandatory"],
+    teachers: [],
+    students: [],
 }
 
 export function getSaveModalFields(props: IGetSaveModalFieldsProps) {
@@ -33,6 +37,20 @@ export function getSaveModalFields(props: IGetSaveModalFieldsProps) {
                 props.onChange("name", value);
             }
         },    
+        {
+            id: "level",
+            label: "Nível",
+            type: "text",
+            defaultValue: props.initialEntity && props.initialEntity.level ? props.initialEntity.level as string : "",
+            errorMessage: props.errorMessages && props.errorMessages.level ? props.errorMessages.level : "",
+            validations: fieldValidations.level && fieldValidations.level,
+            placeholder: "",
+            size: "100",
+            setFieldValidation: props.setFieldValidation,
+            onChange: (value: string | Date | string[])=>{
+                props.onChange("level", value);
+            }
+        }, 
         {
             id: "description",
             label: "Descrição",
@@ -62,20 +80,6 @@ export function getSaveModalFields(props: IGetSaveModalFieldsProps) {
             }
         }, 
         {
-            id: "level",
-            label: "Nível",
-            type: "text",
-            defaultValue: props.initialEntity && props.initialEntity.level ? props.initialEntity.level as string : "",
-            errorMessage: props.errorMessages && props.errorMessages.level ? props.errorMessages.level : "",
-            validations: fieldValidations.level && fieldValidations.level,
-            placeholder: "",
-            size: "100",
-            setFieldValidation: props.setFieldValidation,
-            onChange: (value: string | Date | string[])=>{
-                props.onChange("level", value);
-            }
-        }, 
-        {
             id: "disciplina",
             label: "Disciplina",
             type: "select",
@@ -89,11 +93,41 @@ export function getSaveModalFields(props: IGetSaveModalFieldsProps) {
             onChange: (value: string | Date | string[])=>{
                 props.onChange("disciplina", value)
             }
-        }, 
+        },
+        {
+            id: "teachers",
+            label: "Professoras",
+            type: "multiSelect",
+            defaultValue: props.initialEntity && props.initialEntity.teachersDefaultValue ? props.initialEntity.teachersDefaultValue as Record<string, string>[] : [],
+            errorMessage: props.errorMessages && props.errorMessages.teachers ? props.errorMessages.teachers : "",
+            validations: fieldValidations.teachers && fieldValidations.teachers,
+            placeholder: "Selecione uma ou mais professoras",
+            size: "100",
+            setFieldValidation: props.setFieldValidation,
+            options: props.teachers as {label: string, value: string}[],
+            onChange: (value: string | Date | string[])=>{
+                props.onChange("teachers", value)
+            }
+        },
+        {
+            id: "students",
+            label: "Alunas",
+            type: "multiSelect",
+            defaultValue: props.initialEntity && props.initialEntity.studentsDefaultValue ? props.initialEntity.studentsDefaultValue as Record<string, string>[] : [],
+            errorMessage: props.errorMessages && props.errorMessages.students ? props.errorMessages.students : "",
+            validations: fieldValidations.students && fieldValidations.students,
+            placeholder: "Selecione uma ou mais alunas",
+            size: "100",
+            setFieldValidation: props.setFieldValidation,
+            options: props.students as {label: string, value: string}[],
+            onChange: (value: string | Date | string[])=>{
+                props.onChange("students", value)
+            }
+        },
         {
             id: "color",
             label: "Cor",
-            type: "text",
+            type: "color",
             defaultValue: props.initialEntity && props.initialEntity.color ? props.initialEntity.color as string : "",
             errorMessage: props.errorMessages && props.errorMessages.color ? props.errorMessages.color : "",
             validations: fieldValidations.color && fieldValidations.color,
