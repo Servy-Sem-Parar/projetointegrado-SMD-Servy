@@ -62,7 +62,7 @@ abstract class CrudController<I, T extends Model<I>> {
 
   read = async (request: Request, response: Response): Promise<Response> => {
     const result = await this.populate(this.getEntity().findById(request.params.id)).exec();
-    await this.posRead(result)
+    await this.posRead(result);
     return response.status(200).json({ data: result });
   };
 
