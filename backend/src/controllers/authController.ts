@@ -6,6 +6,7 @@ import bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import mongoose from '../database';
 import config from '../config/config';
+import UserStatus from '../enums/userStatus';
 
 require('express-async-errors');
 
@@ -19,6 +20,7 @@ const login = async (request: Request, response: Response): Promise<Response> =>
   const user = await User.findOne({ email }).select('+password');
 
   if (!user) throw new HttpError('Usuário não encontrado', 404);
+  if (user.status === UserStatus.PENDING) throw new HttpError('Aprovação pendente.', 403);
 
   if (!await bcrypt.compare(password, user.password)) {
     throw new HttpError('Senha incorreta', 400);
@@ -40,6 +42,7 @@ const register = async (request: Request, response: Response): Promise<Response>
     name,
     password,
     email,
+    status: UserStatus.PENDING,
   });
 
   const user = await result.save();

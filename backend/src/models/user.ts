@@ -4,6 +4,8 @@ import bcrypt from 'bcryptjs';
 import paginate from 'mongoose-paginate-v2';
 import mongoose from '../database';
 import Role from '../enums/role';
+import UserStatus from '../enums/userStatus';
+import SchoolType from '../enums/schoolType';
 
 require('mongoose-type-email');
 
@@ -26,10 +28,24 @@ const UserSchema = new Schema<IUser>({
   phone_number: {
     type: String,
   },
+  address: {
+    type: String,
+  },
   role: {
     type: String,
     default: Role.STUDENT,
     enum: Role,
+  },
+  status: {
+    type: String,
+    default: UserStatus.APPROVED,
+    enum: UserStatus,
+  },
+  schoolType: {
+    type: String,
+    default: SchoolType.PUBLIC,
+    enum: SchoolType,
+    required: true,
   },
   createdAt: {
     type: 'Date',

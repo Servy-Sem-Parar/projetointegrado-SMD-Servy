@@ -8,12 +8,20 @@
     top: 60px;
     max-width: 275px;
     width: auto;
-    background-color: white;
     display: flex;
-    border-radius: 30px;
-    padding: 10px;
-    box-shadow: 0 0 13px #999999;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 5px #999999;
     z-index: 30;
+    min-height: 50px;
+    align-items: center;
+    color: white;
+    opacity: .95;
+    transition: all 400ms ease;
+}
+
+.alert:hover {
+    opacity: 1;
 }
 
 .hidden {
@@ -22,15 +30,16 @@
 
 
 .alert-success {
-    border: 3px solid #41f73b;
+    background-color:  #62AC62;
 }
 
 .alert-error {
-    border: 3px solid #e01616;
+    background-color:  #e01616;
 }
 
 .alert-body {
     display: flex;
+    align-items: center;
 }
 
 .alert-text {
@@ -48,6 +57,9 @@
     margin-left: 10px;
     opacity: 0.5;
     font-weight: 700;
+    position: absolute;
+    top: -3px;
+    right: 10px;
 }
 
 .close-icon:hover {
@@ -57,13 +69,11 @@
 .success-icon {
     margin-right: 10px;
     font-size: 20px;
-    color: #099e04;
     min-width: 20px;
 }
 
 .error-icon {
     margin-right: 10px;
     font-size: 20px;
-    color: #e01616;
     min-width: 20px;
 }

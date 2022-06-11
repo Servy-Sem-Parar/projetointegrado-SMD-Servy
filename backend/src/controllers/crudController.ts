@@ -27,6 +27,10 @@ abstract class CrudController<I, T extends Model<I>> {
     
   }
 
+  async posRead(result: I): Promise<void> {
+    
+  }
+
   async createFromParameters(request: Request): Promise<Document<unknown, any, I> & I> {
     const parameters = request.body;
 
@@ -58,7 +62,7 @@ abstract class CrudController<I, T extends Model<I>> {
 
   read = async (request: Request, response: Response): Promise<Response> => {
     const result = await this.populate(this.getEntity().findById(request.params.id)).exec();
-    
+    await this.posRead(result);
     return response.status(200).json({ data: result });
   };
 
@@ -85,6 +89,7 @@ abstract class CrudController<I, T extends Model<I>> {
   pesquisaPadrao = (request: Request): any => {
     const {
       offset,
+      limit,
       order = "id",
       sort = "desc",
     } = request.query;
@@ -97,7 +102,7 @@ abstract class CrudController<I, T extends Model<I>> {
 
     this.prepareQuery(request, query, options)
 
-    return [query, {offset, limit: 10, options}]
+    return [query, {offset, limit: limit || 10, options}]
   }
 
 }
