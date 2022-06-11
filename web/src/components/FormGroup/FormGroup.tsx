@@ -9,7 +9,7 @@ export type inputSizes = '33' | '66' | '50' | '100';
 export interface IFormGroupProps {
     type: inputTypes,
     size: inputSizes,
-    label: string,
+    label?: string,
     placeholder: string,
     id: string,
     defaultValue?: string | Record<string, string>[] | Date,

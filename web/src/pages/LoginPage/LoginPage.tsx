@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Logo from "../../assets/logo.png" 
+import React, { EventHandler, FormEvent, FormEventHandler, useState } from 'react';
+import Mulher from "../../assets/mulher.png" 
 import { alertError } from '../../components/Alert/Alert';
 import FormGroup from '../../components/FormGroup/FormGroup';
 import { closeLoader, openLoader } from '../../components/Loader/Loader';
@@ -15,55 +15,49 @@ function LoginPage() {
     password: "",
   });
 
-  return (
-    <div className='login-page-body'>
-      <div className='login-box'>
-        <div className='login-logo-container'>
-            <img className="login-logo-image" src={Logo} alt="logo"/>
-        </div>
-        <div className='login-form-box'>
-          <div className="login-box-main-title">Bem vinda!</div>
-          <div className="login-box-sub-title">Acesse sua conta</div>
-          <form style={{width: "100%", marginTop: "10px"}} onSubmit={async (e)=>{
-            e.preventDefault();
-            openLoader();
-            try {
-              const response = await makeConnection({
-                method: "post",
-                suffix: "auth/login",
-                body: {
-                  email,
-                  password
-                }
-              });
-              if(response?.data.user.role === "student") {
-                alertError("Alunas devem acessar a plataforma pelo aplicativo.")
-              } else {
-                localStorage.setItem("token", "Bearer " + response?.data.token);
-                localStorage.setItem("user", JSON.stringify(response?.data.user));
-                if(window.location.pathname === "/") {
-                  window.location.pathname = "home";
-                } else {
-                  window.location.reload();
-                }
-              }
-            } catch (err) {
-              const error = err as {
-                response: {
-                  data: {
-                    error: string
-                  }
-                }
-              }
-              alertError(error.response.data.error)
-            }
-            closeLoader();
-          }}>
+  const onSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    openLoader();
+    try {
+      const response = await makeConnection({
+        method: "post",
+        suffix: "auth/login",
+        body: {
+          email,
+          password
+        }
+      });
+      if(response?.data.user.role === "student") {
+        alertError("Alunas devem acessar a plataforma pelo aplicativo.")
+      } else {
+        localStorage.setItem("token", "Bearer " + response?.data.token);
+        localStorage.setItem("user", JSON.stringify(response?.data.user));
+        if(window.location.pathname === "/") {
+          window.location.pathname = "home";
+        } else {
+          window.location.reload();
+        }
+      }
+    } catch (err) {
+      const error = err as {
+        response: {
+          data: {
+            error: string
+          }
+        }
+      }
+      alertError(error.response.data.error)
+    }
+    closeLoader();
+  }
+
+  const renderForm = () => {
+    return (
+      <form style={{width: "100%", marginTop: "10px"}} onSubmit={onSubmit}>
             <FormGroup
               type={'text'}
               size={'100'}
-              label={"Email:"}
-              placeholder={"Digite seu e-mail"}
+              placeholder={"Email"}
               id={"email"}
               validations={["mandatory"]}
               errorMessage={validations.email && validations.email}
@@ -79,8 +73,7 @@ function LoginPage() {
             <FormGroup
               type={'password'}
               size={'100'}
-              label={"Senha:"}
-              placeholder={"Digite sua senha"}
+              placeholder={"Senha"}
               id={"password"}
               validations={["mandatory"]}
               errorMessage={validations.password && validations.password}
@@ -101,6 +94,31 @@ function LoginPage() {
               Entrar
             </button>
           </form>
+    )
+  }
+
+  return (
+    <div className='login-page-body'>
+      <div className='login-first'>
+        <div className='login-logo-holder'>
+          <span className='login-logo-text-title'>
+            Projeto
+          </span>
+          <span className='login-logo-text-subtitle'>
+            Sem Parar
+          </span>
+        </div>
+        <div className='login-mulher-container'>
+          <img src={Mulher} alt="mulher"/>
+        </div>
+        <div className='wave'></div>
+      </div>
+      <div className='login-second'>
+        <div className='login-wrapper'>
+          <h1>
+            Acesse sua conta
+          </h1>
+          {renderForm()}
         </div>
       </div>
     </div>
