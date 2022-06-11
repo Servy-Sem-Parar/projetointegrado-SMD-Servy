@@ -5,7 +5,7 @@ import paginate from 'mongoose-paginate-v2';
 import mongoose from '../database';
 import Role from '../enums/role';
 import UserStatus from '../enums/userStatus';
-import SchoolType from 'src/enums/schoolType';
+import SchoolType from '../enums/schoolType';
 
 require('mongoose-type-email');
 
