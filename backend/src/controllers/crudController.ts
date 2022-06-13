@@ -19,11 +19,11 @@ abstract class CrudController<I, T extends Model<I>> {
 
   }
 
-  posCreate(result: I, request:Request): void {
+  async posCreate(result: I, request:Request): Promise<void> {
     this.posUpdate(result, request)
   }
 
-  posUpdate(result: I, request:Request): void {
+  async posUpdate(result: I, request:Request): Promise<void> {
     
   }
 
@@ -56,7 +56,7 @@ abstract class CrudController<I, T extends Model<I>> {
 
   create = async (request: Request, response: Response): Promise<Response> => {
     const result = await this.createFromParameters(request);
-    this.posCreate(result, request)
+    await this.posCreate(result, request)
     return response.status(201).json({ data: result });
   };
 
@@ -68,7 +68,8 @@ abstract class CrudController<I, T extends Model<I>> {
 
   update = async (request: Request, response: Response): Promise<Response> => {
     const result = await this.updateFromParameters(request);
-    this.posUpdate(result, request)
+    await this.posUpdate(result, request)
+    await this.posRead(result);
     return response.status(200).json({ data: result });
   };
 

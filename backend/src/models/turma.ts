@@ -37,7 +37,10 @@ const TurmaSchema = new Schema<ITurma>({
   },
   color: {
     type: String
-  }
+  },
+  level: {
+    type: String
+  },
 });
 
 TurmaSchema.plugin(paginate);

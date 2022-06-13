@@ -56,26 +56,22 @@ class UserController extends CrudController<IUser, typeof User> {
     }
   }
 
-  override posUpdate(user: IUser, request: Request): void {
+  override async posUpdate(user: IUser, request: Request): Promise<void> {
     // recebe as turmas e adiciona o usuario na turma
     const {turmas: novasTurmas} = request.body
     if (!novasTurmas) return
     const userId = user._id
     const roleField = user.role === 'teacher' || user.role === 'admin' ? 'teachers' : 'students'
-    Turma.updateMany(
+    await Turma.updateMany(
       { [roleField]: userId },
       { "$pull": { [roleField]: userId } },
       { "multi": true },
-      function(err,numAffected) {
-      }
     )
-    Turma.updateMany(
-      { "_id": { "$in": [novasTurmas] } },
+    await Turma.updateMany(
+      { "_id": { "$in": novasTurmas } },
       { "$addToSet": { [roleField]: userId } },
       { "multi": true },
-      function(err,numAffected) {
-      }
-  );
+    );
    
   }
 
