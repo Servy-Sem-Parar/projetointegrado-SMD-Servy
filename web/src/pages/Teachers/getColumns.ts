@@ -8,21 +8,25 @@ export function getColumns() {
                 type: "string",
                 label: "Nome",
                 control: "name",
+                orderControl: "name",
             },
             {
                 type: "string",
                 label: "Telefone",
                 control: "phone",
+                orderControl: "phone_number",
             },
             {
                 type: "string",
                 label: "Email",
                 control: "email",
+                orderControl: "email",
             },
             {
                 type: "string",
                 label: "Permissão",
                 control: "permission",
+                orderControl: "role",
             },
             {
                 type: "action",

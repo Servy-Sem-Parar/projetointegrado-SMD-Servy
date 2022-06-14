@@ -12,21 +12,25 @@ export function getColumns() {
             type: "string",
             label: "Nome",
             control: "name",
+            orderControl: "name",
         },
         {
             type: "string",
             label: "Nível",
             control: "level",
+            orderControl: "level",
         },
         {
             type: "string",
             label: "Alunas",
             control: "studentsCount",
+            orderControl: "students",
         },
         {
             type: "string",
             label: "Aulas",
             control: "aulasCount",
+            orderControl: "aulas",
         },
         {
             type: "action",

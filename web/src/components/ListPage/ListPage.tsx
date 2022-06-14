@@ -36,6 +36,7 @@ export interface IColumn {
     label: string,
     control: string,
     actions?: IAction[],
+    orderControl?: string,
 }
 
 interface IAction {
@@ -45,12 +46,14 @@ interface IAction {
 
 export function ListPage(props: IListPageProps) {
     const [filters, setFilters] = useState<Record<string, unknown>>({});
+    const [order, setOrder] = useState("asc");
+    const [sort, setSort] = useState("name");
 
     useEffect(()=>{
         if(props.defaultFilter) {
             setFilters(props.defaultFilter);
         }
-    }, [props.defaultFilter])
+    }, [])
 
     return (
         <div className="list_page_body">
@@ -138,7 +141,33 @@ export function ListPage(props: IListPageProps) {
                     {
                         props.columns.map(column=>{
                             return (
-                                <th className="list-table-header-item">{column.label}</th>
+                                <th 
+                                    className="list-table-header-item"
+                                    style={{
+                                        cursor: column.orderControl ? "pointer" : "default"
+                                    }}
+                                    onClick={()=>{
+                                        if(props.filtersSearchCallBack && column.orderControl) {
+                                            const filter = {...filters};
+                                            filter.sort = column.orderControl;
+                                            
+                                            if(sort !== column.orderControl) {
+                                                filter.order = "asc";
+                                            } else {
+                                                if(order === "asc") {
+                                                    filter.order = "desc";
+                                                } else {
+                                                    filter.order = "asc";
+                                                }
+                                            }
+                                            setOrder(filter.order as string);
+                                            setSort(filter.sort as string);
+                                            props.filtersSearchCallBack(filter);
+                                        }
+                                    }}
+                                >
+                                    {`${column.label}${column.orderControl === sort ? order === "asc" ? " ▲" : " ▼" : ""}`}
+                                </th>
                             )
                         })
                     }

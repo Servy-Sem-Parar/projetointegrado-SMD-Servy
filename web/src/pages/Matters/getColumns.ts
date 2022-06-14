@@ -14,6 +14,7 @@ export function getColumns() {
             type: "string",
             label: "Nome",
             control: "name",
+            orderControl: "name",
         },
     ];
 
