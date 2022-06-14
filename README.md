@@ -29,6 +29,8 @@ npm start
 ### Back-end
 ```shell
 cd backend
+cp .env.example .env
+// entre no seu editor de texto e configure as variáveis de ambiente da .env
 npm install
 npm run build
 npm run start
