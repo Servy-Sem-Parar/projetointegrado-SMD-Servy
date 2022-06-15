@@ -26,7 +26,7 @@ cd projetointegrado-SMD-Servy
 
 ### Front-end web
 ```shell
-cd frontend
+cd web
 npm install
 npm build
 npm start
@@ -34,10 +34,9 @@ npm start
 
 ### Front-end mobile
 ```shell
-cd frontend
+cd mobile
 npm install
-npm build
-npm start
+expo start
 ```
 
 ### Back-end
