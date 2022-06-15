@@ -9,11 +9,11 @@ O projeto da aplicação a ser desenvolvida ao longo do semestre terá como clie
 
 |  NOME                           |  FUNÇÃO                    |  MATRÍCULA  |
 |  ----------------------------   |  --------------------------|  ---------  |
-|  LUIZ EDUARDO GOMES XAVIER      |  CODIFICAÇÃO               |  509510     |
-|  ROLDÃO FERREIRA GOMES NETO     |  DESIGN                    |  507824     |
-|  SAMIRIS SAMPAIO DE ALBUQUERQUE |  DESIGN                    |  509735     |
-|  VICTOR MOTA DOS SANTOS         |  CODIFICAÇÃO               |  509223     |
-|  YANNA TORRES GONÇALVES         |  LÍDER                     |  507773     |
+|  Luiz Eduardo Gomes Xavier      |  Codificação               |  509510     |
+|  Roldão Ferreira Gomes Neto     |  Design                    |  507824     |
+|  Samiris Sampaio De Albuquerque |  Design                    |  509735     |
+|  Victor Mota Dos Santos         |  Codificação               |  509223     |
+|  Yanna Torres Gonçalves         |  Líder                     |  507773     |
 
 ## Como rodar
 
