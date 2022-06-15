@@ -13,7 +13,7 @@ O projeto da aplicação a ser desenvolvida ao longo do semestre terá como clie
 |  ROLDÃO FERREIRA GOMES NETO     |  DESIGN                    |  507824     |
 |  SAMIRIS SAMPAIO DE ALBUQUERQUE |  DESIGN                    |  509735     |
 |  VICTOR MOTA DOS SANTOS         |  CODIFICAÇÃO               |  509223     |
-|  YANNA TORRES GONÇALVES         |  ATENDIMENTO               |  507773     |
+|  YANNA TORRES GONÇALVES         |  LÍDER                     |  507773     |
 
 ## Como rodar
 
