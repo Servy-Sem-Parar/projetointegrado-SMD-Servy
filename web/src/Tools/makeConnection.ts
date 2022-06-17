@@ -1,4 +1,6 @@
 import axios, { AxiosInstance } from "axios"
+import { alertError } from "../components/Alert/Alert";
+import { closeLoader, openLoader } from "../components/Loader/Loader";
 
 interface IMakeConnectionProps {
     method: "get" | "post" | "put" | "delete",
@@ -15,7 +17,28 @@ export async function makeConnection(props: IMakeConnectionProps) {
     });
     const url = buildUrl(props.suffix, props.entityId, props.otherQueryStrings);
     const body = props.body ? props.body : {};
-    const response = await connectToServer(api, url, props.method, body);
+    let response; 
+
+    openLoader();
+
+    try {
+        response = await connectToServer(api, url, props.method, body);
+    } catch(err) {
+        const error = err as {
+            response: {
+              data: {
+                error: string
+              }
+            }
+        }
+        if(error.response.data.error === "Unauthorized"){
+            localStorage.clear();
+            window.location.reload();
+        } else {
+            alertError(error.response.data.error);
+        }    
+    }
+    closeLoader();
 
     return response;
 }

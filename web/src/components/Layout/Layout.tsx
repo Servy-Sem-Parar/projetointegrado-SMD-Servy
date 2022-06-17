@@ -11,13 +11,15 @@ interface ILayoutProps {
 }
 
 function Layout(props: ILayoutProps) {
-    const [sideBarIsOpen, setSideBarIsOpen] = useState(true);
+    const [sideBarIsOpen, setSideBarIsOpen] = useState<boolean>(true);
     const routesWithOutLayout = ["/"]
 
     useEffect(()=>{
         const sideBarState = JSON.parse(localStorage.getItem("sideBarState") as string);
         if(typeof sideBarState === "boolean") {
             setSideBarIsOpen(sideBarState);
+        } else {
+            setSideBarIsOpen(true);
         }
     }, [])
 
@@ -30,7 +32,8 @@ function Layout(props: ILayoutProps) {
                     <SideBar
                         sideBarIsOpen={sideBarIsOpen}
                         changeSideBarState={(value: boolean)=>{
-                            setSideBarIsOpen(value)
+                            setSideBarIsOpen(value);
+                            localStorage.setItem("sideBarState", JSON.stringify(value))
                         }}
                     />
                 }

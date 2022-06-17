@@ -2,7 +2,6 @@ import React, { FormEvent, useState } from 'react';
 import Mulher from "../../assets/mulher.png" 
 import { alertError } from '../../components/Alert/Alert';
 import FormGroup from '../../components/FormGroup/FormGroup';
-import { closeLoader, openLoader } from '../../components/Loader/Loader';
 import { makeConnection } from '../../Tools/makeConnection';
 
 import "./LoginPage.css"
@@ -17,38 +16,25 @@ function LoginPage() {
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    openLoader();
-    try {
-      const response = await makeConnection({
-        method: "post",
-        suffix: "auth/login",
-        body: {
-          email,
-          password
-        }
-      });
-      if(response?.data.user.role === "student") {
-        alertError("Alunas devem acessar a plataforma pelo aplicativo.")
+    const response = await makeConnection({
+      method: "post",
+      suffix: "auth/login",
+      body: {
+        email,
+        password
+      }
+    });
+    if(response?.data.user.role === "student") {
+      alertError("Alunas devem acessar a plataforma pelo aplicativo.")
+    } else if(response?.data.user) {
+      localStorage.setItem("token", "Bearer " + response?.data.token);
+      localStorage.setItem("user", JSON.stringify(response?.data.user));
+      if(window.location.pathname === "/") {
+        window.location.pathname = "home";
       } else {
-        localStorage.setItem("token", "Bearer " + response?.data.token);
-        localStorage.setItem("user", JSON.stringify(response?.data.user));
-        if(window.location.pathname === "/") {
-          window.location.pathname = "home";
-        } else {
-          window.location.reload();
-        }
+        window.location.reload();
       }
-    } catch (err) {
-      const error = err as {
-        response: {
-          data: {
-            error: string
-          }
-        }
-      }
-      alertError(error.response.data.error);
     }
-    closeLoader();
   }
 
   const renderForm = () => {

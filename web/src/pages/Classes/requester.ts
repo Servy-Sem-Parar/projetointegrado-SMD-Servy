@@ -1,5 +1,3 @@
-import { alertError } from "../../components/Alert/Alert";
-import { closeLoader, openLoader } from "../../components/Loader/Loader";
 import { makeConnection } from "../../Tools/makeConnection"
 
 interface IResult {
@@ -59,32 +57,20 @@ export async function getEntities(offset: number, filters?: Record<string, unkno
             }
         })
     }
-    openLoader();
-    
-    try {
-        const response = await makeConnection({
-            suffix,
-            method,
-            otherQueryStrings
-        });
-        const entities = (response?.data.data as Record<string, unknown>[]).map((entity)=>{
-            return _formatEntities(entity);
-        })
-        result = {
-            data: entities,
-            total: response?.data.total
-        }
-    } catch(err) {
-        const error = err as {
-            response: {
-              data: {
-                error: string
-              }
-            }
-        }
-        alertError(error.response.data.error);
+
+    const response = await makeConnection({
+        suffix,
+        method,
+        otherQueryStrings
+    });
+    const entities = (response?.data.data as Record<string, unknown>[]).map((entity)=>{
+        return _formatEntities(entity);
+    })
+
+    result = {
+        data: entities,
+        total: response?.data.total
     }
-    closeLoader();
 
     return result;
 }
@@ -94,27 +80,12 @@ export async function createEntity(body: Record<string, unknown>) {
     const method = "post";
     let success = false;
 
-    openLoader();
-    
-    try {
-        const response = await makeConnection({
-            suffix,
-            method,
-            body
-        });
-        success = response ? true : false;
-    } catch(err) {
-        const error = err as {
-            response: {
-              data: {
-                error: string
-              }
-            }
-        }
-        alertError(error.response.data.error);
-    }
-
-    closeLoader();
+    const response = await makeConnection({
+        suffix,
+        method,
+        body
+    });
+    success = response ? true : false;
 
     return success;
 }
@@ -124,28 +95,13 @@ export async function editEntity(body: Record<string, unknown>, entityId: string
     const method = "put";
     let success = false;
 
-    openLoader();
-    
-    try {
-        const response = await makeConnection({
-            suffix,
-            method,
-            body,
-            entityId
-        });
-        success = response ? true : false;
-    } catch(err) {
-        const error = err as {
-            response: {
-              data: {
-                error: string
-              }
-            }
-        }
-        alertError(error.response.data.error);
-    }
-    
-    closeLoader();
+    const response = await makeConnection({
+        suffix,
+        method,
+        body,
+        entityId
+    });
+    success = response ? true : false;
 
     return success;
 }
@@ -155,27 +111,12 @@ export async function deleteEntity(entityId: string) {
     const method = "delete";
     let success = false;
 
-    openLoader();
-    
-    try {
-        const response = await makeConnection({
-            suffix,
-            method,
-            entityId
-        });
-        success = response ? true : false;
-    } catch(err) {
-        const error = err as {
-            response: {
-              data: {
-                error: string
-              }
-            }
-        }
-        alertError(error.response.data.error);
-    }
-    
-    closeLoader();
+    const response = await makeConnection({
+        suffix,
+        method,
+        entityId
+    });
+    success = response ? true : false;
 
     return success;
 }
@@ -191,31 +132,17 @@ export async function getDisciplinas() {
     };
     let options: Record<string, unknown>[] = [];
 
-    openLoader();
-    
-    try {
-        const response = await makeConnection({
-            suffix,
-            method,
-            otherQueryStrings
-        });
-        options= (response?.data.data as Record<string, unknown>[]).map((entity)=>{
-            return {
-                label: entity.name,
-                value: entity._id
-            }
-        });
-    } catch(err) {
-        const error = err as {
-            response: {
-              data: {
-                error: string
-              }
-            }
+    const response = await makeConnection({
+        suffix,
+        method,
+        otherQueryStrings
+    });
+    options= (response?.data.data as Record<string, unknown>[]).map((entity)=>{
+        return {
+            label: entity.name,
+            value: entity._id
         }
-        alertError(error.response.data.error);
-    }
-    closeLoader();
+    });
 
     return options;
 }
@@ -231,31 +158,17 @@ export async function getTeachers() {
     };
     let options: Record<string, unknown>[] = [];
 
-    openLoader();
-    
-    try {
-        const response = await makeConnection({
-            suffix,
-            method,
-            otherQueryStrings
-        });
-        options= (response?.data.data as Record<string, unknown>[]).map((entity)=>{
-            return {
-                label: entity.name,
-                value: entity._id
-            }
-        });
-    } catch(err) {
-        const error = err as {
-            response: {
-              data: {
-                error: string
-              }
-            }
+    const response = await makeConnection({
+        suffix,
+        method,
+        otherQueryStrings
+    });
+    options= (response?.data.data as Record<string, unknown>[]).map((entity)=>{
+        return {
+            label: entity.name,
+            value: entity._id
         }
-        alertError(error.response.data.error);
-    }
-    closeLoader();
+    });
 
     return options;
 }
@@ -271,31 +184,17 @@ export async function getStudents() {
     };
     let options: Record<string, unknown>[] = [];
 
-    openLoader();
-    
-    try {
-        const response = await makeConnection({
-            suffix,
-            method,
-            otherQueryStrings
-        });
-        options= (response?.data.data as Record<string, unknown>[]).map((entity)=>{
-            return {
-                label: entity.name,
-                value: entity._id
-            }
-        });
-    } catch(err) {
-        const error = err as {
-            response: {
-              data: {
-                error: string
-              }
-            }
+    const response = await makeConnection({
+        suffix,
+        method,
+        otherQueryStrings
+    });
+    options= (response?.data.data as Record<string, unknown>[]).map((entity)=>{
+        return {
+            label: entity.name,
+            value: entity._id
         }
-        alertError(error.response.data.error);
-    }
-    closeLoader();
+    });
 
     return options;
 }

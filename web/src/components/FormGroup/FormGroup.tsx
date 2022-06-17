@@ -72,7 +72,7 @@ function _generateColorInput(props: IFormGroupProps) {
                     props.onChange(color);
                 }
             }}
-            colors={["#A96BC6", "#F8961E", "#F9844A", "#277DA1", "#90BE6D"]}
+            colors={["#8FDEC6", "#FEA47F", "#F9844A", "#B33771", "#6D214F", "#25CCF7", "#1B9CFC", "#1982C4", "#3B3B98", "#182C61", "#EAB543", "#1E1E1E", "#FD7272", "#FC427B", "#55E6C1", "#58B19F", "#9AECDB", "#FFCA3A", "#CAD3C8", "#2C3A47", "#D6A2E8", "#D6A2E8", "#82589F", "#41DBAC", "#80C754", "#F8961E"]}
             
         />
     )

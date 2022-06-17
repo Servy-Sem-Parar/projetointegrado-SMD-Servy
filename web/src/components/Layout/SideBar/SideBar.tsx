@@ -1,9 +1,6 @@
-import {GiHamburgerMenu, GiTeacher} from "react-icons/gi";
-import {FaUserGraduate} from "react-icons/fa";
-import {SiGoogleclassroom} from "react-icons/si";
-import {BiLogOut} from "react-icons/bi";
-import {AiFillHome} from "react-icons/ai";
-import {MdOutlineClass} from "react-icons/md"
+import {GiHamburgerMenu} from "react-icons/gi";
+import {FaChalkboardTeacher} from "react-icons/fa";
+import {MdOutlineClass, MdAccountCircle, MdSchool, MdListAlt, MdLogout, MdHome} from "react-icons/md"
 import logout from "../../../Tools/logout";
 import LogoImage from "../../../assets/logo.png";
 
@@ -32,19 +29,19 @@ function SideBar(props: ISideBarProps) {
                 <img onClick={()=>{window.location.pathname = "home"}} src={LogoImage} alt="logo" className={props.sideBarIsOpen ? "top-bar-logo" : "top-bar-logo-closed"} />
                 </div>
                 <div onClick={()=>{window.location.pathname = "home"}} className={ testSideBar("home") ? "side-bar-item-active" : "side-bar-item"}>
-                    <AiFillHome
+                    <MdHome
                         className="side-bar-icon"
                     />
                     <div className="side-bar-item-text-content">Home</div>
                 </div>
                 {permission === "admin" && <div onClick={()=>{window.location.pathname = "professoras"}} className={ testSideBar("professoras") ? "side-bar-item-active" : "side-bar-item"}>
-                    <GiTeacher
+                    <FaChalkboardTeacher
                         className="side-bar-icon"
                     />
                     <div className="side-bar-item-text-content">Professoras</div>
                 </div>}
                 {permission === "admin" && <div onClick={()=>{window.location.pathname = "alunas"}} className={ testSideBar("alunas") ? "side-bar-item-active" : "side-bar-item"}>
-                    <FaUserGraduate
+                    <MdSchool
                         className="side-bar-icon"
                     />
                     <div className="side-bar-item-text-content">Alunas</div>
@@ -56,14 +53,20 @@ function SideBar(props: ISideBarProps) {
                     <div className="side-bar-item-text-content">Disciplinas</div>
                 </div>
                 <div onClick={()=>{window.location.pathname = "turmas"}} className={ testSideBar("turmas") ? "side-bar-item-active" : "side-bar-item"}>
-                    <SiGoogleclassroom
+                    <MdListAlt
                         className="side-bar-icon"
                     />
                     <div className="side-bar-item-text-content">Turmas</div>
                 </div>
+                <div onClick={()=>{window.location.pathname = "minha-conta"}} className={ testSideBar("minha-conta") ? "side-bar-item-active" : "side-bar-item"}>
+                    <MdAccountCircle
+                        className="side-bar-icon"
+                    />
+                    <div className="side-bar-item-text-content">Minha Conta</div>
+                </div>
             </div>
             <div onClick={()=>{logout()}} className={"logout-buttom"}>
-                <BiLogOut
+                <MdLogout
                     className="side-bar-icon"
                 />
                 <div className="side-bar-item-text-content">Sair</div>
