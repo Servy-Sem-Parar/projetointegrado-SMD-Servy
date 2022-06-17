@@ -27,6 +27,18 @@
     display: flex;
     border: 0px;
     cursor: pointer;
+    position: relative;
+}
+
+.button-count {
+    font-size: 11px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    padding: 3px;
+    border-radius: 15px;
+    width: 19px !important;
+    background-color: rgb(210,0,0);
 }
 
 .title-button-icon {
