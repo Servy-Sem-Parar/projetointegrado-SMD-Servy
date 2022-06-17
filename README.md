@@ -1,5 +1,19 @@
 # Projeto Sem Parar
-Projeto Integrado - Equipe Servy - Sistemas e Mídias Digitais
+Keywords: Projeto Integrado - Equipe Servy - Sistemas e Mídias Digitais
+
+## Sobre
+
+O projeto da aplicação a ser desenvolvida ao longo do semestre terá como cliente o Projeto Sem Parar, criado em 09 de junho de 2018. O Projeto se propõe a preparar meninas, do ensino fundamental e médio, para olimpíadas científicas, com foco em astronomia, biologia, física, informática, química e matemática. Seu lema é “Meninas ensinando meninas” e visa, principalmente, estimular e aumentar a presença feminina nas competições. A escolha desse cliente se deu não apenas por admiração ao projeto, mas também por uma das administradoras ser uma amiga do ensino médio de uma das integrantes do grupo.
+
+## Equipe Servy
+
+|  NOME                           |  FUNÇÃO                    |  MATRÍCULA  |
+|  ----------------------------   |  --------------------------|  ---------  |
+|  Luiz Eduardo Gomes Xavier      |  Codificação               |  509510     |
+|  Roldão Ferreira Gomes Neto     |  Design                    |  507824     |
+|  Samiris Sampaio De Albuquerque |  Design                    |  509735     |
+|  Victor Mota Dos Santos         |  Codificação               |  509223     |
+|  Yanna Torres Gonçalves         |  Líder                     |  507773     |
 
 ## Como rodar
 
@@ -12,7 +26,7 @@ cd projetointegrado-SMD-Servy
 
 ### Front-end web
 ```shell
-cd frontend
+cd web
 npm install
 npm build
 npm start
@@ -20,15 +34,16 @@ npm start
 
 ### Front-end mobile
 ```shell
-cd frontend
+cd mobile
 npm install
-npm build
-npm start
+expo start
 ```
 
 ### Back-end
 ```shell
 cd backend
+cp .env.example .env
+// entre no seu editor de texto e configure as variáveis de ambiente da .env
 npm install
 npm run build
 npm run start
@@ -36,110 +51,46 @@ npm run start
 
 ## Requisitos funcionais
 
-<!-- <style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
-.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
-.tg .tg-0lax{text-align:left;vertical-align:top}
-</style> -->
-<table class="tg" style="table-layout: fixed; width: 1009px">
-  <thead>
-    <tr>
-      <th class="tg-c3ow"><span style="text-align: center; font-weight:bold">Código</span></th>
-      <th class="tg-c3ow"><span style="text-align: center; font-weight:bold">Descrição</span></th>
-      <th class="tg-c3ow"><span style="text-align: center; font-weight:bold">Codificação</span></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="tg-0pky"><span style="font-weight:bold">RFG0001</span></td>
-      <td class="tg-c3ow" style="text-align: center;">Dashboard geral de informações</td>
-      <td class="tg-c3ow" style="text-align: center;"><a target="_blank" href="" target="_blank" rel="noopener noreferrer">código</a></td>
-    </tr>
-    <tr>
-      <td class="tg-0pky"><span style="font-weight:bold">RFA0002</span></td>
-      <td class="tg-c3ow" style="text-align: center;">Listagem de professoras</td>
-      <td class="tg-c3ow" style="text-align: center;"><a target="_blank" href="" target="_blank" rel="noopener noreferrer">código</a></td>
-    </tr>
-    <tr>
-      <td class="tg-0pky"><span style="font-weight:bold">RFA0003</span></td>
-      <td class="tg-c3ow" style="text-align: center;">Cadastro de professoras</td>
-      <td class="tg-c3ow" style="text-align: center;"><a target="_blank" href="" target="_blank" rel="noopener noreferrer">código</a></td>
-    </tr>
-    <tr>
-      <td class="tg-0pky"><span style="font-weight:bold">RFA0004</span></td>
-      <td class="tg-c3ow" style="text-align: center;">Edição de cadastro de professoras</td>
-      <td class="tg-c3ow" style="text-align: center;"><a target="_blank" href="" target="_blank" rel="noopener noreferrer">código</a></td>
-    </tr>
-    <tr>
-      <td class="tg-0pky"><span style="font-weight:bold">RFP0005</span></td>
-      <td class="tg-c3ow" style="text-align: center;">Listagem de turmas</td>
-      <td class="tg-c3ow" style="text-align: center;"><a target="_blank" href="" target="_blank" rel="noopener noreferrer">código</a></td>
-    </tr>
-    <tr>
-      <td class="tg-0pky"><span style="font-weight:bold">RFA0006</span></td>
-      <td class="tg-c3ow" style="text-align: center;">Cadastro de turmas</td>
-      <td class="tg-c3ow" style="text-align: center;"><a target="_blank" href="" target="_blank" rel="noopener noreferrer">código</a></td>
-    </tr>
-    <tr>
-      <td class="tg-0pky"><span style="font-weight:bold">RFA0007</span></td>
-      <td class="tg-c3ow" style="text-align: center;">Edição de turmas</td>
-      <td class="tg-c3ow" style="text-align: center;"><a target="_blank" href="" target="_blank" rel="noopener noreferrer">código</a></td>
-    </tr>
-    <tr>
-      <td class="tg-0pky"><span style="font-weight:bold">RFP0008</span></td>
-      <td class="tg-c3ow" style="text-align: center;">Detalhes da turmas</td>
-      <td class="tg-c3ow" style="text-align: center;"><a target="_blank" href="" target="_blank" rel="noopener noreferrer">código</a></td>
-    </tr>
-    <tr>
-      <td class="tg-0pky"><span style="font-weight:bold">RFP0009</span></td>
-      <td class="tg-c3ow" style="text-align: center;">Cadastro de aulas</td>
-      <td class="tg-c3ow" style="text-align: center;"><a target="_blank" href="" target="_blank" rel="noopener noreferrer">código</a></td>
-    </tr>
-    <tr>
-      <td class="tg-0pky"><span style="font-weight:bold">RFP0010</span></td>
-      <td class="tg-c3ow" style="text-align: center;">Edição de aulas</td>
-      <td class="tg-c3ow" style="text-align: center;"><a target="_blank" href="" target="_blank" rel="noopener noreferrer">código</a></td>
-    </tr>
-    <tr>
-      <td class="tg-0pky"><span style="font-weight:bold">RFG0011</span></td>
-      <td class="tg-c3ow" style="text-align: center;">Calendário de aulas</td>
-      <td class="tg-c3ow" style="text-align: center;"><a target="_blank" href="" target="_blank" rel="noopener noreferrer">código</a></td>
-    </tr>
-    <tr>
-      <td class="tg-0pky"><span style="font-weight:bold">RFP0012</span></td>
-      <td class="tg-c3ow" style="text-align: center;">Cadastro de materiais auxiliares</td>
-      <td class="tg-c3ow" style="text-align: center;"><a target="_blank" href="" target="_blank" rel="noopener noreferrer">código</a></td>
-    </tr>
-    <tr>
-      <td class="tg-0pky"><span style="font-weight:bold">RFA0013</span></td>
-      <td class="tg-c3ow" style="text-align: center;">Listagem de alunas</td>
-      <td class="tg-c3ow" style="text-align: center;"><a target="_blank" href="" target="_blank" rel="noopener noreferrer">código</a></td>
-    </tr>
-    <tr>
-      <td class="tg-0pky"><span style="font-weight:bold">RFE0014</span></td>
-      <td class="tg-c3ow" style="text-align: center;">Autocadastro das alunas</td>
-      <td class="tg-c3ow" style="text-align: center;"><a target="_blank" href="" target="_blank" rel="noopener noreferrer">código</a></td>
-    </tr>
-    <tr>
-      <td class="tg-0pky"><span style="font-weight:bold">RFA0015</span></td>
-      <td class="tg-c3ow" style="text-align: center;">Aprovar/reprovar solicitação de cadastro das alunas</td>
-      <td class="tg-c3ow" style="text-align: center;"><a target="_blank" href="" target="_blank" rel="noopener noreferrer">código</a></td>
-    </tr>
-    <tr>
-      <td class="tg-0pky"><span style="font-weight:bold">RFE0016</span></td>
-      <td class="tg-c3ow" style="text-align: center;">Notificação de aulas</td>
-      <td class="tg-c3ow" style="text-align: center;"><a target="_blank" href="" target="_blank" rel="noopener noreferrer">código</a></td>
-    </tr>
-    <tr>
-      <td class="tg-0pky"><span style="font-weight:bold">RFG0017</span></td>
-      <td class="tg-c3ow" style="text-align: center;">Listagem de materiais</td>
-      <td class="tg-c3ow" style="text-align: center;"><a target="_blank" href="" target="_blank" rel="noopener noreferrer">código</a></td>
-    </tr>
-  </tbody>
-</table>
-
+|  Código                           |  Descrição                    |  Codificação  | Status | 
+|  ----------------------------   |  --------------------------|  ---------  | --------- |
+|  RFG0001     |  Mostrar tela de dashboard              |  X     | Em desenvolvimento
+|  RFG0002     |  Requisitar listagem de turmas no dashboard               |  X     | Em desenvolvimento
+|  RFG0003     |  Requisitar calendário de aulas no dashboard               |  X     | Em desenvolvimento
+|  RFA0004     |  Mostrar listagem de professoras               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Teachers/Teachers.tsx)     | Feito
+|  RFG0005     |  Mostrar listagem de turmas               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Classes/Classes.tsx)     | Feito
+|  RFA0006     |  Mostrar listagem de alunas               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Students/Students.tsx)     | Feito
+|  RFA0007     |  Mostrar listagem de pedidos de cadastro                |  X     | Em desenvolvimento
+|  RFA0008     |  Mostrar listagem de disciplinas               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Matters/Matters.tsx)     | Feito
+|  RFG0009     |  Mostrar tela informações da aula               |  X     | A fazer
+|  RFG0010     |  Mostrar tela com dados pessoais (perfil)               |  X     | A fazer
+|  RFA0011     |  Mostrar tela de cadastro de professoras               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Teachers/ModalsProvider/ModalsProvider.tsx)     | Feito
+|  RFA0012     |  Mostrar tela de cadastro de alunas               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Students/ModalsProvider/ModalsProvider.tsx)     | Feito
+|  RFA0013     |  Mostrar tela de cadastro de turma               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Classes/ModalsProvider/ModalsProvider.tsx)     | Feito
+|  RFP0014     |  Mostrar tela de cadastro de aula               |  X     | A fazer
+|  RFA0015     |  Mostrar tela de cadastro de disciplina               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Matters/ModalsProvider/ModalsProvider.tsx)     | Feito
+|  RFA0016     |  Mostrar tela de pedido de cadastro               |  X     | Em desenvolvimento
+|  RFG0017     |  Validar campos de cadastro por parâmetro               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/components/FormGroup/FormGroup.tsx)     | Feito
+|  RFA0018     |  Cadastrar professora               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Teachers/ModalsProvider/ModalsProvider.tsx)     | Feito
+|  RFA0019     |  Cadastrar aluna               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Students/ModalsProvider/ModalsProvider.tsx)     | Feito
+|  RFE0020     |  Solicitar cadastro               |  X     | Em desenvolvimento
+|  RFA0021     |  Aprovar ou reprovar solicitação de cadastro               |  X     | Em desenvolvimento
+|  RFA0022     |  Cadastrar turma               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Classes/ModalsProvider/ModalsProvider.tsx)     | Feito
+|  RFP0023     |  Cadastrar aula               |  X     | A fazer
+|  RFA0024     |  Cadastrar nova disciplina               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Matters/ModalsProvider/ModalsProvider.tsx)     | Feito
+|  RFA0025     |  Filtrar listagem de professoras por parâmetro               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/components/ListPage/ListPage.tsx)     | Feito
+|  RFA0026     |  Filtrar listagem de alunas por parâmetro               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/components/ListPage/ListPage.tsx)     | Feito
+|  RFG0027     |  Filtrar listagem de turmas por parâmetro               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/components/ListPage/ListPage.tsx)     | Feito
+|  RFA0028     |  Ordenar listagem de professoras por parâmetro               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/components/ListPage/ListPage.tsx)     | Feito
+|  RFA0029     |  Ordenar listagem de alunas por parâmetro               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/components/ListPage/ListPage.tsx)     | Feito
+|  RFG0030     |  Ordenar listagem de turmas por parâmetro               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/components/ListPage/ListPage.tsx)     | Feito
+|  RFG0031     |  Mostrar tela de detalhes de turma                |  X     | A fazer
+|  RFP0032     |  Mostrar informações da turma na tela de detalhes                |  X     | A fazer
+|  RFG0033     |  Mostrar calendário de aulas na tela de detalhes                |  X     | A fazer
+|  RFE0034     |  Mostrar listagem de materiais de apoio da turma na tela de detalhes               |  X     | A fazer
+|  RFA0035     |  Editar cadastro de professora               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Teachers/ModalsProvider/ModalsProvider.tsx)     | Feito
+|  RFP0036     |  Editar informações de uma turma               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Classes/ModalsProvider/ModalsProvider.tsx)     | Feito
+|  RFA0037     |  Editar alunas matriculadas em uma turma               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Classes/ModalsProvider/ModalsProvider.tsx)     | Feito
+|  RFA0038     |  Editar cadastro de aluna               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Students/ModalsProvider/ModalsProvider.tsx)     | Feito
+|  RFG0039     |  Editar informações do seu cadastro                |  X     | A fazer
+|  RFE0040     |  Mostrar notificação de nova aula               |  X     | A fazer
+|  RFE0041     |  Mostrar tela de solicitação de cadastro               |  X     | A fazer
