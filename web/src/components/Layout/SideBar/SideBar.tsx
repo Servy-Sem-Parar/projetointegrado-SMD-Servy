@@ -6,6 +6,7 @@ import LogoImage from "../../../assets/logo.png";
 
 import "./SideBar.css";
 import { getUserPermission } from "../../../Tools/getUserPermission";
+import { openProfileModal } from "../MyAccountModal/ModalsProvider";
 
 interface ISideBarProps {
     sideBarIsOpen: boolean;
@@ -58,7 +59,7 @@ function SideBar(props: ISideBarProps) {
                     />
                     <div className="side-bar-item-text-content">Turmas</div>
                 </div>
-                <div onClick={()=>{window.location.pathname = "minha-conta"}} className={ testSideBar("minha-conta") ? "side-bar-item-active" : "side-bar-item"}>
+                <div onClick={()=>{openProfileModal()}} className={ testSideBar("minha-conta") ? "side-bar-item-active" : "side-bar-item"}>
                     <MdAccountCircle
                         className="side-bar-icon"
                     />

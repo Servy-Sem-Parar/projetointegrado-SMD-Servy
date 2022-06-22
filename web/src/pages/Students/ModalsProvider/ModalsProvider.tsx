@@ -97,7 +97,7 @@ export function ModalsProvider() {
                                         if(isEdit) {
                                             const success = await editEntity(entity, targetEntity._id as string);
                                             if(success) {
-                                                alertSuccess("Aluna editado com sucesso.")
+                                                alertSuccess("Aluna editada com sucesso.")
                                                 setEntity({});
                                                 setTargetEntity({});
                                                 setIsOpenSaveModal(false); 

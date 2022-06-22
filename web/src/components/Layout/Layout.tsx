@@ -5,6 +5,7 @@ import "./Layout.css";
 import { Loader } from '../Loader/Loader';
 import { Alert } from '../Alert/Alert';
 import { isAuth } from '../../routes/routes';
+import { ProfileModalProvider } from './MyAccountModal/ModalsProvider';
 
 interface ILayoutProps {
     children: ReactNode;
@@ -27,6 +28,7 @@ function Layout(props: ILayoutProps) {
         <div style={{width: "100%", height: "100%"}}>
             <Loader/>
             <Alert/>
+            <ProfileModalProvider/>
             <div className={!routesWithOutLayout.includes(window.location.pathname) && isAuth() ? 'layout-body' : "no-layout"}>
                 {!routesWithOutLayout.includes(window.location.pathname) && isAuth() &&
                     <SideBar
