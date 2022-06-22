@@ -11,6 +11,7 @@ interface IPhoneNumberInputProps {
     validations?: string[],
     setFieldValidation?: (field: string, value: string)=>void,
     errorMessage?: string,
+    disabled?: boolean
 }
 
 export function PhoneNumberInput(props: IPhoneNumberInputProps) {
@@ -27,6 +28,7 @@ export function PhoneNumberInput(props: IPhoneNumberInputProps) {
             inputClass={`form_group_phone ${props.errorMessage && "is-invalid-field"}`}
             country={'br'}
             value={phone}
+            disabled={props.disabled}
             onChange={(phone)=>{
                 setPhone(phone);
                 if(props.onChange) {

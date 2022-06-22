@@ -12,6 +12,7 @@ export interface IFormGroupProps {
     size: inputSizes,
     label?: string,
     placeholder: string,
+    disabled?: boolean,
     id: string,
     defaultValue?: string | Record<string, string>[] | Date,
     onChange?: (value: string | Date | string[])=>void,
@@ -82,6 +83,7 @@ function _generateMultiSelectInput(props: IFormGroupProps) {
     return (
         <Select
             options={props.options}
+            isDisabled={props.disabled}
             isMulti={true}
             id={props.id}
             placeholder={props.placeholder}
@@ -115,11 +117,14 @@ function _generateMultiSelectInput(props: IFormGroupProps) {
                     ...styles,
                     fontSize: "15px",
                 }),
-                control: styles => ({ 
+                control: (styles, {isDisabled}) => ({ 
                     display:"flex",
                     borderRadius: "10px",
                     border: "1px solid #F97E0D",
                     marginTop: "4px",
+                    backgroundColor: isDisabled && "#efefef",
+                    color: isDisabled && "rgb(170, 170, 170)",
+                    opacity: isDisabled && "1",
                 }),
             } as StylesConfig}
             defaultValue={props.defaultValue as unknown as string[]}
@@ -145,6 +150,7 @@ function _generateMultiSelectInput(props: IFormGroupProps) {
 function _generatePhoneInput(props: IFormGroupProps) {
     return (
         <PhoneNumberInput
+            disabled={props.disabled}
             id={props.id}
             defaultValue={props.defaultValue as string}
             onChange={props.onChange}
@@ -172,6 +178,7 @@ function _generateTextInput(props: IFormGroupProps) {
             }} 
             defaultValue={props.defaultValue as string} 
             id={props.id} 
+            disabled={props.disabled}
             placeholder={props.placeholder} 
             type={props.type} 
         />
@@ -181,6 +188,7 @@ function _generateTextInput(props: IFormGroupProps) {
 function _generateSelectInput(props: IFormGroupProps) {
     return (
         <select
+            disabled={props.disabled}
             placeholder={props.placeholder}
             className={`form-control-input ${props.errorMessage && "is-invalid-field"}`}
             defaultValue={props.defaultValue as string}
@@ -243,13 +251,12 @@ function _generateIconSelectInput(props: IFormGroupProps) {
                     ...styles,
                     fontSize: "15px",
                 }),
-                control: styles => ({ 
+                control: (styles) => ({ 
                     display:"flex",
                     borderRadius: "10px",
                     border: "1px solid #F97E0D",
                     marginTop: "4px",
                 }),
-                
             } as StylesConfig}
             defaultValue={props.defaultValue as string}
             onChange={(selectedOptionValue)=>{

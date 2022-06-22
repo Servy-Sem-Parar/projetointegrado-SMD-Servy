@@ -1,11 +1,11 @@
 import "./ListPage.css";
-import {GoPlus} from "react-icons/go";
-import {FaSearch} from "react-icons/fa";
+import { GoPlus } from "react-icons/go";
+import { FaSearch } from "react-icons/fa";
 import { Popover } from "./Popover/Popover";
 import { Pagination } from "./Pagination/Pagination";
 import { useEffect, useState } from "react";
 import { getIconByName } from "../../Tools/getIconByName";
-import { MdCheckCircle } from "react-icons/md";
+import { MdCheckCircle, MdList, MdVisibility } from "react-icons/md";
 
 interface IListPageProps {
     title: string,
@@ -13,9 +13,15 @@ interface IListPageProps {
     columns: IColumn[],
     titleButtonLabel: string,
     titleButtonCallback: ()=>void,
+    titleButtomCustomIcon?: boolean,
     secondaryButtonLabel?: string,
     secondaryButtonCallback?: ()=>void,
+    secondaryButtonCount?: number,
     defaultFilter?: Record<string, unknown>,
+    defaultOrder?: {
+        order: string,
+        sort: string
+    }
     filters?: {
         placeholder: string,
         control: string,
@@ -37,6 +43,7 @@ export interface IColumn {
     control: string,
     actions?: IAction[],
     orderControl?: string,
+    viewCallback?: (entity: Record<string, unknown>)=>void,
 }
 
 interface IAction {
@@ -53,6 +60,10 @@ export function ListPage(props: IListPageProps) {
         if(props.defaultFilter) {
             setFilters(props.defaultFilter);
         }
+        if(props.defaultOrder) {
+            setOrder(props.defaultOrder.order);
+            setSort(props.defaultOrder.sort);
+        }
     }, [])
 
     return (
@@ -66,12 +77,19 @@ export function ListPage(props: IListPageProps) {
                                 className="title-button-icon"
                             />
                             {props.secondaryButtonLabel}
+                            {props.secondaryButtonCount && props.secondaryButtonCount > 0 && <div className="button-count">{props.secondaryButtonCount}</div>}
                         </button>
                     }
                     <button className="title-button" onClick={()=>{props.titleButtonCallback()}}>
-                        <GoPlus
+                        {props.titleButtomCustomIcon ?
+                            <MdList 
+                                className="title-button-icon"
+                            />
+                            :
+                            <GoPlus
                             className="title-button-icon"
                         />
+                        }
                         {props.titleButtonLabel}
                     </button>
                 </div>
@@ -207,6 +225,26 @@ export function ListPage(props: IListPageProps) {
                                                     }}
                                                 >
                                                     {entity[column.control] ? getIconByName(entity[column.control] as string) as JSX.Element : ""}
+                                                </td>
+                                            )
+                                        } else if(column.type === "view") {
+                                            return (
+                                                <td 
+                                                    className="list-table-line-item" 
+                                                    id={`gear-${column.control}`}
+                                                    style={{
+                                                        width: "120px", 
+                                                        minWidth: `120px`,
+                                                        textAlign: "center",
+                                                        position: "relative",
+                                                    }}
+                                                >
+                                                    <MdVisibility
+                                                        onClick={()=>{
+                                                            column.viewCallback && column.viewCallback(entity);
+                                                        }}
+                                                        className="gear-icon"
+                                                    />
                                                 </td>
                                             )
                                         } else {

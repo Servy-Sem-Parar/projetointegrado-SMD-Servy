@@ -40,7 +40,7 @@ function SideBar(props: ISideBarProps) {
                     />
                     <div className="side-bar-item-text-content">Professoras</div>
                 </div>}
-                {permission === "admin" && <div onClick={()=>{window.location.pathname = "alunas"}} className={ testSideBar("alunas") ? "side-bar-item-active" : "side-bar-item"}>
+                {permission === "admin" && <div onClick={()=>{window.location.pathname = "alunas"}} className={ testSideBar("alunas") || testSideBar("aprovar_cadastros") ? "side-bar-item-active" : "side-bar-item"}>
                     <MdSchool
                         className="side-bar-icon"
                     />

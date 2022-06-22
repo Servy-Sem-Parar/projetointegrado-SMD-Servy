@@ -60,7 +60,6 @@ export function Popover(props: IPopoverProps) {
             }}
         >
             <BsFillGearFill
-                
                 onClick={()=>{
                     setShowPopover(!showPopover);
                 }}

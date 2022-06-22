@@ -42,6 +42,18 @@
     font-family: 'Dosis';
 }
 
+.form-control-input:disabled {
+    background-color: #efefef !important;
+    color: rgb(170, 170, 170);
+    opacity: 1;
+}
+
+.form-control:disabled {
+    background-color: #efefef !important;
+    color: rgb(170, 170, 170);
+    opacity: 1;
+}
+
 .is-invalid-field {
     border: 1px solid red;
 }

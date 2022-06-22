@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { ListPage } from "../../components/ListPage/ListPage";
 import { getColumns } from "./getColumns";
 import { ModalsProvider, openSaveModal } from "./ModalsProvider/ModalsProvider";
-import { getEntities } from "./requester";
+import { getEntities, getPendingCount } from "./requester";
 
 export let updateEntities: ()=>void;
 
@@ -10,23 +10,26 @@ function Students() {
     const [entities, setEntities] = useState<Record<string, unknown>[]>([]);
     const [total, setTotal] = useState(1);
     const [offset, setOffset] = useState(0);
+    const [pendingCount, setPendingCount] = useState(0);
     const [filters, setFilters] = useState<Record<string, unknown>>({
         sort: "name",
         order: "asc",
         limit: 10,
+        status: "approved"
     });
     
     updateEntities = ()=>{
         getEntities(offset, filters).then(result=>{
-            setEntities(result.data)
-            setTotal(result.total*10)
+            setEntities(result.data);
+            setTotal(result.total*10);
         })
     }
 
     useEffect(()=>{
-        getEntities(offset, filters).then(result=>{
-            setEntities(result.data)
-            setTotal(result.total*10)
+        Promise.all([getEntities(offset, filters), getPendingCount()]).then(results=>{
+            setEntities(results[0].data);
+            setTotal(results[0].total*10);
+            setPendingCount(results[1]);
         })
     }, [offset, filters])
 
@@ -39,6 +42,7 @@ function Students() {
                 titleButtonCallback={()=>{openSaveModal()}}
                 secondaryButtonLabel={"Aprovar cadastros"}
                 secondaryButtonCallback={()=>{window.location.pathname = "aprovar_cadastros"}}
+                secondaryButtonCount={pendingCount}
                 entities={entities}
                 columns={getColumns()}
                 filters={[
@@ -57,6 +61,7 @@ function Students() {
                     sort: "name",
                     order: "asc",
                     limit: 10,
+                    status: "approved"
                 }}
                 filtersSearchCallBack={(filters: Record<string, unknown>)=>{
                     setFilters(filters);

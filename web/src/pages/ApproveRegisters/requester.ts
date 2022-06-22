@@ -1,3 +1,4 @@
+import { formatDateToShow } from "../../Tools/formatDateToShow";
 import { formatPhoneNumberToShow } from "../../Tools/formatPhoneNumberToShow";
 import { makeConnection } from "../../Tools/makeConnection"
 
@@ -8,6 +9,7 @@ interface IResult {
 
 function _formatEntities(entity: Record<string, unknown>) {
     const formatedEntity = {
+        dateToShow: formatDateToShow(entity.createdAt as string),
         phone: entity.phone_number ? formatPhoneNumberToShow(entity.phone_number as string) : "",
         ...entity
     }
@@ -46,21 +48,6 @@ export async function getEntities(offset: number, filters?: Record<string, unkno
     }
 
     return result;
-}
-
-export async function createEntity(body: Record<string, unknown>) {
-    const suffix = "user";
-    const method = "post";
-    let success = false;
-
-    const response = await makeConnection({
-        suffix,
-        method,
-        body
-    });
-    success = response ? true : false;
-
-    return success;
 }
 
 export async function editEntity(body: Record<string, unknown>, entityId: string) {
@@ -103,43 +90,6 @@ export async function getTurmas() {
     });
 
     return options;
-}
-
-export async function getPendingCount() {
-    const suffix = "user/alunas";
-    const method = "get";
-    const otherQueryStrings: Record<string, unknown> = { 
-        sort: "name",
-        order: "asc",
-        offset: 0,
-        limit: 10000,
-        status: "pending"
-    };
-    let count = 0;
-
-    const response = await makeConnection({
-        suffix,
-        method,
-        otherQueryStrings
-    });
-    count = response?.data.data.length
-
-    return count;
-}
-
-export async function deleteEntity(entityId: string) {
-    const suffix = "user";
-    const method = "delete";
-    let success = false;
-
-    const response = await makeConnection({
-        suffix,
-        method,
-        entityId
-    });
-    success = response ? true : false;
-
-    return success;
 }
 
 export async function getEntity(id: string){
