@@ -77,7 +77,7 @@ class UserController extends CrudController<IUser, typeof User> {
 
   override async posRead(user: IUser): Promise<void> {
     const roleField = user.role === 'teacher' || user.role === 'admin' ? 'teachers' : 'students'
-    const turmas = await Turma.find({[roleField]: user._id}).populate("disciplina").exec()
+    const turmas = await Turma.find({[roleField]: user._id}).populate("disciplina").populate("aulas").exec()
     user._doc.turmas = turmas
   }
  
