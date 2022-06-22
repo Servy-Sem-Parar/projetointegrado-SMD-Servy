@@ -23,9 +23,12 @@ class AulaController extends CrudController<IAula, typeof Aula> {
 
   override prepareQuery(request: Request, query: mongoose.FilterQuery<IAula>, options: any): void {
     options.populate = ['materiais']
-    const {title} = request.query
+    const {title, turma} = request.query
     if (title) {
       query.title = {$regex: new RegExp(title as string), $options: "i"}
+    }
+    if (turma) {
+      query.turma = turma
     }
   }
 
