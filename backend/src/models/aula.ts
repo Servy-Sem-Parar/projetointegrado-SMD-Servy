@@ -15,10 +15,6 @@ const AulaSchema = new Schema<IAula>({
     type: Date,
     required: true,
   },
-  scheduledHour: {
-    type: String,
-    required: true,
-  },
   duration: {
     type: Number,
     required: true,

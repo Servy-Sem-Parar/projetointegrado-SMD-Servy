@@ -6,7 +6,6 @@ interface IAula extends Document {
   title: String;
   description: String;
   date: Date;
-  scheduledHour: String;
   duration: Number;
   link: String;
   materiais: IMaterial[];

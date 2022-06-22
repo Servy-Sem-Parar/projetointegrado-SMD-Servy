@@ -23,12 +23,18 @@ class AulaController extends CrudController<IAula, typeof Aula> {
 
   override prepareQuery(request: Request, query: mongoose.FilterQuery<IAula>, options: any): void {
     options.populate = ['materiais']
-    const {title, turma} = request.query
+    const {title, turma, dateStart, dateEnd} = request.query
     if (title) {
       query.title = {$regex: new RegExp(title as string), $options: "i"}
     }
     if (turma) {
       query.turma = turma
+    }
+    if (dateStart || dateEnd){
+      query.date = {
+        $gte: dateStart, 
+        $lt: dateEnd
+      }
     }
   }
 
