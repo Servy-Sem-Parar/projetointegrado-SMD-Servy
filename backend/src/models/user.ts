@@ -51,6 +51,10 @@ const UserSchema = new Schema<IUser>({
     type: 'Date',
     default: Date.now,
   },
+  wantedTurmas: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Turma',
+  }],
 });
 
 UserSchema.plugin(paginate);

@@ -1,3 +1,5 @@
+import Role from "src/enums/role";
+
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
@@ -8,6 +10,7 @@ declare global {
   namespace Express {
     interface Request {
       userId: string
+      userRole: Role
     }
   }
 }

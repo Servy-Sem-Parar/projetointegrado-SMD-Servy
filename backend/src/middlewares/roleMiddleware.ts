@@ -12,7 +12,7 @@ const roleMiddleware = (roles: Role[]) => {
     const user = await User.findById(userId);
 
     if (!user) throw new HttpError('Unauthorized', 401);
-
+    request.userRole = user.role
     if (user.role === Role.ADMIN) {
       return next();
     } if (roles.includes(Role.SELF)) {
