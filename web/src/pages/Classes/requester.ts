@@ -58,6 +58,12 @@ export async function getEntities(offset: number, filters?: Record<string, unkno
         })
     }
 
+    const user = JSON.parse(localStorage.getItem("user") as string);
+
+    if(user.role === "teacher") {
+        otherQueryStrings.userId = user._id;
+    }
+
     const response = await makeConnection({
         suffix,
         method,

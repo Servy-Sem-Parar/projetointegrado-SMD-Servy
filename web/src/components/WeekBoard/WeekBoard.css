@@ -1,0 +1,72 @@
+.week-days-container {
+    width: 100%;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+.week-days-title {
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.week-days-board {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.week-day {
+    width: 20%;
+    height: 100%;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+    min-height: 400px;
+}
+
+.week-day-title {
+    font-size: 20px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    font-family: Raleway;
+}
+
+.week-day-content {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    overflow-y: auto;
+    background-color: #F1C8FF;
+    padding: 10px;
+}
+
+.week-day-aula-card {
+    width: 100%;
+    padding: 30px 10px;
+    border-radius: 10px;
+    background-color: rgb(167,128,181);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.week-day-aula-card-title {
+    font-family: Raleway;
+    font-size: 16px;
+    font-weight: 600;
+    line-break: anywhere;
+    text-align: center;
+}
+
+.week-day-aula-card-subtitle {
+    font-family: Raleway;
+    font-size: 16px;
+    margin-top: 10px;
+    line-break: anywhere;
+    text-align: center;
+}

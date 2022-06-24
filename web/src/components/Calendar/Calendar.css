@@ -1,0 +1,40 @@
+.calendar-title {
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.calendar {
+    width: 100%;
+}
+
+.calendar-body {
+    width: 100%;
+}
+
+.calendar-day-box {
+    height: 120px;
+    background-color: #f8e3ff;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.calendar-weekday-header-item {
+    background-color: #f8e3ff;
+    padding: 5px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.calendar-day-text {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.aula-marker {
+    height: 10px;
+    width: 100%;
+    border-radius: 5px;
+    background-color: #C33535;
+}

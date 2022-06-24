@@ -1,0 +1,18 @@
+.turma-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+    color: white;
+    border-radius: 10px;
+    width: 210px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    line-break: anywhere;
+    cursor: pointer;
+}
+
+.turma-card .icon-table-class {
+    font-size: 50px;
+}

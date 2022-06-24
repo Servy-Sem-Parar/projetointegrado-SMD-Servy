@@ -66,7 +66,16 @@ function buildUrl(
     if(otherQueryStrings){
         url = url+"?"
         Object.keys(otherQueryStrings).forEach((key, index)=>{
-            url = `${url}${key}=${otherQueryStrings[key]}`
+            if(Array.isArray(otherQueryStrings[key])) {
+                (otherQueryStrings[key] as string[]).forEach((param, index)=>{
+                    url = `${url}${key}=${param}`
+                    if(index+1 <= Object.keys(otherQueryStrings[key] as string[]).length-1) {
+                        url = url+"&"
+                    }
+                })
+            } else {
+                url = `${url}${key}=${otherQueryStrings[key]}`
+            }
             if(index+1 <= Object.keys(otherQueryStrings).length-1) {
                 url = url+"&"
             }

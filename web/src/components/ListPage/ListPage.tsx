@@ -77,7 +77,7 @@ export function ListPage(props: IListPageProps) {
                                 className="title-button-icon"
                             />
                             {props.secondaryButtonLabel}
-                            {props.secondaryButtonCount && props.secondaryButtonCount > 0 && <div className="button-count">{props.secondaryButtonCount}</div>}
+                            {(props.secondaryButtonCount && props.secondaryButtonCount > 0) && <div className="button-count">{props.secondaryButtonCount}</div>}
                         </button>
                     }
                     <button className="title-button" onClick={()=>{props.titleButtonCallback()}}>

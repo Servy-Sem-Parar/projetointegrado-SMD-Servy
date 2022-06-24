@@ -47,12 +47,12 @@ function SideBar(props: ISideBarProps) {
                     />
                     <div className="side-bar-item-text-content">Alunas</div>
                 </div>}
-                <div onClick={()=>{window.location.pathname = "disciplinas"}} className={ testSideBar("disciplinas") ? "side-bar-item-active" : "side-bar-item"}>
+                {permission === "admin" && <div onClick={()=>{window.location.pathname = "disciplinas"}} className={ testSideBar("disciplinas") ? "side-bar-item-active" : "side-bar-item"}>
                     <MdOutlineClass
                         className="side-bar-icon"
                     />
                     <div className="side-bar-item-text-content">Disciplinas</div>
-                </div>
+                </div>}
                 <div onClick={()=>{window.location.pathname = "turmas"}} className={ testSideBar("turmas") ? "side-bar-item-active" : "side-bar-item"}>
                     <MdListAlt
                         className="side-bar-icon"
