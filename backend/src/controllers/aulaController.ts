@@ -18,7 +18,8 @@ class AulaController extends CrudController<IAula, typeof Aula> {
 
   override populate(entity) {
     return entity
-      .populate('materiais');
+      .populate('materiais')
+      .populate('turma');
   }
 
   override prepareQuery(request: Request, query: mongoose.FilterQuery<IAula>, options: any): void {
