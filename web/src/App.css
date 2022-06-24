@@ -21,3 +21,18 @@ body, input, button, textarea, div {
     width: 100%;
     height: 100%;
 }
+
+*::-webkit-scrollbar {
+    width: 12px;  
+    color: rgb(167,128,181);
+    border-radius: 12px;
+}
+  
+*::-webkit-scrollbar-track {
+    background: rgba(200,200,200, 0.5);    
+}
+  
+*::-webkit-scrollbar-thumb {
+    background-color: rgb(167,128,181);   
+    border-radius: 20px;    
+}

@@ -13,7 +13,6 @@ const userPermission = JSON.parse(localStorage.getItem("user") as string)?.role;
 
 function Home() {
   const [turmas, setTurmas] = useState<Record<string, unknown>[]>([]);
-  const [markers, setMarkers] = useState<number[]>([]);
   const [aulas, setAulas] = useState<Record<string, unknown>[]>([]);
   const [date] = useState(new Date(startYear, startMonth, 1));
 
@@ -34,14 +33,13 @@ function Home() {
       
       if(turmas.length > 0){
         getAulas(turmasIds, dateStart, dateEnd).then(aulas=>{
-          const markers: number[] = [];
+          const formatedAulas: Record<string, unknown>[] = [];
           aulas.forEach(aula=>{
             const day = parseInt((aula.date as string).substr(8,2));
-            if(!markers.includes(day)) {
-              markers.push(day);
-            }
+            aula.day = day;
+            formatedAulas.push(aula);
           })
-          setMarkers(markers)
+          setAulas(formatedAulas);
         })
       }
     } else {
@@ -83,8 +81,8 @@ function Home() {
       </div>
       { userPermission === "admin" ? 
           <Calendar
-            markers={markers}
             date={date}
+            aulas={aulas}
           />
         :
           <WeekBoard

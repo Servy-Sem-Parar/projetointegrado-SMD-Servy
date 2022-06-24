@@ -24,13 +24,11 @@ export function getColumns() {
             type: "string",
             label: "Alunas",
             control: "studentsCount",
-            //orderControl: "students",
         },
         {
             type: "string",
             label: "Aulas",
             control: "aulasCount",
-            //orderControl: "aulas",
         },
         {
             type: "action",

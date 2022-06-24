@@ -4,7 +4,7 @@ import "./Calendar.css"
 
 interface ICalendarProps {
     date: Date;
-    markers: number[]
+    aulas: Record<string, unknown>[];
 }
 
 const weekDays = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]
@@ -22,24 +22,21 @@ export function Calendar(props: ICalendarProps) {
         for(let day = 0; day < firstDayWeekIndex; day++){
             calendar.push({
                 day: "",
-                hasAula: false
             })
         }
         for(let day = 1; day <= monthLastDay; day++){
             calendar.push({
                 day: day,
-                hasAula: props.markers.includes(day)
             })
         }
         for(let day = lastDayWeekIndex+1; day <= 6; day++){
             calendar.push({
                 day: "",
-                hasAula: false
             })
         }
 
         setCalendar(calendar);
-    }, [props.date, props.markers])
+    }, [props.date])
 
     return (
         <div className="calendar">
@@ -74,8 +71,6 @@ export function Calendar(props: ICalendarProps) {
                                 style={{
                                     width: `${100/7}%`,
                                     backgroundColor: index%7 === 0 ? "#F1C8FF" : "#F8E3FF",
-                                    //borderTopLeftRadius: index === 0 ? "10px" : "0px",
-                                    //borderTopRightRadius: index === 6 ? "10px" : "0px",
                                     borderBottomLeftRadius: index === calendar.length-7 ? "10px" : "0px",
                                     borderBottomRightRadius: index === calendar.length-1 ? "10px" : "0px",
                                 }} 
@@ -84,8 +79,21 @@ export function Calendar(props: ICalendarProps) {
                                 <div className="calendar-day-text">
                                     {day.day as string}
                                 </div>
-                                <div>
-                                    {day.hasAula as boolean && <div className="aula-marker"></div>}
+                                <div style={{ overflowY: "auto", maxHeight: "100%", overflowX: "hidden"}}>
+                                    {props.aulas.map(aula=>{
+                                        if(aula.day === day.day) {
+                                            return <div
+                                                style={{
+                                                    width: "100%",
+                                                    height: "6px",
+                                                    borderRadius: "6px",
+                                                    marginRight: "5px",
+                                                    marginBottom: "5px",
+                                                    backgroundColor: (aula.turma as Record<string, unknown>).color as string
+                                                }}
+                                            ></div>
+                                        }
+                                    })}
                                 </div>
                             </div>
                         )
