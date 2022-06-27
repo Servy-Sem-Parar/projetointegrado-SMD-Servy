@@ -83,15 +83,18 @@ export function Calendar(props: ICalendarProps) {
                                     {props.aulas.map(aula=>{
                                         if(aula.day === day.day) {
                                             return <div
+                                                className="aula-marker"
                                                 style={{
                                                     width: "100%",
-                                                    height: "6px",
-                                                    borderRadius: "6px",
                                                     marginRight: "5px",
                                                     marginBottom: "5px",
                                                     backgroundColor: (aula.turma as Record<string, unknown>).color as string
                                                 }}
-                                            ></div>
+                                            >
+                                                <div className="aula-name">
+                                                    {aula.title as string}
+                                                </div>
+                                            </div>
                                         }
                                     })}
                                 </div>

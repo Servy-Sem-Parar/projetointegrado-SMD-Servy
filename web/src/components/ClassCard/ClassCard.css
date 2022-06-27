@@ -11,6 +11,11 @@
     margin-bottom: 20px;
     line-break: anywhere;
     cursor: pointer;
+    transition: all 300ms ease-in;
+}
+
+.turma-card:hover {
+    filter: brightness(90%);
 }
 
 .turma-card .icon-table-class {
