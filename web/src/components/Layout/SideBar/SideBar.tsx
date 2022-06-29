@@ -1,3 +1,4 @@
+import React from 'react';
 import {GiHamburgerMenu} from "react-icons/gi";
 import {FaChalkboardTeacher} from "react-icons/fa";
 import {MdOutlineClass, MdAccountCircle, MdSchool, MdListAlt, MdLogout, MdHome} from "react-icons/md"
@@ -16,6 +17,53 @@ interface ISideBarProps {
 function testSideBar(route: string) {
     return window.location.pathname.includes(route)
 }
+
+type SidebarItem = {
+    key: string;
+    icon: JSX.Element;
+    onClick?: React.MouseEventHandler;
+    permission?: string;
+    testSidebar?: string;
+    label: string;
+}
+
+const items: SidebarItem[] = [
+    {
+        key: "home",
+        icon: <MdHome/>,
+        label: "Home"
+    },
+    {
+        key: "professoras",
+        icon: <FaChalkboardTeacher/>,
+        label: "Professoras",
+        permission: "admin"
+    },
+    {
+        key: "alunas",
+        icon: <MdSchool/>,
+        label: "Alunas",
+        permission: "admin",
+        testSidebar: "aprovar_cadastros"
+    },
+    {
+        key: "disciplinas",
+        icon: <MdOutlineClass/>,
+        label: "Disciplinas",
+        permission: "admin"
+    },
+    {
+        key: "turmas",
+        icon: <MdListAlt/>,
+        label: "Turmas",
+    },
+    {
+        key: "minha-conta",
+        icon: <MdAccountCircle/>,
+        label: "Minha Conta",
+        onClick: () => openProfileModal()
+    },
+]
 
 function SideBar(props: ISideBarProps) {
     const permission = getUserPermission();
@@ -38,42 +86,17 @@ function SideBar(props: ISideBarProps) {
                         </div>}
                     </div>
                 </div>
-                <div onClick={()=>{window.location.pathname = "home"}} className={ testSideBar("home") ? "side-bar-item-active" : "side-bar-item"}>
-                    <MdHome
-                        className="side-bar-icon"
-                    />
-                    <div className="side-bar-item-text-content">Home</div>
-                </div>
-                {permission === "admin" && <div onClick={()=>{window.location.pathname = "professoras"}} className={ testSideBar("professoras") ? "side-bar-item-active" : "side-bar-item"}>
-                    <FaChalkboardTeacher
-                        className="side-bar-icon"
-                    />
-                    <div className="side-bar-item-text-content">Professoras</div>
-                </div>}
-                {permission === "admin" && <div onClick={()=>{window.location.pathname = "alunas"}} className={ testSideBar("alunas") || testSideBar("aprovar_cadastros") ? "side-bar-item-active" : "side-bar-item"}>
-                    <MdSchool
-                        className="side-bar-icon"
-                    />
-                    <div className="side-bar-item-text-content">Alunas</div>
-                </div>}
-                {permission === "admin" && <div onClick={()=>{window.location.pathname = "disciplinas"}} className={ testSideBar("disciplinas") ? "side-bar-item-active" : "side-bar-item"}>
-                    <MdOutlineClass
-                        className="side-bar-icon"
-                    />
-                    <div className="side-bar-item-text-content">Disciplinas</div>
-                </div>}
-                <div onClick={()=>{window.location.pathname = "turmas"}} className={ testSideBar("turmas") ? "side-bar-item-active" : "side-bar-item"}>
-                    <MdListAlt
-                        className="side-bar-icon"
-                    />
-                    <div className="side-bar-item-text-content">Turmas</div>
-                </div>
-                <div onClick={()=>{openProfileModal()}} className={ testSideBar("minha-conta") ? "side-bar-item-active" : "side-bar-item"}>
-                    <MdAccountCircle
-                        className="side-bar-icon"
-                    />
-                    <div className="side-bar-item-text-content">Minha Conta</div>
-                </div>
+                {items.map(item => (
+                    <div 
+                        key={item.key}
+                        onClick={item.onClick === undefined ? () => {window.location.pathname = item.key} : item.onClick}
+                        className={ testSideBar(item.key) || (item.testSidebar ? testSideBar(item.testSidebar) : false) ? "side-bar-item-active" : "side-bar-item"}
+                        style={item.permission && item.permission !== permission ? {display: "none"} : {}} 
+                    >
+                        {React.cloneElement(item.icon, {className: "side-bar-icon"})}
+                        <div className="side-bar-item-text-content">{item.label}</div>
+                    </div>
+                ))}
             </div>
             <div onClick={()=>{logout()}} className={"logout-buttom"}>
                 <MdLogout
