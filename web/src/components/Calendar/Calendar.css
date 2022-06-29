@@ -47,6 +47,7 @@
     transition: all 200ms ease-in-out;
     border-radius: 6px;
     height: 6px;
+    overflow: hidden;
 }
 
 .aula-marker:hover {
