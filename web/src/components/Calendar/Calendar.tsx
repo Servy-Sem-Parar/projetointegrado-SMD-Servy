@@ -1,3 +1,4 @@
+import moment from "moment";
 import { useEffect, useState } from "react";
 import { getMonthLabel } from "../../Tools/getMonthLabel";
 import "./Calendar.css"
@@ -11,6 +12,7 @@ const weekDays = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "
 
 export function Calendar(props: ICalendarProps) {
     const [calendar, setCalendar] = useState<Record<string, unknown>[]>([])
+    const currentDay = moment().format("DD")
 
     useEffect(()=>{
         const calendar = [];
@@ -74,7 +76,7 @@ export function Calendar(props: ICalendarProps) {
                                     borderBottomLeftRadius: index === calendar.length-7 ? "10px" : "0px",
                                     borderBottomRightRadius: index === calendar.length-1 ? "10px" : "0px",
                                 }} 
-                                className="calendar-day-box"
+                                className={`calendar-day-box ${day.day == currentDay ? "current-day" : ""}`}
                             >
                                 <div className="calendar-day-text">
                                     {day.day as string}
@@ -83,15 +85,18 @@ export function Calendar(props: ICalendarProps) {
                                     {props.aulas.map(aula=>{
                                         if(aula.day === day.day) {
                                             return <div
+                                                className="aula-marker"
                                                 style={{
                                                     width: "100%",
-                                                    height: "6px",
-                                                    borderRadius: "6px",
                                                     marginRight: "5px",
                                                     marginBottom: "5px",
                                                     backgroundColor: (aula.turma as Record<string, unknown>).color as string
                                                 }}
-                                            ></div>
+                                            >
+                                                <div className="aula-name">
+                                                    {aula.title as string}
+                                                </div>
+                                            </div>
                                         }
                                     })}
                                 </div>

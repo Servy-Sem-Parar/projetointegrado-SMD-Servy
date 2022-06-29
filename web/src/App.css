@@ -23,7 +23,7 @@ body, input, button, textarea, div {
 }
 
 *::-webkit-scrollbar {
-    width: 12px;  
+    width: 8px;  
     color: rgb(167,128,181);
     border-radius: 12px;
 }
