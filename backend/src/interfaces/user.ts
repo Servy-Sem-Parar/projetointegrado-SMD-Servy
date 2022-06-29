@@ -15,6 +15,7 @@ interface IUser extends Document {
   schoolType: SchoolType;
   status: UserStatus;
   wantedTurmas: ITurma;
+  birthDate: Date;
 }
 
 export default IUser;
