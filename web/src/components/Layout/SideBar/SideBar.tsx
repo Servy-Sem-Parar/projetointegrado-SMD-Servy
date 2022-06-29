@@ -24,10 +24,19 @@ function SideBar(props: ISideBarProps) {
         <div className={`side-bar ${props.sideBarIsOpen === false && "side-bar-closed"}`}>
             <div className="side-bar-body">
                 <div className={props.sideBarIsOpen ? "side-bar-logo-container" : "side-bar-logo-container-closed"}>
-                <div onClick={()=>{ props.changeSideBarState(!props.sideBarIsOpen) }} className={!props.sideBarIsOpen ? "burguer-button-box-active" : "burguer-button-box"}>
-                    <GiHamburgerMenu/>
-                </div>
-                <img onClick={()=>{window.location.pathname = "home"}} src={LogoImage} alt="logo" className={props.sideBarIsOpen ? "top-bar-logo" : "top-bar-logo-closed"} />
+                    <div className={`login-logo-sidebar ${props.sideBarIsOpen ? "opened" : "closed"}`}>
+                        <div onClick={()=>{ props.changeSideBarState(!props.sideBarIsOpen) }} className={!props.sideBarIsOpen ? "burguer-button-box-active" : "burguer-button-box"}>
+                            <GiHamburgerMenu/>
+                        </div>
+                        {props.sideBarIsOpen && <div className="login-logo-holder sidebar">
+                            <span className='login-logo-text-title'>
+                                Projeto
+                            </span>
+                            <span className='login-logo-text-subtitle'>
+                                Sem Parar
+                            </span>
+                        </div>}
+                    </div>
                 </div>
                 <div onClick={()=>{window.location.pathname = "home"}} className={ testSideBar("home") ? "side-bar-item-active" : "side-bar-item"}>
                     <MdHome
