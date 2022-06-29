@@ -162,6 +162,8 @@
     margin-top: 0;
     padding: 0;
     margin-left: 12px;
+    font-size: 22px;
+    line-height: 21px;
 }
 
 .login-logo-sidebar {
@@ -169,8 +171,6 @@
     flex-direction: row;
     width: 100%;
     padding-left: 12px;
-    font-size: 22px;
-    line-height: 21px;
 }
 
 .login-logo-sidebar.closed {
