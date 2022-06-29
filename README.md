@@ -1,5 +1,5 @@
 # Projeto Sem Parar
-Keywords: Projeto Integrado - Equipe Servy - Sistemas e Mídias Digitais
+Keywords: Projeto Integrado - Equipe Servy - Sistemas e Mídias Digitais - Universidade Federal do Ceará
 
 ## Sobre
 
