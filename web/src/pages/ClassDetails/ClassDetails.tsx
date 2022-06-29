@@ -24,9 +24,13 @@ export function ClassDetails() {
             getAulas(id as string, dateStart, dateEnd).then(aulas=>{
                 const formatedAulas: Record<string, unknown>[] = [];
                 aulas.forEach(aula=>{
-                  const day = parseInt((aula.date as string).substr(8,2));
-                  aula.day = day;
-                  formatedAulas.push(aula);
+                    const day = parseInt((aula.date as string).substr(8,2));
+                    const month = parseInt((aula.date as string).substr(5,2));
+                    const year = parseInt((aula.date as string).substr(0,4));
+                    aula.day = day;
+                    aula.month = month;
+                    aula.year = year;
+                    formatedAulas.push(aula);
                 })
                 setAulas(formatedAulas);
               })

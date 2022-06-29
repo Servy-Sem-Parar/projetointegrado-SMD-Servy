@@ -14,7 +14,9 @@ const weekDays = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "
 
 export function Calendar(props: ICalendarProps) {
     const [calendar, setCalendar] = useState<Record<string, unknown>[]>([])
-    const currentDay = moment().format("DD")
+    const currentDay = moment().format("DD");
+    const currentMonth = moment().format("MM");
+    const currentYear = moment().format("yyyy");
 
     useEffect(()=>{
         const calendar = [];
@@ -31,6 +33,8 @@ export function Calendar(props: ICalendarProps) {
         for(let day = 1; day <= monthLastDay; day++){
             calendar.push({
                 day: day,
+                month: (startDate.getMonth()+1),
+                year: startDate.getFullYear(),
             })
         }
         for(let day = lastDayWeekIndex+1; day <= 6; day++){
@@ -86,6 +90,7 @@ export function Calendar(props: ICalendarProps) {
                 <div style={{display: "flex", flexWrap: "wrap"}}>
                 {
                     calendar.map((day, index)=>{
+                        console.log("day", day, currentDay, currentMonth, currentYear)
                         return (
                             <div 
                                 style={{
@@ -94,7 +99,7 @@ export function Calendar(props: ICalendarProps) {
                                     borderBottomLeftRadius: index === calendar.length-7 ? "10px" : "0px",
                                     borderBottomRightRadius: index === calendar.length-1 ? "10px" : "0px",
                                 }} 
-                                className={`calendar-day-box ${day.day === parseInt(currentDay) ? "current-day" : ""}`}
+                                className={`calendar-day-box ${(day.day === parseInt(currentDay) && day.year === parseInt(currentYear) && day.month === parseInt(currentMonth)) ? "current-day" : ""}`}
                             >
                                 <div className="calendar-day-text">
                                     {day.day as string}
