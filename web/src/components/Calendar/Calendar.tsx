@@ -76,7 +76,7 @@ export function Calendar(props: ICalendarProps) {
                                     borderBottomLeftRadius: index === calendar.length-7 ? "10px" : "0px",
                                     borderBottomRightRadius: index === calendar.length-1 ? "10px" : "0px",
                                 }} 
-                                className={`calendar-day-box ${day.day == currentDay ? "current-day" : ""}`}
+                                className={`calendar-day-box ${day.day === currentDay ? "current-day" : ""}`}
                             >
                                 <div className="calendar-day-text">
                                     {day.day as string}

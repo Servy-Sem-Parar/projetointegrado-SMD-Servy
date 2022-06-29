@@ -43,8 +43,8 @@ function Home() {
         })
       }
     } else {
-      const dateStart = formatDateToSend(startYear, startMonth+1, moment().startOf('week').toDate().getDate(), "00:00:00");
-      const dateEnd = formatDateToSend(startYear, startMonth+1, moment().endOf('week').toDate().getDate(), "23:59:59");
+      const dateStart = formatDateToSend(startYear, moment().startOf('week').toDate().getMonth()+1, moment().startOf('week').toDate().getDate(), "00:00:00");
+      const dateEnd = formatDateToSend(startYear, moment().endOf('week').toDate().getMonth()+1, moment().endOf('week').toDate().getDate(), "23:59:59");
       
       if(turmas.length > 0){
         getAulas(turmasIds, dateStart, dateEnd).then(aulas=>{
