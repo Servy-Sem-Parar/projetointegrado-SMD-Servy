@@ -1,11 +1,13 @@
 import moment from "moment";
 import { useEffect, useState } from "react";
+import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import { getMonthLabel } from "../../Tools/getMonthLabel";
 import "./Calendar.css"
 
 interface ICalendarProps {
     date: Date;
     aulas: Record<string, unknown>[];
+    onChangeDateCallback?: (date: Date)=>void;
 }
 
 const weekDays = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]
@@ -16,8 +18,8 @@ export function Calendar(props: ICalendarProps) {
 
     useEffect(()=>{
         const calendar = [];
-        const startDate = new Date(props.date.getFullYear(), new Date().getMonth(), 1);
-        const endDate = new Date(props.date.getFullYear(), new Date().getMonth()+1, 0);
+        const startDate = new Date(props.date.getFullYear(), props.date.getMonth(), 1);
+        const endDate = new Date(props.date.getFullYear(), props.date.getMonth()+1, 0);
         const firstDayWeekIndex = startDate.getDay();
         const lastDayWeekIndex = endDate.getDay();
         const monthLastDay = endDate.getDate();
@@ -44,6 +46,22 @@ export function Calendar(props: ICalendarProps) {
         <div className="calendar">
             <div className="calendar-header">
                 <div className="calendar-title">{getMonthLabel(props.date.getMonth())}</div>
+                {props.onChangeDateCallback && <div className="calendar-header-buttons">
+                    <GrFormPrevious
+                        className="calendar-header-button"
+                        onClick={()=>{
+                            const date = new Date(props.date.getFullYear(), props.date.getMonth()-1, props.date.getDate());
+                            props.onChangeDateCallback &&props.onChangeDateCallback(date);
+                        }}
+                    />
+                    <GrFormNext
+                        className="calendar-header-button"
+                        onClick={()=>{
+                            const date = new Date(props.date.getFullYear(), props.date.getMonth()+1, props.date.getDate());
+                            props.onChangeDateCallback &&props.onChangeDateCallback(date);
+                        }}
+                    /> 
+                </div>}
             </div>
             <div className="calendar-body">
                 <div style={{display: "flex"}}>
@@ -76,7 +94,7 @@ export function Calendar(props: ICalendarProps) {
                                     borderBottomLeftRadius: index === calendar.length-7 ? "10px" : "0px",
                                     borderBottomRightRadius: index === calendar.length-1 ? "10px" : "0px",
                                 }} 
-                                className={`calendar-day-box ${day.day === currentDay ? "current-day" : ""}`}
+                                className={`calendar-day-box ${day.day === parseInt(currentDay) ? "current-day" : ""}`}
                             >
                                 <div className="calendar-day-text">
                                     {day.day as string}
@@ -86,6 +104,9 @@ export function Calendar(props: ICalendarProps) {
                                         if(aula.day === day.day) {
                                             return <div
                                                 className="aula-marker"
+                                                onClick={()=>{
+                                                    aula.onClickCallback && (aula.onClickCallback as ()=>void)();
+                                                }}
                                                 style={{
                                                     width: "100%",
                                                     marginRight: "5px",

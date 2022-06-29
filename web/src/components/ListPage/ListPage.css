@@ -48,13 +48,7 @@
 
 .list-page-table-line {
     height: 70px;
-    transition: all 200ms ease-in;
     border-radius: 8px;
-}
-
-.list-page-table-line:hover {
-    box-shadow: 0 0 4px 0px #999;
-    filter: brightness(95%);
 }
 
 .list-table-line-item:first-child {

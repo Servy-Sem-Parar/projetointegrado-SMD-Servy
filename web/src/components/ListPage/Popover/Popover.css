@@ -18,7 +18,13 @@
     display: flex;
     cursor: pointer;
     color: #F97E0D;
+    align-items: center;
 }
+
+.popover-item:hover {
+    background-color: #dedede;
+}
+
 .popover-icon {
     margin-left: 5px;
 }

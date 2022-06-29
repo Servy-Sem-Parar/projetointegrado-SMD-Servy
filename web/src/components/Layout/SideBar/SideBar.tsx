@@ -53,7 +53,7 @@ function SideBar(props: ISideBarProps) {
                     />
                     <div className="side-bar-item-text-content">Disciplinas</div>
                 </div>}
-                <div onClick={()=>{window.location.pathname = "turmas"}} className={ testSideBar("turmas") ? "side-bar-item-active" : "side-bar-item"}>
+                <div onClick={()=>{window.location.pathname = "turmas"}} className={ testSideBar("turmas") || testSideBar("detalhes_da_turma") ? "side-bar-item-active" : "side-bar-item"}>
                     <MdListAlt
                         className="side-bar-icon"
                     />

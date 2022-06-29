@@ -4,6 +4,7 @@ import {
     Route,
 } from "react-router-dom";
 import ApproveRegisters from "../pages/ApproveRegisters/ApproveRegisters";
+import { ClassDetails } from "../pages/ClassDetails/ClassDetails";
 import Classes from "../pages/Classes/Classes";
 import Home from "../pages/Home/Home";
 import LoginPage from "../pages/LoginPage/LoginPage";
@@ -31,6 +32,7 @@ function Router() {
                 <Route path="planejamento" element={isAuth() ? <Planing/> : <LoginPage/>}/>
                 <Route path="disciplinas" element={isAuth() ? <Matters/> : <LoginPage/>}/>
                 <Route path="aprovar_cadastros" element={isAuth() ? <ApproveRegisters/> : <LoginPage/>} />
+                <Route path="detalhes_da_turma/:id" element={isAuth() ? <ClassDetails/> : <LoginPage/>} />
             </Routes>
         </BrowserRouter>
     )

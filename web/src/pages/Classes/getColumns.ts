@@ -36,6 +36,12 @@ export function getColumns() {
             control: "action",
             actions: [
                 {
+                    label: "Detalhes",
+                    callback: (entity: Record<string, unknown>)=>{
+                        window.location.pathname = `detalhes_da_turma/${entity._id}`
+                    }
+                },
+                {
                     label: "Editar",
                     callback: (entity: Record<string, unknown>)=>{
                         openSaveModal(entity)

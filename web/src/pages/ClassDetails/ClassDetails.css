@@ -1,0 +1,48 @@
+.list-page-subtitle {
+    font-size: 40px;
+}
+
+.class-data-container {
+    margin-top: 30px;
+}
+
+.class-data-subcontainer {
+    margin-top: 30px;
+}
+
+.class-data-line {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.class-data-line-content {
+    font-size: 20px;
+}
+
+.class-data-body {
+    margin-top: 10px;
+}
+
+.class-alunas-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 10px;
+    max-height: 135px;
+    overflow-y: auto;
+}
+
+.student-card {
+    padding: 10px;
+    border-radius: 10px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.student-card > * {
+    font-family: Raleway;
+    font-size: 15px;
+}
+
+.student-card-title {
+    font-weight: 600;
+}

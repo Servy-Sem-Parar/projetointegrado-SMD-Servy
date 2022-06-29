@@ -37,6 +37,9 @@ function Home() {
           aulas.forEach(aula=>{
             const day = parseInt((aula.date as string).substr(8,2));
             aula.day = day;
+            aula.onClickCallback = ()=>{
+              window.location.pathname = `detalhes_da_turma/${(aula.turma as Record<string, unknown>)._id}`
+            }
             formatedAulas.push(aula);
           })
           setAulas(formatedAulas);

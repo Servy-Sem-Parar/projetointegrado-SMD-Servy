@@ -37,6 +37,24 @@
     font-weight: bold;
 }
 
+.calendar-header {
+    justify-content: space-between;
+    display: flex;
+}
+
+.calendar-header-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.calendar-header-button {
+    cursor: pointer;
+}
+
+.calendar-header-button:first-child {
+    margin-right: 20px;
+}
+
 .calendar-day-text {
     font-size: 20px;
     font-weight: bold;

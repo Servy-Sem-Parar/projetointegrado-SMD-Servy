@@ -187,6 +187,7 @@ export async function getStudents() {
         order: "asc",
         offset: 0,
         limit: 10000,
+        status: "approved"
     };
     let options: Record<string, unknown>[] = [];
 

@@ -4,6 +4,7 @@ import {AiFillEdit} from "react-icons/ai";
 import {AiTwotoneDelete} from "react-icons/ai";
 
 import "./Popover.css"
+import { MdVisibility } from "react-icons/md";
 
 interface IPopoverProps {
     control: number;
@@ -24,6 +25,12 @@ function getActionIcon(action: string) {
     } else if(action === "Editar") {
         return (
             <AiFillEdit
+                className="popover-icon"
+            />
+        )
+    } else if(action === "Detalhes") {
+        return (
+            <MdVisibility
                 className="popover-icon"
             />
         )
