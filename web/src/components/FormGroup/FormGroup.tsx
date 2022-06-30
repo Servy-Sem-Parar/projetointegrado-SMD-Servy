@@ -3,8 +3,9 @@ import "./FormGroup.css"
 import { PhoneNumberInput } from "./PhoneNumberInput/PhoneNumberInput";
 import Select, { StylesConfig } from 'react-select';
 import { GithubPicker } from 'react-color';
+import { DateInput } from "./DateInput/DateInput";
 
-export type inputTypes = 'text' | 'select' | 'password' | "phone_number" | "multiSelect" | "iconSelect" | "color";
+export type inputTypes = 'text' | 'select' | 'password' | "phone_number" | "multiSelect" | "iconSelect" | "color" | "date";
 export type inputSizes = '33' | '66' | '50' | '100';
 
 export interface IFormGroupProps {
@@ -50,6 +51,9 @@ function _generateInput(props: IFormGroupProps) {
             break;
         case 'color':
             input = _generateColorInput(props)
+            break;
+        case 'date':
+            input = _generateDateInput(props)
             break;
         default:
             break;
@@ -151,6 +155,19 @@ function _generatePhoneInput(props: IFormGroupProps) {
     return (
         <PhoneNumberInput
             disabled={props.disabled}
+            id={props.id}
+            defaultValue={props.defaultValue as string}
+            onChange={props.onChange}
+            validations={props.validations}
+            setFieldValidation={props.setFieldValidation}
+            errorMessage={props.errorMessage}
+        />
+    )
+}
+
+function _generateDateInput(props: IFormGroupProps) {
+    return (
+        <DateInput
             id={props.id}
             defaultValue={props.defaultValue as string}
             onChange={props.onChange}

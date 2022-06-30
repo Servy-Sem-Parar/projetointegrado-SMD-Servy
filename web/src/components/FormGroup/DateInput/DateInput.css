@@ -1,0 +1,30 @@
+.form_group_phone {
+    border-radius: 10px !important;
+    border: 1px solid #F97E0D !important;
+    font-size: 15px !important;
+    width: 100% !important;
+}
+
+.react-datepicker__day, .react-datepicker__day-name {
+    font-size: 15px;
+}
+
+.react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle::after, .react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle::before {
+    display: none !important;
+}
+
+.is-invalid-field {
+    border: 1px solid red !important;
+}
+
+.dial-code {
+    font-size: 15px;
+}
+
+.country-name {
+    font-size: 15px;
+}
+
+.react-tel-input .country-list {
+    max-height: 100px !important;
+}

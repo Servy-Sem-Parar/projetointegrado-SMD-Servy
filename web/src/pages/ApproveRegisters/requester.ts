@@ -92,7 +92,7 @@ export async function getTurmas() {
     return options;
 }
 
-export async function getEntity(id: string){
+export async function getEntity(id: string, turmasOptions: Record<string, unknown>[]){
     const suffix = "user";
     const method = "get";
     let entity: Record<string, unknown> = {};
@@ -105,14 +105,14 @@ export async function getEntity(id: string){
     entity = response?.data.data;
     let turmasDefaultValue: Record<string, unknown>[] = []; 
     let turmas: string[] = []; 
-    (entity.turmas as Record<string, unknown>[]).forEach(turma=>{
+    (entity.wantedTurmas as string[]).forEach(turma=>{
         turmasDefaultValue.push({
-            label: turma.name,
-            value: turma._id
+            label: (turmasOptions.find(turmaOption=>turmaOption.value === turma) as unknown as Record<string, unknown>).label,
+            value: turma
         })
-        turmas.push(turma._id as string);
+        turmas.push(turma);
     })
-    entity.turmas = turmas;
+    entity.wantedTurmas = turmas;
     entity.turmasDefaultValue = turmasDefaultValue;
     
     return entity;

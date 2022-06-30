@@ -24,7 +24,7 @@ export function ModalsProvider() {
     openSaveModal = (targetEntity?: Record<string, unknown>)=>{ 
         if(targetEntity){
             if(targetEntity._id) {
-                getEntity(targetEntity._id as string).then(resp=>{
+                getEntity(targetEntity._id as string, turmas).then(resp=>{
                     setTargetEntity({...resp}); 
                     setEntity({...resp})
                 })
@@ -92,6 +92,9 @@ export function ModalsProvider() {
                                     
                                     if(validationResult.success) {
                                         const finalEntity = {...entity};
+                                        //finalEntity.wantedTurmas = finalEntity.turmas;
+                                        //finalEntity.turmas = [];
+                                        finalEntity.turmas = finalEntity.wantedTurmas;
                                         finalEntity.status = "approved";
                                         const success = await editEntity(finalEntity, targetEntity._id as string);
                                         if(success) {
