@@ -90,7 +90,6 @@ export function Calendar(props: ICalendarProps) {
                 <div style={{display: "flex", flexWrap: "wrap"}}>
                 {
                     calendar.map((day, index)=>{
-                        console.log("day", day, currentDay, currentMonth, currentYear)
                         return (
                             <div 
                                 style={{
