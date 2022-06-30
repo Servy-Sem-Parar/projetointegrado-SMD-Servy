@@ -57,7 +57,6 @@ const UserSchema = new Schema<IUser>({
   }],
   birthDate: {
     type: 'Date',
-    required: true,
   }
 });
 
