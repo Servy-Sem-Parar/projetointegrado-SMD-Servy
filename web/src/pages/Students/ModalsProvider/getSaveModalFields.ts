@@ -18,7 +18,8 @@ export const fieldValidations = {
     phone_number: [],
     turmas: [],
     address: ["mandatory"],
-    schoolType: ["mandatory"]
+    schoolType: ["mandatory"],
+    birthDate: ["mandatory"]
 }
 
 export function getSaveModalFields(props: IGetSaveModalFieldsProps) {
@@ -35,6 +36,20 @@ export function getSaveModalFields(props: IGetSaveModalFieldsProps) {
             setFieldValidation: props.setFieldValidation,
             onChange: (value: string | Date | string[])=>{
                 props.onChange("name", value)
+            }
+        },
+        {
+            id: "birthDate",
+            label: "Data de nascimento",
+            type: "date",
+            defaultValue: props.initialEntity && props.initialEntity.birthDate ? props.initialEntity.birthDate as string : "",
+            errorMessage: props.errorMessages && props.errorMessages.birthDate ? props.errorMessages.birthDate : "",
+            validations: fieldValidations.birthDate && fieldValidations.birthDate,
+            placeholder: "",
+            size: "100",
+            setFieldValidation: props.setFieldValidation,
+            onChange: (value: string | Date | string[])=>{
+                props.onChange("birthDate", value)
             }
         },
         {

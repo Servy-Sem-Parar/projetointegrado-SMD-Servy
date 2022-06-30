@@ -45,7 +45,7 @@ export function getSaveModalFields(props: IGetSaveModalFieldsProps) {
             setFieldValidation: props.setFieldValidation,
             options: props.turmas as {label: string, value: string}[],
             onChange: (value: string | Date | string[])=>{
-                props.onChange("turmas", value)
+                props.onChange("wantedTurmas", value)
             }
         }, 
         {

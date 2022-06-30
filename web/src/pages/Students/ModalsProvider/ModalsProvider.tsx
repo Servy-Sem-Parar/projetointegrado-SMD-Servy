@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { alertError, alertSuccess } from "../../../components/Alert/Alert";
 import { DeleteModal } from "../../../components/DeleteModal/DeleteModal";
 import { SaveModal } from "../../../components/SaveModal/SaveModal"
+import { formatDateToReceive } from "../../../Tools/formatDateToReceive";
 import { validateAllInputs } from "../../../Tools/validateInputs";
 import { createEntity, deleteEntity, editEntity, getEntity, getTurmas } from "../requester";
 import { updateEntities } from "../Students";
@@ -35,6 +36,12 @@ export function ModalsProvider() {
                 })
             } 
         } else {
+            setEntity({
+                birthDate: formatDateToReceive(new Date().getFullYear(), new Date().getMonth()+1, new Date().getDate(), "00:00:00")
+            });
+            setTargetEntity({
+                birthDate: formatDateToReceive(new Date().getFullYear(), new Date().getMonth()+1, new Date().getDate(), "00:00:00")
+            })
             setIsEdit(false);
         }
         setIsOpenSaveModal(true) 
