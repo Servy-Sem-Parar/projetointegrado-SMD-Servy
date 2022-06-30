@@ -17,7 +17,7 @@ class UserController extends CrudController<IUser, typeof User> {
   }
 
   override populate(entity) {
-    return entity;
+    return entity.populate("wantedTurmas");
   }
 
   override async createFromParameters(request: Request): Promise<IUser> {
@@ -41,6 +41,8 @@ class UserController extends CrudController<IUser, typeof User> {
   }
 
   override prepareQuery(request: Request, query: mongoose.FilterQuery<IUser>, options: any): void {
+    options.populate = ['wantedTurmas']
+
     const {name, email, role, status} = request.query
     if (name) {
       query.name = {$regex: new RegExp(name as string), $options: "i"}
