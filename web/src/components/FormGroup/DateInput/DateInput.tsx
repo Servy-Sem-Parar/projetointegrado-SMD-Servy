@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "./DateInput.css";
 import "react-datepicker/dist/react-datepicker.css";
 import { validateInput } from "../../../Tools/validateInputs";
-import { formatDateToSend } from "../../../Tools/formatDateToSend";
+import { formatDateToSendAlt } from "../../../Tools/formatDateToSend";
 import { registerLocale } from  "react-datepicker";
 import br from 'date-fns/locale/pt-BR';
 registerLocale('pt-BR', br)
@@ -38,7 +38,7 @@ export function DateInput(props: IDateInputProps) {
             disabled={props.disabled}
             onChange={(date)=>{
                 if(date) {
-                    const dateString = formatDateToSend(date.getFullYear(), date.getMonth()+1, date.getDate(), "00:00:00")
+                    const dateString = formatDateToSendAlt(date.getFullYear(), date.getMonth()+1, date.getDate(), "00:00:00")
                     setDate(date);
                     if(props.onChange) {
                         if(props.validations) {
