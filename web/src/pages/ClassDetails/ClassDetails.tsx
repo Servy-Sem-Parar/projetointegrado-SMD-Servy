@@ -5,9 +5,14 @@ import { getAulas, getTurma } from "./requester";
 import "./ClassDetails.css";
 import { formatDateToSend } from "../../Tools/formatDateToSend";
 import { Calendar } from "../../components/Calendar/Calendar";
+import moment from "moment";
+import { ModalsProvider, openAddStudentModal } from "./ModalsProvider/ModalsProvider";
 
 const startMonth = new Date().getMonth();
 const startYear = new Date().getFullYear();
+
+export let updateTurma: ()=>void;
+export let updateAulas: ()=>void;
 
 export function ClassDetails() {
     const [turma, setTurma] = useState<Record<string, unknown>>({});
@@ -19,26 +24,57 @@ export function ClassDetails() {
         const dateStart = formatDateToSend(date.getFullYear(), date.getMonth()+1, 1, "00:00:00");
         const dateEnd = formatDateToSend(date.getFullYear(), date.getMonth()+1, new Date(date.getFullYear(), date.getMonth()+1, 0).getDate(), "23:59:59");
         
-        getTurma(id as string).then(turma=>{
-            setTurma(turma);
-            getAulas(id as string, dateStart, dateEnd).then(aulas=>{
-                const formatedAulas: Record<string, unknown>[] = [];
+        Promise.all([
+            getTurma(id as string), 
+            getAulas(id as string, dateStart, dateEnd)
+        ]).then(result=>{
+            const turma = result[0];
+            const aulas = result[1];
+            const formatedAulas: Record<string, unknown>[] = [];
                 aulas.forEach(aula=>{
-                    const day = parseInt((aula.date as string).substr(8,2));
-                    const month = parseInt((aula.date as string).substr(5,2));
-                    const year = parseInt((aula.date as string).substr(0,4));
-                    aula.day = day;
-                    aula.month = month;
-                    aula.year = year;
-                    formatedAulas.push(aula);
-                })
-                setAulas(formatedAulas);
-              })
+                const day = parseInt((aula.date as string).substr(8,2));
+                const month = parseInt((aula.date as string).substr(5,2));
+                const year = parseInt((aula.date as string).substr(0,4));
+                aula.day = day;
+                aula.month = month;
+                aula.year = year;
+                formatedAulas.push(aula);
+            })
+
+            setAulas(formatedAulas);
+            setTurma(turma);
         })
     }, [id, date])
 
+    updateTurma = ()=>{
+        getTurma(id as string).then(turma=>{
+            setTurma(turma);
+        })
+    }
+
+    updateAulas = ()=>{
+        const dateStart = formatDateToSend(date.getFullYear(), date.getMonth()+1, 1, "00:00:00");
+        const dateEnd = formatDateToSend(date.getFullYear(), date.getMonth()+1, new Date(date.getFullYear(), date.getMonth()+1, 0).getDate(), "23:59:59");
+
+        getAulas(id as string, dateStart, dateEnd).then(aulas=>{
+            const formatedAulas: Record<string, unknown>[] = [];
+                aulas.forEach(aula=>{
+                const day = parseInt((aula.date as string).substr(8,2));
+                const month = parseInt((aula.date as string).substr(5,2));
+                const year = parseInt((aula.date as string).substr(0,4));
+                aula.day = day;
+                aula.month = month;
+                aula.year = year;
+                formatedAulas.push(aula);
+            })
+
+            setAulas(formatedAulas);
+        })
+    }
+
     return (
         <div>
+            <ModalsProvider/>
             <header className="list-page-header">
                 <h1 className="list-page-title">{turma.name as string}</h1>
                 <button className="title-button" onClick={()=>{console.log("pop")}}>
@@ -69,7 +105,7 @@ export function ClassDetails() {
             <div className="class-data-subcontainer">
                 <div className="list-page-header">
                     <h1 className="list-page-subtitle">Alunas da turma</h1>
-                    <button className="title-button" onClick={()=>{console.log("pop")}}>
+                    <button className="title-button" onClick={()=>{openAddStudentModal(turma)}}>
                         <GoPlus
                             className="title-button-icon"
                         />
@@ -78,14 +114,14 @@ export function ClassDetails() {
                 </div>
                 <div className="class-alunas-container">
                     {
-                        turma.students ? (turma.students as Record<string, unknown>[]).map((aluna, index)=>{
+                        turma.alunas ? (turma.alunas as Record<string, unknown>[]).map((aluna, index)=>{
                             return (
                                 <div 
                                     className="student-card"
                                     style={{backgroundColor: index%2 === 0 ? "#F8E3FF" : "#F1C8FF"}}    
                                 >
                                     <div className="student-card-title">{aluna.name as string}</div>
-                                    <div>10 anos</div>
+                                    <div>{`${aluna.birthDate ? moment().diff(moment(aluna.birthDate as string, 'YYYY-MM-DD').toDate(), 'years') : 10} anos`}</div>
                                 </div>
                             )
                         }) : ""
