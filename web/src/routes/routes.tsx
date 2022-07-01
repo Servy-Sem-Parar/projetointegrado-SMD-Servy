@@ -32,7 +32,7 @@ function Router() {
                 <Route path="planejamento" element={isAuth() ? <Planing/> : <LoginPage/>}/>
                 <Route path="disciplinas" element={isAuth() ? <Matters/> : <LoginPage/>}/>
                 <Route path="aprovar_cadastros" element={isAuth() ? <ApproveRegisters/> : <LoginPage/>} />
-                <Route path="detalhes_da_turma/:id" element={isAuth() ? <ClassDetails/> : <LoginPage/>} />
+                <Route path="turmas/:id" element={isAuth() ? <ClassDetails/> : <LoginPage/>} />
             </Routes>
         </BrowserRouter>
     )
