@@ -42,7 +42,7 @@ function Home() {
             aula.month = month;
             aula.year = year;
             aula.onClickCallback = ()=>{
-              window.location.pathname = `detalhes_da_turma/${(aula.turma as Record<string, unknown>)._id}`
+              window.location.pathname = `turmas/${(aula.turma as Record<string, unknown>)._id}`
             }
             formatedAulas.push(aula);
           })

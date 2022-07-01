@@ -38,7 +38,7 @@ export function getColumns() {
                 {
                     label: "Detalhes",
                     callback: (entity: Record<string, unknown>)=>{
-                        window.location.pathname = `detalhes_da_turma/${entity._id}`
+                        window.location.pathname = `turmas/${entity._id}`
                     }
                 },
                 {
