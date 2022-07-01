@@ -36,3 +36,11 @@ body, input, button, textarea, div {
     background-color: rgb(167,128,181);   
     border-radius: 20px;    
 }
+
+button {
+    transition: all 200ms ease-in;
+}
+
+button:hover {
+    filter: brightness(95%);
+}
