@@ -6,7 +6,7 @@ import "./ClassDetails.css";
 import { formatDateToSend } from "../../Tools/formatDateToSend";
 import { Calendar } from "../../components/Calendar/Calendar";
 import moment from "moment";
-import { ModalsProvider, openAddStudentModal } from "./ModalsProvider/ModalsProvider";
+import { ModalsProvider, openAddStudentModal, openAulaModal, openEditTurmaModal } from "./ModalsProvider/ModalsProvider";
 
 const startMonth = new Date().getMonth();
 const startYear = new Date().getFullYear();
@@ -38,6 +38,7 @@ export function ClassDetails() {
                 aula.day = day;
                 aula.month = month;
                 aula.year = year;
+                aula.onClickCallback = ()=>{openAulaModal(aula)};
                 formatedAulas.push(aula);
             })
 
@@ -65,6 +66,7 @@ export function ClassDetails() {
                 aula.day = day;
                 aula.month = month;
                 aula.year = year;
+                aula.onClickCallback = ()=>{openAulaModal(aula)};
                 formatedAulas.push(aula);
             })
 
@@ -74,10 +76,12 @@ export function ClassDetails() {
 
     return (
         <div>
-            <ModalsProvider/>
+            <ModalsProvider
+                turmaId={id as string}
+            />
             <header className="list-page-header">
                 <h1 className="list-page-title">{turma.name as string}</h1>
-                <button className="title-button" onClick={()=>{console.log("pop")}}>
+                <button className="title-button" onClick={()=>{openAulaModal({})}}>
                     <GoPlus
                         className="title-button-icon"
                     />
@@ -85,7 +89,10 @@ export function ClassDetails() {
                 </button>
             </header>
             <div className="class-data-container">
-                <h1 className="list-page-subtitle">Dados da turma</h1>
+                <div style={{display: "flex", alignItems: "baseline"}}>
+                    <h1 className="list-page-subtitle">Dados da turma</h1>
+                    <div className="class-edit-button" onClick={()=>{openEditTurmaModal(turma)}}>Editar</div>
+                </div>
                 <div className="class-data-body">
                     <div className="class-data-line">
                         <div className="class-data-line-content"><strong>Professoras:&nbsp;</strong>{turma.professoras as string}</div>

@@ -25,9 +25,21 @@ export async function getTurma(id: string) {
         }
     })
     entity.alunas = entity.students;
-    entity.students = (entity.students as Record<string, unknown>[]).map(student=>{
-        return student._id;
+    entity.studentsDefaultValue = (entity.students as Record<string, unknown>[]).map(student=>{
+        return {
+            value: student._id,
+            label: student.name
+        }
     })
+    entity.students = (entity.students as Record<string, unknown>[]).map(student=>student._id as string);
+    entity.teachersDefaultValue = (entity.teachers as Record<string, unknown>[]).map(teacher=>{
+        return {
+            value: teacher._id,
+            label: teacher.name
+        }
+    })
+    entity.teachers = (entity.teachers as Record<string, unknown>[]).map(teacher=>teacher._id as string);
+    entity.disciplinaDefaultValue = (entity.disciplina as Record<string, unknown>)._id;
 
     return entity;
 }
@@ -58,6 +70,7 @@ export async function getAulas(turma: string, dateStart: string, dateEnd:String)
         }
         const endHour = `${endHourNumber}${(aula.date as string).substr(13,3)}`;
         return ({
+            hour: startHour,
             startHour,
             endHour,
             ...aula
@@ -94,7 +107,7 @@ export async function getStudents() {
     return options;
 }
 
-export async function editEntity(body: Record<string, unknown>, entityId: string) {
+export async function editTurma(body: Record<string, unknown>, entityId: string) {
     const suffix = "turma";
     const method = "put";
     let success = false;
@@ -103,6 +116,104 @@ export async function editEntity(body: Record<string, unknown>, entityId: string
         suffix,
         method,
         body,
+        entityId
+    });
+    success = response ? true : false;
+
+    return success;
+}
+
+export async function getTeachers() {
+    const suffix = "user/professoras";
+    const method = "get";
+    const otherQueryStrings: Record<string, unknown> = { 
+        sort: "name",
+        order: "asc",
+        offset: 0,
+        limit: 10000,
+    };
+    let options: Record<string, unknown>[] = [];
+
+    const response = await makeConnection({
+        suffix,
+        method,
+        otherQueryStrings
+    });
+    options= (response?.data.data as Record<string, unknown>[]).map((entity)=>{
+        return {
+            label: entity.name,
+            value: entity._id
+        }
+    });
+
+    return options;
+}
+
+export async function getDisciplinas() {
+    const suffix = "disciplina";
+    const method = "get";
+    const otherQueryStrings: Record<string, unknown> = { 
+        sort: "name",
+        order: "asc",
+        offset: 0,
+        limit: 10000,
+    };
+    let options: Record<string, unknown>[] = [];
+
+    const response = await makeConnection({
+        suffix,
+        method,
+        otherQueryStrings
+    });
+    options= (response?.data.data as Record<string, unknown>[]).map((entity)=>{
+        return {
+            label: entity.name,
+            value: entity._id
+        }
+    });
+
+    return options;
+}
+
+export async function createAula(body: Record<string, unknown>) {
+    const suffix = "aula";
+    const method = "post";
+    let success = false;
+
+    const response = await makeConnection({
+        suffix,
+        method,
+        body
+    });
+    success = response ? true : false;
+
+    return success;
+}
+
+export async function editAula(body: Record<string, unknown>, entityId: string) {
+    const suffix = "aula";
+    const method = "put";
+    let success = false;
+
+    const response = await makeConnection({
+        suffix,
+        method,
+        body,
+        entityId
+    });
+    success = response ? true : false;
+
+    return success;
+}
+
+export async function deleteAula(entityId: string) {
+    const suffix = "aula";
+    const method = "delete";
+    let success = false;
+
+    const response = await makeConnection({
+        suffix,
+        method,
         entityId
     });
     success = response ? true : false;

@@ -47,7 +47,7 @@ export function DateInput(props: IDateInputProps) {
                                 props.setFieldValidation(props.id, validationError as string)
                             }
                         }
-                        props.onChange(date);
+                        props.onChange(dateString);
                     }
                 }
             }}
