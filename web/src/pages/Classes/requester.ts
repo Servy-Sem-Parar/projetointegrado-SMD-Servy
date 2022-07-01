@@ -30,6 +30,7 @@ function _formatEntities(entity: Record<string, unknown>) {
     entity.studentsDefaultValue = studentsDefaultValue;
     entity.students = students;
     entity.teachers = teachers;
+    entity.disciplinaDefaultValue = (entity.disciplina as Record<string, unknown>)._id;
 
     const formatedEntity = {
         icon: (entity.disciplina as Record<string, unknown>).icon,
