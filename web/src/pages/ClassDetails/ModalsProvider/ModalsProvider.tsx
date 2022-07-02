@@ -271,6 +271,14 @@ export function ModalsProvider(props: {turmaId: string}) {
                                     callback: async ()=>{
                                         const newEntity = {...entity};
                                         newEntity.date = (newEntity.date as string).substr(0,10) + "T" + newEntity.hour as string + ":00.997Z";
+                                        if(newEntity.materiais) {
+                                            newEntity.materiais = (newEntity.materiais as Record<string, unknown>[]).map(material=>{
+                                                return ({
+                                                    date: newEntity.date,
+                                                    ...material
+                                                })
+                                            })
+                                        }
                                         const validations = {...aulasFieldValidations};
                                         const validationResult = validateAllInputs({entity, validations});
                                         if(validationResult.success) {

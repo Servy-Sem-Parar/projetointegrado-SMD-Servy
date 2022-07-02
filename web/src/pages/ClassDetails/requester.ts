@@ -225,7 +225,7 @@ export async function getMateriais(turma: string) {
     const suffix = "aula";
     const method = "get";
     const otherQueryStrings: Record<string, unknown> = { 
-        sort: "name",
+        sort: "date",
         order: "asc",
         offset: 0,
         limit: 10000,
