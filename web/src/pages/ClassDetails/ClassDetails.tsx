@@ -177,6 +177,11 @@ export function ClassDetails() {
                         label: "Link",
                         control: "link",
                     },
+                    {
+                        type: "string",
+                        label: "Data",
+                        control: "dateShow",
+                    },
                 ]}
                 offset={0}
                 setOffset={()=>{/**/}}

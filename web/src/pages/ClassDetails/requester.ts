@@ -1,3 +1,4 @@
+import { formatDateToShow } from "../../Tools/formatDateToShow";
 import { makeConnection } from "../../Tools/makeConnection";
 
 export async function getTurma(id: string) {
@@ -238,7 +239,12 @@ export async function getMateriais(turma: string) {
         otherQueryStrings
     });
 
-    const materiais = (response?.data.data as unknown as Record<string, unknown>[]).map(aula=>aula.materiais).flat() as Record<string, unknown>[];
-
+    let materiais = (response?.data.data as unknown as Record<string, unknown>[]).map(aula=>aula.materiais).flat() as Record<string, unknown>[];
+    materiais = materiais.map(material=>{
+        return ({
+            dateShow: material.date ? formatDateToShow(material.date as string).substr(0,10) : "---",
+            ...material
+        })
+    })
     return materiais;
 }
