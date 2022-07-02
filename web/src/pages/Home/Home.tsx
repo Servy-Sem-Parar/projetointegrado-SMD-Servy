@@ -57,6 +57,9 @@ function Home() {
         getAulas(turmasIds, dateStart, dateEnd).then(aulas=>{
           const formatedAulas = aulas.map(aula=>{
             aula.day = parseInt((aula.date as string).substr(8,2));
+            aula.onClickCallback = ()=>{
+              window.location.pathname = `turmas/${(aula.turma as Record<string, unknown>)._id}`
+            }
             return aula;
           })
           setAulas(formatedAulas);

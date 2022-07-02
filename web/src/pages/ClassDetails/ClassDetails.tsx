@@ -142,6 +142,7 @@ export function ClassDetails() {
                     onChangeDateCallback={(date: Date)=>{
                         setDate(date);
                     }}
+                    onClickDayCallback={(date) => openAulaModal(undefined, date)}
                 />
             </div>
         </div>

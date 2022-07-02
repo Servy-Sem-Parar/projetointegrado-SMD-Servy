@@ -41,6 +41,7 @@
     overflow-y: auto;
     background-color: #F1C8FF;
     padding: 10px;
+    max-height: 360px;
 }
 
 .week-day-aula-card {
@@ -54,6 +55,12 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 10px;
+    transition: all 200ms ease-in;
+    cursor: pointer;
+}
+
+.week-day-aula-card:hover {
+    filter: brightness(90%);
 }
 
 .week-day-aula-card-title {
