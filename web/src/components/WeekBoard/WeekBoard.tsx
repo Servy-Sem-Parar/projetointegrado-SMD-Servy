@@ -17,7 +17,7 @@ export function WeekBoard(props: IWeekBoardProps) {
             const date = moment(startOfWeek).add(i, 'days')
             days.push({
                 weekDay: date.format("ddd"),
-                number: date.format("DD"),
+                number: parseInt(date.format("DD")),
             })
         }
         setDays(days);
