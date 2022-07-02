@@ -9,20 +9,38 @@ interface IWeekBoardProps {
 const weekDays = ["SEG", "TER", "QUA", "QUI", "SEX"];
 
 export function WeekBoard(props: IWeekBoardProps) {
-    const [date] = useState(new Date());
+    const [date] = useState(new Date(2022, 7, 5));
     const [days, setDays] = useState<Record<string, unknown>[]>([]);
 
     useEffect(()=>{
-        const days = [];
-        const startOfWeek = moment().startOf('week').toDate().getDate();
-        let count = 0;
-        for(let day = startOfWeek+1; day <= startOfWeek+5; day++) {
-            days.push({
-                weekDay: weekDays[count],
-                number: new Date(new Date().getFullYear(), new Date().getMonth(), day).getDate()
-            })
-            count++;
+        const days: Record<string, unknown>[] = [];
+        let startOfWeek = moment().startOf('week').toDate().getDate()+1;
+        const endOfWeek = moment().endOf('week').toDate().getDate()-1;
+        const weekDaysNumber = [];
+        let monthLastDay: number; 
+        
+        if(endOfWeek < startOfWeek) {
+            monthLastDay = startOfWeek+4-endOfWeek;
+        } else {
+            monthLastDay = moment().endOf('month').toDate().getDate();
         }
+        
+        for(let day = 0; day < 5; day++) {
+            if(weekDaysNumber.length < 5) {
+                weekDaysNumber.push(startOfWeek+day);
+                if(startOfWeek+day === monthLastDay) {
+                    day = 0;
+                    startOfWeek = 0;
+                }
+            }
+        }
+
+        weekDaysNumber.forEach((day, index)=>{
+            days.push({
+                weekDay: weekDays[index],
+                number: day,
+            })
+        })
         setDays(days);
     }, [date])
 
