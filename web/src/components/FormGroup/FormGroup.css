@@ -76,3 +76,34 @@
     margin-left: 6px;
     color: red;
 }
+
+.materials-inputs-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.material-input {
+    margin-right: 10px;
+}
+
+.material-icon-button {
+    cursor: pointer;
+}
+
+.material-marker {
+    color: white;
+    background-color: #8538D2;
+    display: flex;
+    padding: 3px 10px;
+    font-size: 14px;
+    margin-top: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 13px #999999;
+    justify-content: space-between;
+}
+
+.material-close-icon {
+    font-size: 15px;
+    cursor: pointer;
+}

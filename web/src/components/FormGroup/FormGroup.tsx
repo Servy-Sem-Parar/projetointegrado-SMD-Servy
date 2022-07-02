@@ -4,8 +4,9 @@ import { PhoneNumberInput } from "./PhoneNumberInput/PhoneNumberInput";
 import Select, { StylesConfig } from 'react-select';
 import { GithubPicker } from 'react-color';
 import { DateInput } from "./DateInput/DateInput";
+import { MaterialsInput } from "./MaterialInput/MaterialInput";
 
-export type inputTypes = 'text' | 'number' | 'time' | 'select' | 'password' | "phone_number" | "multiSelect" | "iconSelect" | "color" | "date";
+export type inputTypes = 'text' | 'number' | 'time' | 'select' | 'password' | "phone_number" | "multiSelect" | "iconSelect" | "color" | "date" | "materials";
 export type inputSizes = '33' | '66' | '50' | '100';
 
 export interface IFormGroupProps {
@@ -61,11 +62,29 @@ function _generateInput(props: IFormGroupProps) {
         case 'date':
             input = _generateDateInput(props)
             break;
+        case 'materials':
+            input = _generateMaterialsInput(props)
+            break;
         default:
             break;
     }
 
     return input;
+}
+
+function _generateMaterialsInput(props: IFormGroupProps) {
+    return(
+        <MaterialsInput
+            placeholder={props.placeholder}
+            disabled={props.disabled}
+            id={props.id}
+            onChange={props.onChange}
+            validations={props.validations}
+            errorMessage={props.errorMessage}
+            setFieldValidation={props.setFieldValidation}
+            defaultValue={props.defaultValue}
+        />
+    )
 }
 
 function _generateColorInput(props: IFormGroupProps) {

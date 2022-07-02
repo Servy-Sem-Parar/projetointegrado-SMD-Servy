@@ -15,6 +15,7 @@ export const aulasFieldValidations = {
     date: ["mandatory"],
     duration: ["mandatory"],
     link: ["mandatory"],
+    materiais: [],
 }
 
 export function getAulaModalFields(props: IGetAulaModalFieldsProps) {
@@ -109,6 +110,21 @@ export function getAulaModalFields(props: IGetAulaModalFieldsProps) {
                 props.onChange("link", value);
             }
         },  
+        {
+            id: "materiais",
+            label: "Materiais",
+            type: "materials",
+            disabled: props.disabled,
+            defaultValue: props.initialEntity && props.initialEntity.materiais ? JSON.stringify(props.initialEntity.materiais) : "",
+            errorMessage: props.errorMessages && props.errorMessages.materiais ? props.errorMessages.materiais : "",
+            validations: aulasFieldValidations.materiais && aulasFieldValidations.materiais,
+            placeholder: "",
+            size: "100",
+            setFieldValidation: props.setFieldValidation,
+            onChange: (value: string | Date | string[])=>{
+                props.onChange("materiais", JSON.parse(value as string));
+            }
+        }, 
     ]
 
     return fields;

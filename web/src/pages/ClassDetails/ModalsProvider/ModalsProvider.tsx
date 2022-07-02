@@ -95,7 +95,7 @@ export function ModalsProvider(props: {turmaId: string}) {
                             getAddStudentModalFields({
                                 initialEntity: targetEntity, 
                                 errorMessages, 
-                                onChange: (field: string, value: string | Date | string[] )=>{
+                                onChange: (field: string, value: string | Date | string[])=>{
                                     const newEntity = {...entity}
                                     const newStudents = value as string[];
                                     const currentStudents = targetEntity.students as string[];

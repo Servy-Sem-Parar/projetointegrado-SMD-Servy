@@ -81,12 +81,12 @@ export function ClassDetails() {
             />
             <header className="list-page-header">
                 <h1 className="list-page-title">{turma.name as string}</h1>
-                <button className="title-button" onClick={()=>{openAulaModal({})}}>
+                {/*<button className="title-button" onClick={()=>{openAulaModal({})}}>
                     <GoPlus
                         className="title-button-icon"
                     />
                     Nova aula
-                </button>
+                </button>*/}
             </header>
             <div className="class-data-container">
                 <div style={{display: "flex", alignItems: "baseline"}}>
@@ -143,6 +143,14 @@ export function ClassDetails() {
                         setDate(date);
                     }}
                     onClickDayCallback={(date) => openAulaModal(undefined, date)}
+                    titleButton={
+                        <button className="title-button" style={{height: "fit-content"}} onClick={()=>{openAulaModal({})}}>
+                            <GoPlus
+                                className="title-button-icon"
+                            />
+                            Nova aula
+                        </button>
+                    }
                 />
             </div>
         </div>

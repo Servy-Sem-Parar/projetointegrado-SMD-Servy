@@ -9,6 +9,7 @@ interface ICalendarProps {
     aulas: Record<string, unknown>[];
     onChangeDateCallback?: (date: Date)=>void;
     onClickDayCallback?: (date: Date)=>void;
+    titleButton?: JSX.Element;
 }
 
 const weekDays = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]
@@ -51,23 +52,26 @@ export function Calendar(props: ICalendarProps) {
     return (
         <div className="calendar">
             <div className="calendar-header">
-                <div className="calendar-title">{getMonthLabel(props.date.getMonth())}</div>
-                {props.onChangeDateCallback && <div className="calendar-header-buttons">
-                    <GrFormPrevious
-                        className="calendar-header-button"
-                        onClick={()=>{
-                            const date = new Date(props.date.getFullYear(), props.date.getMonth()-1, props.date.getDate());
-                            props.onChangeDateCallback &&props.onChangeDateCallback(date);
-                        }}
-                    />
-                    <GrFormNext
-                        className="calendar-header-button"
-                        onClick={()=>{
-                            const date = new Date(props.date.getFullYear(), props.date.getMonth()+1, props.date.getDate());
-                            props.onChangeDateCallback &&props.onChangeDateCallback(date);
-                        }}
-                    /> 
-                </div>}
+                <div style={{display: "flex"}}>
+                    <div className="calendar-title">{getMonthLabel(props.date.getMonth())}</div>
+                    {props.onChangeDateCallback && <div className="calendar-header-buttons">
+                        <GrFormPrevious
+                            className="calendar-header-button"
+                            onClick={()=>{
+                                const date = new Date(props.date.getFullYear(), props.date.getMonth()-1, props.date.getDate());
+                                props.onChangeDateCallback &&props.onChangeDateCallback(date);
+                            }}
+                        />
+                        <GrFormNext
+                            className="calendar-header-button"
+                            onClick={()=>{
+                                const date = new Date(props.date.getFullYear(), props.date.getMonth()+1, props.date.getDate());
+                                props.onChangeDateCallback &&props.onChangeDateCallback(date);
+                            }}
+                        /> 
+                    </div>}
+                </div>
+                {props.titleButton && props.titleButton}
             </div>
             <div className="calendar-body">
                 <div style={{display: "flex"}}>

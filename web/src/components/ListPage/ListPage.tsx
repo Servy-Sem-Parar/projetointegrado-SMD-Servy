@@ -87,8 +87,8 @@ export function ListPage(props: IListPageProps) {
                             />
                             :
                             <GoPlus
-                            className="title-button-icon"
-                        />
+                                className="title-button-icon"
+                            />
                         }
                         {props.titleButtonLabel}
                     </button>
