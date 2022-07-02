@@ -11,7 +11,7 @@ import { formatDateToReceive } from "../../../Tools/formatDateToReceive";
 
 export let openAddStudentModal:(targetEntity: Record<string, unknown>)=>void;
 export let openEditTurmaModal:(targetEntity: Record<string, unknown>)=>void;
-export let openAulaModal:(targetEntity?: Record<string, unknown>)=>void;
+export let openAulaModal:(targetEntity?: Record<string, unknown>, date?: Date)=>void;
 
 export function ModalsProvider(props: {turmaId: string}) {
     const [targetEntity, setTargetEntity] = useState<Record<string, unknown>>({});
@@ -58,22 +58,23 @@ export function ModalsProvider(props: {turmaId: string}) {
         setIsOpenEditTurmaModal(true);
     }
 
-    openAulaModal = (targetEntity?: Record<string, unknown>)=>{ 
+    openAulaModal = (targetEntity?: Record<string, unknown>, date?: Date)=>{ 
         if(targetEntity && targetEntity._id){
             setIsEdit(true);
             setTargetEntity({...targetEntity}); 
             setEntity({...targetEntity});
             setDisabledFields(true);
         } else {
+            const editingDate = date || new Date()
             setEntity({
                 materiais: [],
                 turma: props.turmaId,
-                date: formatDateToReceive(new Date().getFullYear(), new Date().getMonth()+1, new Date().getDate(), "00:00:00")
+                date: formatDateToReceive(editingDate.getFullYear(), editingDate.getMonth()+1, editingDate.getDate(), "00:00:00")
             });
             setTargetEntity({
                 materiais: [],
                 turma: props.turmaId,
-                date: formatDateToReceive(new Date().getFullYear(), new Date().getMonth()+1, new Date().getDate(), "00:00:00")
+                date: formatDateToReceive(editingDate.getFullYear(), editingDate.getMonth()+1, editingDate.getDate(), "00:00:00")
             });
             setIsEdit(false);
             setDisabledFields(false);

@@ -8,6 +8,7 @@ interface ICalendarProps {
     date: Date;
     aulas: Record<string, unknown>[];
     onChangeDateCallback?: (date: Date)=>void;
+    onClickDayCallback?: (date: Date)=>void;
 }
 
 const weekDays = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]
@@ -35,6 +36,7 @@ export function Calendar(props: ICalendarProps) {
                 day: day,
                 month: (startDate.getMonth()+1),
                 year: startDate.getFullYear(),
+                date: new Date(startDate.getFullYear(), startDate.getMonth(), day)
             })
         }
         for(let day = lastDayWeekIndex+1; day <= 6; day++){
@@ -98,6 +100,7 @@ export function Calendar(props: ICalendarProps) {
                                     borderBottomLeftRadius: index === calendar.length-7 ? "10px" : "0px",
                                     borderBottomRightRadius: index === calendar.length-1 ? "10px" : "0px",
                                 }} 
+                                onClick={(e) => props.onClickDayCallback && day.date && props.onClickDayCallback(day.date as Date)}
                                 className={`calendar-day-box ${(day.day === parseInt(currentDay) && day.year === parseInt(currentYear) && day.month === parseInt(currentMonth)) ? "current-day" : ""}`}
                             >
                                 <div className="calendar-day-text">
@@ -108,7 +111,8 @@ export function Calendar(props: ICalendarProps) {
                                         if(aula.day === day.day) {
                                             return <div
                                                 className="aula-marker"
-                                                onClick={()=>{
+                                                onClick={(e)=>{
+                                                    e.stopPropagation()
                                                     aula.onClickCallback && (aula.onClickCallback as ()=>void)();
                                                 }}
                                                 style={{
