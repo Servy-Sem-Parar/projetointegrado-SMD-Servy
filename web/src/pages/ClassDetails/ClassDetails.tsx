@@ -1,22 +1,25 @@
 import { useEffect, useState } from "react";
 import { GoPlus } from "react-icons/go";
 import { useParams } from "react-router-dom";
-import { getAulas, getTurma } from "./requester";
+import { getAulas, getMateriais, getTurma } from "./requester";
 import "./ClassDetails.css";
 import { formatDateToSend } from "../../Tools/formatDateToSend";
 import { Calendar } from "../../components/Calendar/Calendar";
 import moment from "moment";
 import { ModalsProvider, openAddStudentModal, openAulaModal, openEditTurmaModal } from "./ModalsProvider/ModalsProvider";
+import { ListPage } from "../../components/ListPage/ListPage";
 
 const startMonth = new Date().getMonth();
 const startYear = new Date().getFullYear();
 
 export let updateTurma: ()=>void;
 export let updateAulas: ()=>void;
+export let updateMateriais: ()=>void;
 
 export function ClassDetails() {
     const [turma, setTurma] = useState<Record<string, unknown>>({});
     const [aulas, setAulas] = useState<Record<string, unknown>[]>([]);
+    const [materiais, setMateriais] = useState<Record<string, unknown>[]>([]);
     const [date, setDate] = useState(new Date(startYear, startMonth, 1));
     let { id } = useParams();
 
@@ -26,10 +29,12 @@ export function ClassDetails() {
         
         Promise.all([
             getTurma(id as string), 
-            getAulas(id as string, dateStart, dateEnd)
+            getAulas(id as string, dateStart, dateEnd),
+            getMateriais(id as string),
         ]).then(result=>{
             const turma = result[0];
             const aulas = result[1];
+            const materiais = result[2];
             const formatedAulas: Record<string, unknown>[] = [];
                 aulas.forEach(aula=>{
                 const day = parseInt((aula.date as string).substr(8,2));
@@ -44,12 +49,19 @@ export function ClassDetails() {
 
             setAulas(formatedAulas);
             setTurma(turma);
+            setMateriais(materiais);
         })
     }, [id, date])
 
     updateTurma = ()=>{
         getTurma(id as string).then(turma=>{
             setTurma(turma);
+        })
+    }
+
+    updateMateriais = ()=>{
+        getMateriais(id as string).then(materiais=>{
+            setMateriais(materiais);
         })
     }
 
@@ -81,12 +93,6 @@ export function ClassDetails() {
             />
             <header className="list-page-header">
                 <h1 className="list-page-title">{turma.name as string}</h1>
-                {/*<button className="title-button" onClick={()=>{openAulaModal({})}}>
-                    <GoPlus
-                        className="title-button-icon"
-                    />
-                    Nova aula
-                </button>*/}
             </header>
             <div className="class-data-container">
                 <div style={{display: "flex", alignItems: "baseline"}}>
@@ -153,6 +159,29 @@ export function ClassDetails() {
                     }
                 />
             </div>
+            <h1 className="list-page-subtitle">Materiais</h1>
+            <ListPage
+                title={""}
+                titleButtonLabel={""}
+                hideTitleButton={true}
+                titleButtonCallback={()=>{/**/}}
+                entities={materiais}
+                columns={[
+                    {
+                        type: "string",
+                        label: "Nome",
+                        control: "name",
+                    },
+                    {
+                        type: "string",
+                        label: "Link",
+                        control: "link",
+                    },
+                ]}
+                offset={0}
+                setOffset={()=>{/**/}}
+                total={1}
+            />
         </div>
     )
 }

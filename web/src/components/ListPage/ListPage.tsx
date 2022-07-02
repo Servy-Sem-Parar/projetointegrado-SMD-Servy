@@ -6,6 +6,7 @@ import { Pagination } from "./Pagination/Pagination";
 import { useEffect, useState } from "react";
 import { getIconByName } from "../../Tools/getIconByName";
 import { MdCheckCircle, MdList, MdVisibility } from "react-icons/md";
+import { AiTwotoneDelete } from "react-icons/ai";
 
 interface IListPageProps {
     title: string,
@@ -18,6 +19,7 @@ interface IListPageProps {
     secondaryButtonCallback?: ()=>void,
     secondaryButtonCount?: number,
     defaultFilter?: Record<string, unknown>,
+    hideTitleButton?: boolean,
     defaultOrder?: {
         order: string,
         sort: string
@@ -80,7 +82,7 @@ export function ListPage(props: IListPageProps) {
                             {(props.secondaryButtonCount && props.secondaryButtonCount > 0) ? <div className="button-count">{props.secondaryButtonCount}</div> : ""}
                         </button>
                     }
-                    <button className="title-button" onClick={()=>{props.titleButtonCallback()}}>
+                    <button style={{display: props.hideTitleButton ? "none":"flex"}} className="title-button" onClick={()=>{props.titleButtonCallback()}}>
                         {props.titleButtomCustomIcon ?
                             <MdList 
                                 className="title-button-icon"
@@ -240,6 +242,26 @@ export function ListPage(props: IListPageProps) {
                                                     }}
                                                 >
                                                     <MdVisibility
+                                                        onClick={()=>{
+                                                            column.viewCallback && column.viewCallback(entity);
+                                                        }}
+                                                        className="gear-icon"
+                                                    />
+                                                </td>
+                                            )
+                                        } else if(column.type === "remove") {
+                                            return (
+                                                <td 
+                                                    className="list-table-line-item" 
+                                                    id={`gear-${column.control}`}
+                                                    style={{
+                                                        width: "120px", 
+                                                        minWidth: `120px`,
+                                                        textAlign: "center",
+                                                        position: "relative",
+                                                    }}
+                                                >
+                                                    <AiTwotoneDelete
                                                         onClick={()=>{
                                                             column.viewCallback && column.viewCallback(entity);
                                                         }}

@@ -220,3 +220,25 @@ export async function deleteAula(entityId: string) {
 
     return success;
 }
+
+export async function getMateriais(turma: string) {
+    const suffix = "aula";
+    const method = "get";
+    const otherQueryStrings: Record<string, unknown> = { 
+        sort: "name",
+        order: "asc",
+        offset: 0,
+        limit: 10000,
+        turma
+    };
+
+    const response = await makeConnection({
+        suffix,
+        method,
+        otherQueryStrings
+    });
+
+    const materiais = (response?.data.data as unknown as Record<string, unknown>[]).map(aula=>aula.materiais).flat() as Record<string, unknown>[];
+
+    return materiais;
+}

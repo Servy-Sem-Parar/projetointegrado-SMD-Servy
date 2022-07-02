@@ -3,7 +3,7 @@ import { alertError, alertSuccess } from "../../../components/Alert/Alert";
 import { SaveModal } from "../../../components/SaveModal/SaveModal"
 import { validateAllInputs } from "../../../Tools/validateInputs";
 import { createAula, editAula, deleteAula, editTurma, getDisciplinas, getStudents, getTeachers } from "../requester";
-import { updateAulas, updateTurma } from "../ClassDetails";
+import { updateAulas, updateMateriais, updateTurma } from "../ClassDetails";
 import { getAddStudentModalFields } from "./getAddStudentModalFields";
 import { getEditTurmaModalFields, turmasFieldValidations } from "./getEditTurmaModalFields";
 import { aulasFieldValidations, getAulaModalFields } from "./getAulaModalFields ";
@@ -242,6 +242,7 @@ export function ModalsProvider(props: {turmaId: string}) {
                                                 setIsOpenAulaModal(false); 
                                                 setErrorMessages({});
                                                 updateAulas();
+                                                updateMateriais();
                                             }
                                         })
                                     }
@@ -283,6 +284,7 @@ export function ModalsProvider(props: {turmaId: string}) {
                                                     setErrorMessages({});
                                                     setDisabledFields(true);
                                                     updateAulas();
+                                                    updateMateriais();
                                                 }
                                             } else {
                                                 const success = await createAula(newEntity);
@@ -294,6 +296,7 @@ export function ModalsProvider(props: {turmaId: string}) {
                                                     setErrorMessages({});
                                                     setDisabledFields(true);
                                                     updateAulas();
+                                                    updateMateriais();
                                                 }
                                             }
                                         } else {
