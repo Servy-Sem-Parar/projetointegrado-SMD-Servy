@@ -169,6 +169,11 @@ export function ClassDetails() {
                 columns={[
                     {
                         type: "string",
+                        label: "Data",
+                        control: "dateShow",
+                    },
+                    {
+                        type: "string",
                         label: "Nome",
                         control: "name",
                     },
@@ -176,11 +181,6 @@ export function ClassDetails() {
                         type: "string",
                         label: "Link",
                         control: "link",
-                    },
-                    {
-                        type: "string",
-                        label: "Data",
-                        control: "dateShow",
                     },
                 ]}
                 offset={0}
