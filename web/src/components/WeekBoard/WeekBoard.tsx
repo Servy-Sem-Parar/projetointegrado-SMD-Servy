@@ -6,41 +6,20 @@ interface IWeekBoardProps {
     aulas: Record<string, unknown>[];
 }
 
-const weekDays = ["SEG", "TER", "QUA", "QUI", "SEX"];
-
 export function WeekBoard(props: IWeekBoardProps) {
-    const [date] = useState(new Date(2022, 7, 5));
+    const [date] = useState(new Date());
     const [days, setDays] = useState<Record<string, unknown>[]>([]);
 
     useEffect(()=>{
         const days: Record<string, unknown>[] = [];
-        let startOfWeek = moment().startOf('week').toDate().getDate()+1;
-        const endOfWeek = moment().endOf('week').toDate().getDate()-1;
-        const weekDaysNumber = [];
-        let monthLastDay: number; 
-        
-        if(endOfWeek < startOfWeek) {
-            monthLastDay = startOfWeek+4-endOfWeek;
-        } else {
-            monthLastDay = moment().endOf('month').toDate().getDate();
-        }
-        
-        for(let day = 0; day < 5; day++) {
-            if(weekDaysNumber.length < 5) {
-                weekDaysNumber.push(startOfWeek+day);
-                if(startOfWeek+day === monthLastDay) {
-                    day = 0;
-                    startOfWeek = 0;
-                }
-            }
-        }
-
-        weekDaysNumber.forEach((day, index)=>{
+        let startOfWeek = moment(date).startOf('week').toDate()
+        for (let i = 1; i <= 5; i++){
+            const date = moment(startOfWeek).add(i, 'days')
             days.push({
-                weekDay: weekDays[index],
-                number: day,
+                weekDay: date.format("ddd"),
+                number: parseInt(date.format("DD")),
             })
-        })
+        }
         setDays(days);
     }, [date])
 
