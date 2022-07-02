@@ -40,7 +40,7 @@ export function WeekBoard(props: IWeekBoardProps) {
                                         props.aulas.map((aula=>{
                                             if(aula.day === day.number) {
                                                 return (
-                                                    <div className="week-day-aula-card" style={{backgroundColor: (aula.turma as Record<string, string>).color}}>
+                                                    <div onClick={() => aula.onClickCallback && (aula.onClickCallback as ()=>void)()} className="week-day-aula-card" style={{backgroundColor: (aula.turma as Record<string, string>).color}}>
                                                         <div className="week-day-aula-card-title">{aula.title as string}</div>
                                                         <div className="week-day-aula-card-subtitle">{`${aula.startHour as string}-${aula.endHour as string}`}</div>
                                                     </div>
