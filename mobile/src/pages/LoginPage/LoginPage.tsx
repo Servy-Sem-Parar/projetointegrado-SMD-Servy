@@ -85,6 +85,10 @@ export function LoginPage({navigation}: {navigation: any}) {
                                         storage.setItem("token", "Bearer " + response?.data.token);
                                         storage.setItem("user", JSON.stringify(response?.data.user));
                                         navigation.navigate("HomePage")
+                                        navigation.reset({
+                                            index: 0,
+                                            routes: [{ name: "HomePage" }],
+                                          })
                                       }
                                     
                                 }}
