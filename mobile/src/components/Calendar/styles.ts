@@ -45,14 +45,30 @@ const styles = StyleSheet.create({
         fontWeight: "bold"
     },
     aulaMarker: {
-        height: 10,
-        width: 10,
+        height: 9,
+        width: 9,
         borderRadius: 10,
-        overflow: "hidden",
-        marginRight: 5,
-        marginBottom: 5,
+        marginRight: 3,
+        textAlign: "center",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    aulaMarkerText: {
+        color: "black",
+        fontSize: 9,
+        fontWeight: "bold"
     },
     currentDay: {
+        shadowColor: "#111",
+        shadowOffset: {
+            width: 2,
+            height: 2,
+        },
+        shadowOpacity: 0.8,
+        shadowRadius: 3.84,
+
+        elevation: 5,
     }
 
 })

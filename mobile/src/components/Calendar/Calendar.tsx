@@ -64,7 +64,7 @@ export function Calendar(props: ICalendarProps) {
                             size={25}
                         />
                         <Icon
-                              onPress={() => {
+                            onPress={() => {
                                 const date = new Date(props.date.getFullYear(), props.date.getMonth() + 1, props.date.getDate());
                                 props.onChangeDateCallback && props.onChangeDateCallback(date);
                             }}
@@ -108,6 +108,23 @@ export function Calendar(props: ICalendarProps) {
             )
         }
         const renderDays = () => {
+            const renderAulaDots = (day: Record<string, unknown>) => {
+                const aulas = props.aulas.filter(aula => new Date(aula.date as string).getDay() === day.day)
+                const rest = aulas.splice(3)
+                return (
+                    <View style={{ display: "flex", flexDirection: "row" }}>
+                        {aulas.map(aula =>
+                            <TouchableOpacity
+                                key={aula._id as string}
+                                style={[
+                                    { backgroundColor: (aula.turma as Record<string, unknown>).color as string },
+                                    styles.aulaMarker
+                                ]}
+                            />
+                        )}
+                    </View>
+                )
+            }
             return (
                 <View style={{ display: "flex", flexWrap: "wrap", flexDirection: "row" }}>
                     {
@@ -130,17 +147,7 @@ export function Calendar(props: ICalendarProps) {
                                     <Text style={styles.calendarDayText}>
                                         {day.day as string}
                                     </Text>
-                                    <View style={{ maxHeight: "100%", display: "flex", flexDirection: "row" }}>
-                                        {props.aulas.filter(aula => new Date(aula.date as string).getDay() === day.day).map(aula =>
-                                            <TouchableOpacity
-                                                key={aula.title as string}
-                                                style={[
-                                                    { backgroundColor: (aula.turma as Record<string, unknown>).color as string },
-                                                    styles.aulaMarker
-                                                ]}
-                                            />
-                                        )}
-                                    </View>
+                                    {renderAulaDots(day)}
                                 </TouchableOpacity>
                             )
                         })
