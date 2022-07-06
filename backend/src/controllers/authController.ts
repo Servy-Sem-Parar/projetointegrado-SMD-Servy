@@ -33,7 +33,9 @@ const login = async (request: Request, response: Response): Promise<Response> =>
 };
 
 const register = async (request: Request, response: Response): Promise<Response> => {
-  const { name, password, email } = request.body;
+  const {
+    name, password, email, birthDate, phone_number, schoolType, wantedTurmas, address,
+  } = request.body;
 
   if (await User.findOne({ email })) throw new HttpError('Usuário já cadastrado', 409);
 
@@ -42,6 +44,11 @@ const register = async (request: Request, response: Response): Promise<Response>
     name,
     password,
     email,
+    birthDate,
+    phone_number,
+    schoolType,
+    wantedTurmas,
+    address,
     status: UserStatus.PENDING,
   });
 
