@@ -66,13 +66,13 @@ npm run start
 |  RFA0011     |  Mostrar tela de cadastro de professoras               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Teachers/ModalsProvider/ModalsProvider.tsx)     | Feito
 |  RFA0012     |  Mostrar tela de cadastro de alunas               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Students/ModalsProvider/ModalsProvider.tsx)     | Feito
 |  RFA0013     |  Mostrar tela de cadastro de turma               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Classes/ModalsProvider/ModalsProvider.tsx)     | Feito
-|  RFP0014     |  Mostrar tela de cadastro de aula               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/ClassDetails/ClassDetails.tsx)     | A fazer
+|  RFP0014     |  Mostrar tela de cadastro de aula               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/ClassDetails/ClassDetails.tsx)     | Feito
 |  RFA0015     |  Mostrar tela de cadastro de disciplina               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Matters/ModalsProvider/ModalsProvider.tsx)     | Feito
-|  RFA0016     |  Mostrar tela de pedido de cadastro               |  X     | Em desenvolvimento
+|  RFA0016     |  Mostrar tela de pedido de cadastro               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/mobile/src/pages/RegisterPage/RegisterPage.tsx)     | Feito
 |  RFG0017     |  Validar campos de cadastro por parâmetro               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/components/FormGroup/FormGroup.tsx)     | Feito
 |  RFA0018     |  Cadastrar professora               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Teachers/ModalsProvider/ModalsProvider.tsx)     | Feito
 |  RFA0019     |  Cadastrar aluna               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Students/ModalsProvider/ModalsProvider.tsx)     | Feito
-|  RFE0020     |  Solicitar cadastro               |  X     | Em desenvolvimento
+|  RFE0020     |  Solicitar cadastro               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/mobile/src/pages/RegisterPage/RegisterPage.tsx)     | Feito
 |  RFA0021     |  Aprovar ou reprovar solicitação de cadastro               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/ApproveRegisters/ApproveRegisters.tsx)     | Feito
 |  RFA0022     |  Cadastrar turma               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Classes/ModalsProvider/ModalsProvider.tsx)     | Feito
 |  RFP0023     |  Cadastrar aula               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/ClassDetails/ClassDetails.tsx) | Feito
@@ -93,4 +93,4 @@ npm run start
 |  RFA0038     |  Editar cadastro de aluna               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Students/ModalsProvider/ModalsProvider.tsx)     | Feito
 |  RFG0039     |  Editar informações do seu cadastro                |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/components/Layout/MyAccountModal/ModalsProvider.tsx)     | Feito
 |  RFE0040     |  Mostrar notificação de nova aula               |  X     | A fazer
-|  RFE0041     |  Mostrar tela de solicitação de cadastro               |  X     | A fazer
+|  RFE0041     |  Mostrar tela de solicitação de cadastro               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/mobile/src/pages/RegisterPage/RegisterPage.tsx)     | Feito
