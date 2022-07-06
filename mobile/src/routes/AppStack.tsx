@@ -4,6 +4,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { LandingPage } from "../pages/LandingPage/LandingPage";
 import { LoginPage } from "../pages/LoginPage/LoginPage";
 import { RegisterPage } from "../pages/RegisterPage/RegisterPage";
+import { RegisterFinishPage } from "../pages/RegisterFinishPage/RegisterFinishPage";
+import { HomePage } from "../pages/HomePage/HomePage";
 //import 'react-native-gesture-handler';
 
 const { Navigator, Screen } = createNativeStackNavigator();
@@ -19,6 +21,8 @@ function AppStack() {
                 <Screen name="LandingPage" component={LandingPage} />
                 <Screen name="LoginPage" component={LoginPage} />
                 <Screen name="RegisterPage" component={RegisterPage} />
+                <Screen name="RegisterFinishPage" component={RegisterFinishPage} />
+                <Screen name="HomePage" component={HomePage} />
             </Navigator>
         </NavigationContainer>
     )

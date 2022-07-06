@@ -1,11 +1,19 @@
+import { useEffect } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Button } from '../../components/Button/Button';
-import { buttonStyles } from '../../components/Button/ButtonsStyles';
 import { containerStyles } from '../../styles/containerStyles';
+import { storage } from '../../Tools/storage';
 
 import styles from "./LandingPageStyles";
 
 export function LandingPage({navigation}: {navigation: any}) {
+    useEffect(()=>{
+        storage.getItem("user").then(user=>{
+            if(user && user.length > 0) {
+                navigation.navigate("HomePage");
+            }
+        })
+    }, [])
 
     return (
         <View style={containerStyles.page}>

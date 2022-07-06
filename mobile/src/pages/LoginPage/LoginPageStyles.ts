@@ -62,6 +62,10 @@ const styles = StyleSheet.create({
       width: "100%",
       paddingTop: 20,
       paddingLeft: 20,
+      marginBottom: -50
+    },
+
+    contentBox: {
       marginBottom: -20
     },
 });

@@ -105,12 +105,12 @@ export async function getEntity(id: string, turmasOptions: Record<string, unknow
     entity = response?.data.data;
     let turmasDefaultValue: Record<string, unknown>[] = []; 
     let turmas: string[] = []; 
-    (entity.wantedTurmas as string[]).forEach(turma=>{
+    (entity.wantedTurmas as Record<string, unknown>[]).forEach(turma=>{
         turmasDefaultValue.push({
-            label: (turmasOptions.find(turmaOption=>turmaOption.value === turma) as unknown as Record<string, unknown>).label,
-            value: turma
+            label: (turmasOptions.find(turmaOption=>turmaOption.value === turma._id) as unknown as Record<string, unknown>).label,
+            value: turma._id 
         })
-        turmas.push(turma);
+        turmas.push(turma._id as string);
     })
     entity.wantedTurmas = turmas;
     entity.turmasDefaultValue = turmasDefaultValue;

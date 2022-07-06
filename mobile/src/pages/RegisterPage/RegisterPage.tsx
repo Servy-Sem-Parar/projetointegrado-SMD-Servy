@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { Button } from '../../components/Button/Button';
 import { FormGroup } from '../../components/FormGroup/FormGroup';
 import { containerStyles } from '../../styles/containerStyles';
@@ -53,9 +53,11 @@ export function RegisterPage({navigation}: {navigation: any}) {
                 <View style={styles.content} >
                     <View style={styles.content}>
                         <View style={styles.headerContent}>
-                            <Text style={styles.logoMainText}>Projeto</Text>
-                            <Text style={styles.logoSubText}>Sem Parar</Text>
-                            <Text style={styles.logoSpanText}>Meninas ensinando meninas</Text>
+                            <View>
+                                <Text style={styles.logoMainText}>Projeto</Text>
+                                <Text style={styles.logoSubText}>Sem Parar</Text>
+                                <Text style={styles.logoSpanText}>Meninas ensinando meninas</Text>
+                            </View>
                         </View>
                         <View style={styles.formBox}>
                             <Text style={styles.titleText}>Entre com seus dados</Text>
@@ -85,7 +87,7 @@ export function RegisterPage({navigation}: {navigation: any}) {
                                     type="text"
                                     errorMessage={validations.email as string}
                                     callback={(value: string | string[])=>{
-                                        callback("email", value);
+                                        callback("email", (value as string).trim());
                                         const error = validateInput(value, fieldValidations.email)
                                         validationCallback("email", error);
                                     }}
@@ -168,7 +170,9 @@ export function RegisterPage({navigation}: {navigation: any}) {
                                     const validationResult = validateAllInputs({entity: userInfo, validations});
                                     if(validationResult.success) {
                                         createEntity(userInfo).then(success=>{
-                                            console.log(success);
+                                            if(success) {
+                                                navigation.navigate("RegisterFinishPage");
+                                            }
                                         })
                                     } else {
                                         setValidations(validationResult.errors);
