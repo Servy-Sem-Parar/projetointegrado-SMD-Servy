@@ -10,7 +10,6 @@ export const styles = StyleSheet.create({
         paddingLeft: 20,
         fontSize: 20,
         color: "black",
-        marginBottom: 20,
     },
 
     phoneInput: {
@@ -22,7 +21,6 @@ export const styles = StyleSheet.create({
         //paddingLeft: 20,
         padding: 0,
         maxHeight: 55,
-        marginBottom: 20,
     },
 
     phoneTextInput: {
@@ -70,7 +68,45 @@ export const styles = StyleSheet.create({
         height: 55,
         borderWidth: 2,
         borderColor: "#F97E0D",
+        marginBottom: 0,
+        paddingRight: 5,
         borderRadius: 10,
         paddingLeft: 20,
+    },
+
+    multiSelectButton: {
+        backgroundColor: "#F97E0D", 
+        color: "white",
+        borderRadius: 10,
+    },
+
+    searchInput: {
+        fontSize: 20,
+    },
+
+    searchInputBox: {
+        borderRadius: 10,
+        borderWidth: 2,
+        borderColor: "#F97E0D",
+        paddingRight: 5,
+        minHeight: 55,
+    },
+
+    selectButton: {
+        borderRadius: 10
+    },
+
+    error: {
+        color: "red",
+        fontSize: 12,
+        marginLeft: 8
+    },
+
+    inputView: {
+        marginBottom: 20,
+    },
+
+    mainWrapper: {
+        marginBottom: 0
     }
 });

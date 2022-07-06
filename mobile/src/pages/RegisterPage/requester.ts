@@ -25,3 +25,18 @@ export async function getTurmas() {
 
     return options;
 }
+
+export async function createEntity(body: Record<string, unknown>) {
+    const suffix = "auth/register";
+    const method = "post";
+    let success = false;
+
+    const response = await makeConnection({
+        suffix,
+        method,
+        body
+    });
+    success = response ? true : false;
+
+    return success;
+}

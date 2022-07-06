@@ -14,7 +14,6 @@ export const storage = {
     setItem: async (item: string, value: string)=>{
         try {
             await AsyncStorage.setItem(item, value);
-            await AsyncStorage.clear()
         } catch (error) {
             // Error saving data
         }

@@ -32,7 +32,9 @@ export async function makeConnection(props: IMakeConnectionProps) {
             storage.clear();
             window.location.reload();
         } else {
-            Alert.alert(error.response.data.error);
+            Alert.alert("OOPS!", error.response.data.error, [{
+                text: "Entendi", onPress: ()=>{console.log("alert closed")}
+            }]);
         }    
     }
     return response;
