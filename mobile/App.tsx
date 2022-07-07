@@ -6,6 +6,7 @@ import AppLoading from "expo-app-loading";
 import {useFonts, Dosis_400Regular, Dosis_600SemiBold} from "@expo-google-fonts/dosis"
 import {Raleway_400Regular, Raleway_600SemiBold} from "@expo-google-fonts/raleway"
 import { View, StyleSheet } from 'react-native';
+import { AuthProvider } from './src/context/Auth';
 
 export default function App() {
   moment.locale("pt-br")
@@ -21,10 +22,10 @@ export default function App() {
   }
 
   return (
-    <>
+    <AuthProvider>
       <AppStack />
       <StatusBar style="auto" />
-    </>
+    </AuthProvider>
   );
 }
 

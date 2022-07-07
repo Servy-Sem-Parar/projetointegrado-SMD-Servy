@@ -42,10 +42,12 @@ export async function makeConnection(props: IMakeConnectionProps) {
 
 async function generateHeader() {
     const headers: Record<string, string> = {}
-    const token = await storage.getItem("token")
-
-    if(token) {
-        headers.authorization = token
+    const authDataJson = await storage.getItem("@AuthData")
+    if (authDataJson){
+        const {token} = JSON.parse(authDataJson as string)
+        if(token) {
+            headers.authorization = token
+        }
     }
 
     return headers;

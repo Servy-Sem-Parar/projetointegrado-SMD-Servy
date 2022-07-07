@@ -7,19 +7,12 @@ import styles from "./LoginPageStyles";
 import { useEffect, useState } from 'react';
 import { storage } from '../../Tools/storage';
 import { makeConnection } from '../../Tools/makeConnection';
+import { useAuth } from '../../context/Auth';
 
 export function LoginPage({navigation}: {navigation: any}) {
     const [entity, setEntity] = useState<Record<string, unknown>>({});
     const [validations, setValidations] = useState<Record<string, unknown>>({});
-
-    useEffect(()=>{
-        storage.getItem("user").then(user=>{
-            if(user && user.length > 0) {
-                navigation.navigate("HomePage");
-            }
-        })
-    }, [])
-
+    const {signIn} = useAuth();
     const callback = (field: string, value: string | string[])=>{
         const newEntity = {...entity};
         newEntity[field] = value;
@@ -82,13 +75,7 @@ export function LoginPage({navigation}: {navigation: any}) {
                                             text: "Entendi", onPress: ()=>{console.log("alert closed")}
                                         }]);
                                       } else if(response?.data.user) {
-                                        storage.setItem("token", "Bearer " + response?.data.token);
-                                        storage.setItem("user", JSON.stringify(response?.data.user));
-                                        navigation.navigate("HomePage")
-                                        navigation.reset({
-                                            index: 0,
-                                            routes: [{ name: "HomePage" }],
-                                          })
+                                        signIn({token: `Bearer ${response.data.token}`, ...response.data.user})
                                       }
                                     
                                 }}

@@ -7,14 +7,6 @@ import { storage } from '../../Tools/storage';
 import styles from "./LandingPageStyles";
 
 export function LandingPage({navigation}: {navigation: any}) {
-    useEffect(()=>{
-        storage.getItem("user").then(user=>{
-            if(user && user.length > 0) {
-                navigation.navigate("HomePage");
-            }
-        })
-    }, [])
-
     return (
         <View style={containerStyles.page}>
             <View style={styles.container}>

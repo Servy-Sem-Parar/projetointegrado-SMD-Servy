@@ -6,11 +6,34 @@ import { LoginPage } from "../pages/LoginPage/LoginPage";
 import { RegisterPage } from "../pages/RegisterPage/RegisterPage";
 import { RegisterFinishPage } from "../pages/RegisterFinishPage/RegisterFinishPage";
 import { HomePage } from "../pages/HomePage/HomePage";
-//import 'react-native-gesture-handler';
+import { useAuth } from "../context/Auth";
+import AppLoading from "expo-app-loading";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
+type Route = {
+    name: string,
+    component: React.ComponentType<any>
+}
+
+const publicRoutes: Route[] = [
+    {name: "LandingPage", component: LandingPage},
+    {name: "LoginPage", component: LoginPage},
+    {name: "RegisterPage", component: RegisterPage},
+    {name: "RegisterFinishPage", component: RegisterFinishPage},
+]
+
+const privateRoutes: Route[] = [
+    {name: "HomePage", component: HomePage},
+]
+
 function AppStack() {
+    const {authData, loading} = useAuth();
+
+    if (loading) {
+        return <AppLoading/>
+    }
+
     return (
         <NavigationContainer>
             <Navigator 
@@ -18,11 +41,9 @@ function AppStack() {
                     headerShown: false,
                 }}
             >
-                <Screen name="LandingPage" component={LandingPage} />
-                <Screen name="LoginPage" component={LoginPage} />
-                <Screen name="RegisterPage" component={RegisterPage} />
-                <Screen name="RegisterFinishPage" component={RegisterFinishPage} />
-                <Screen name="HomePage" component={HomePage} />
+                {(authData ? privateRoutes : publicRoutes).map(route => 
+                    <Screen key={route.name} name={route.name} component={route.component} />
+                )}
             </Navigator>
         </NavigationContainer>
     )
