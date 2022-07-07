@@ -5,7 +5,8 @@ import moment from 'moment';
 import AppLoading from "expo-app-loading";
 import {useFonts, Dosis_400Regular, Dosis_600SemiBold} from "@expo-google-fonts/dosis"
 import {Raleway_400Regular, Raleway_600SemiBold} from "@expo-google-fonts/raleway"
-import { View, StyleSheet, SafeAreaView } from 'react-native';
+import { Text, StyleSheet, SafeAreaView } from 'react-native';
+import { AuthProvider } from './src/context/Auth';
 
 export default function App() {
   moment.locale("pt-br")
@@ -21,19 +22,20 @@ export default function App() {
   }
 
   return (
-    <>
+    <AuthProvider>
       <SafeAreaView style={styles.safeArea}>
+        <Text></Text>
         <AppStack />
         <StatusBar style="auto" />
       </SafeAreaView>
-    </>
+    </AuthProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {marginTop: 30},
   safeArea: {
-    paddingTop: 5,
+    paddingTop: 10,
     flex: 1,
     backgroundColor: "#C489EC"
   }

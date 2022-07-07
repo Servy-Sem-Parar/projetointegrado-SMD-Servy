@@ -56,6 +56,7 @@ function renderTextInput(props: IFormGroupProps) {
                 placeholder={props.placeholder}
                 style={styles.input}
                 secureTextEntry={props.type === "password"}
+                autoCapitalize='none'
                 onChangeText={(value)=>{
                     props.callback(value);
                 }}

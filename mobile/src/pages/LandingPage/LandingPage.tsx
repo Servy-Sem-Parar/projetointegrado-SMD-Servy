@@ -5,7 +5,6 @@ import { containerStyles } from '../../styles/containerStyles';
 import styles from "./LandingPageStyles";
 
 export function LandingPage({navigation}: {navigation: any}) {
-
     return (
         <View style={containerStyles.page}>
             <View style={styles.container}>
