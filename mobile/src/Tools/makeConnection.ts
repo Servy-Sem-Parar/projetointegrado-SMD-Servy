@@ -46,7 +46,6 @@ export async function makeConnection(props: IMakeConnectionProps) {
 async function generateHeader() {
     const headers: Record<string, string> = {}
     const authDataJson = await storage.getItem("@AuthData")
-    console.log(authDataJson)
     if (authDataJson){
         const {token} = JSON.parse(authDataJson as string)
         if(token) {
