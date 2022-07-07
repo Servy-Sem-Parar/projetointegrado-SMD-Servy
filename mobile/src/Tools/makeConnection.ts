@@ -1,7 +1,8 @@
 import axios, { AxiosInstance } from "axios";
 import { Alert } from "react-native";
 import { storage } from "./storage";
-
+import * as RootNavigation from "../routes/RootNavigation";
+import { signOut } from "../context/Auth";
 interface IMakeConnectionProps {
     method: "get" | "post" | "put" | "delete",
     suffix: string,
@@ -29,8 +30,10 @@ export async function makeConnection(props: IMakeConnectionProps) {
             }
         }
         if(error.response.data.error === "Unauthorized"){
-            storage.clear();
-            window.location.reload();
+            signOut()
+            Alert.alert("OOPS!", "Token expirado.", [{
+                text: "Entendi", onPress: ()=>{console.log("alert closed")}
+            }]);
         } else {
             Alert.alert("OOPS!", error.response.data.error, [{
                 text: "Entendi", onPress: ()=>{console.log("alert closed")}
@@ -43,6 +46,7 @@ export async function makeConnection(props: IMakeConnectionProps) {
 async function generateHeader() {
     const headers: Record<string, string> = {}
     const authDataJson = await storage.getItem("@AuthData")
+    console.log(authDataJson)
     if (authDataJson){
         const {token} = JSON.parse(authDataJson as string)
         if(token) {

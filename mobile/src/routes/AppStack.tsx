@@ -8,6 +8,7 @@ import { RegisterFinishPage } from "../pages/RegisterFinishPage/RegisterFinishPa
 import { HomePage } from "../pages/HomePage/HomePage";
 import { useAuth } from "../context/Auth";
 import AppLoading from "expo-app-loading";
+import { navigationRef } from './RootNavigation';
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -35,7 +36,7 @@ function AppStack() {
     }
 
     return (
-        <NavigationContainer>
+        <NavigationContainer ref={navigationRef}>
             <Navigator 
                 screenOptions={{
                     headerShown: false,

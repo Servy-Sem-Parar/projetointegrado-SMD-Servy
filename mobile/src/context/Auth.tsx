@@ -17,6 +17,7 @@ type AuthContextData = {
 };
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
+let signOut = async () => {} // perdoe-me pai pela gambiarra
 
 const AuthProvider: React.FC = ({children}) => {
   const [authData, setAuthData] = useState<AuthData>();
@@ -41,12 +42,11 @@ const AuthProvider: React.FC = ({children}) => {
   }
 
   const signIn = async (authData: AuthData) => {
+    await AsyncStorage.setItem('@AuthData', JSON.stringify(authData));
     setAuthData(authData);
-
-    AsyncStorage.setItem('@AuthData', JSON.stringify(authData));
   };
 
-  const signOut = async () => {
+  signOut = async () => {
     setAuthData(undefined);
     await AsyncStorage.removeItem('@AuthData');
   };
@@ -63,4 +63,4 @@ function useAuth(): AuthContextData {
   return context;
 }
 
-export {AuthContext, AuthProvider, useAuth};
+export {AuthContext, AuthProvider, useAuth, signOut};
