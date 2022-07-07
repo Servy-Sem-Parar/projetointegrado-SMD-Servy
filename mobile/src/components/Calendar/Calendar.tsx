@@ -62,6 +62,7 @@ export function Calendar(props: ICalendarProps) {
                             }}
                             name="chevron-back"
                             size={25}
+                            style={{marginLeft: -10, marginRight: 10}}
                         />
                         <Icon
                             onPress={() => {
