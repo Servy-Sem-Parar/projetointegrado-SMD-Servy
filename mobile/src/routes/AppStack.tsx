@@ -1,6 +1,6 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import { LandingPage } from "../pages/LandingPage/LandingPage";
 import { LoginPage } from "../pages/LoginPage/LoginPage";
 import { RegisterPage } from "../pages/RegisterPage/RegisterPage";
@@ -12,7 +12,7 @@ import { navigationRef } from './RootNavigation';
 import { AccountPage } from "../pages/AccountPage/AccountPage";
 import { TurmasPage } from "../pages/TurmasPage/TurmasPage";
 
-const { Navigator, Screen } = createNativeStackNavigator();
+const { Navigator, Screen } = createDrawerNavigator();
 
 type Route = {
     name: string,
@@ -45,6 +45,7 @@ function AppStack() {
                 screenOptions={{
                     headerShown: false,
                 }}
+                useLegacyImplementation={true}
             >
                 {(authData ? privateRoutes : publicRoutes).map(route => {
                         return(
