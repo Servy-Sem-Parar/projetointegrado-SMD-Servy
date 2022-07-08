@@ -3,6 +3,7 @@ import styles from "./LayoutStyles";
 import Icon from "react-native-vector-icons/Ionicons";
 import Icon2 from "react-native-vector-icons/MaterialCommunityIcons";
 import { useState } from "react";
+import { useAuth } from "../../context/Auth";
 
 interface ILayoutProps {
     title: string,
@@ -41,6 +42,9 @@ type SidebarProps = {
 }
 
 export function Sidebar(props: SidebarProps) {
+
+    const {signOut} = useAuth()
+
     const pages = [
         {
             name: "home",
@@ -59,6 +63,16 @@ export function Sidebar(props: SidebarProps) {
             label: "Meu perfil",
             icon: "account-circle",
             page: "AccountPage"
+        },
+        {
+            name: "logout",
+            label: "Sair",
+            icon: "exit-to-app",
+            logout: true,
+            onClick: () => {
+                props.navigation.closeDrawer()
+                signOut()
+            }
         },
     ]
     return (
@@ -86,9 +100,9 @@ export function Sidebar(props: SidebarProps) {
                             return (
                                 <TouchableOpacity
                                     key={page.name}
-                                    style={page.page === props.activeTab ? styles.itemBoxActive : styles.itemBox}
+                                    style={page.logout ? styles.itemBoxLogout : page.page === props.activeTab ? styles.itemBoxActive : styles.itemBox}
                                     onPress={() => {
-                                        props.navigation.navigate(page.page);
+                                        page.onClick ? page.onClick() : props.navigation.navigate(page.page);
                                     }}
                                 >
                                     <View style={styles.logoIconBox}>

@@ -95,6 +95,9 @@ const styles = StyleSheet.create({
 
     itensContainer: {
         marginTop: 20,
+        position: "relative",
+        display: "flex",
+        flex: 1
     },
 
     itemBox: {
@@ -104,6 +107,16 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
         display: "flex",
         flexDirection: "row"
+    },
+
+    itemBoxLogout: {
+        width: "100%",
+        paddingLeft: 20,
+        paddingTop: 10,
+        display: "flex",
+        flexDirection: "row",
+        position: "absolute",
+        bottom: 20
     },
 
     itemBoxActive: {
