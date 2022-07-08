@@ -71,7 +71,7 @@ export function ModalsProvider() {
                                         finalEntity.status = "disapproved";
                                         const success = await editEntity(finalEntity, targetEntity._id as string);
                                         if(success) {
-                                            alertSuccess("Aluna editado com sucesso.")
+                                            alertSuccess("Aluna rejeitada com sucesso.")
                                             setEntity({});
                                             setTargetEntity({});
                                             setIsOpenSaveModal(false); 
@@ -98,7 +98,7 @@ export function ModalsProvider() {
                                         finalEntity.status = "approved";
                                         const success = await editEntity(finalEntity, targetEntity._id as string);
                                         if(success) {
-                                            alertSuccess("Aluna editado com sucesso.")
+                                            alertSuccess("Aluna aprovada com sucesso.")
                                             setEntity({});
                                             setTargetEntity({});
                                             setIsOpenSaveModal(false); 

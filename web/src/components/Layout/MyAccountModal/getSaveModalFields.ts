@@ -13,7 +13,6 @@ export const fieldValidations = {
     email: ["mandatory"],
     phone_number: [],
     address: [],
-    schoolType: ["mandatory"]
 }
 
 export function getSaveModalFields(props: IGetSaveModalFieldsProps) {
@@ -61,25 +60,6 @@ export function getSaveModalFields(props: IGetSaveModalFieldsProps) {
             setFieldValidation: props.setFieldValidation,
             onChange: (value: string | Date | string[])=>{
                 props.onChange("phone_number", value)
-            }
-        },
-        {
-            id: "schoolType",
-            label: "Tipo de escola",
-            type: "select",
-            disabled: !props.ableToEdit,
-            defaultValue: props.initialEntity && props.initialEntity.schoolType ? props.initialEntity.schoolType as string : "",
-            errorMessage: props.errorMessages && props.errorMessages.schoolType ? props.errorMessages.schoolType : "",
-            validations: fieldValidations.schoolType && fieldValidations.schoolType,
-            placeholder: "Selecione o tipo de escola",
-            size: "100",
-            setFieldValidation: props.setFieldValidation,
-            options: [
-                {label: "Pública", value: "public"},
-                {label: "Particular", value: "private"},
-            ],
-            onChange: (value: string | Date | string[])=>{
-                props.onChange("schoolType", value)
             }
         },
         {
