@@ -2,7 +2,7 @@ import { TextInput, View, Text } from "react-native";
 import { styles } from "./FormGroupStyles";
 import RNPickerSelect from 'react-native-picker-select';
 import PhoneInput from "react-native-phone-number-input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MultiSelect from 'react-native-multiple-select';
 import DatePicker from "react-native-datepicker";
 import MaskInput from 'react-native-mask-input';
@@ -13,6 +13,7 @@ interface IFormGroupProps {
     callback: (value: string | string[])=>void,
     options?: {label: string, value: string}[],
     errorMessage?: string,
+    defaultValue?: string,
 }
 
 export function FormGroup(props: IFormGroupProps) {
@@ -36,7 +37,7 @@ function renderInput(props: IFormGroupProps) {
             input = renderPhoneInput(props);
             break;
         case "select":
-            input = renderSelectInput(props);
+            input = RenderSelectInput(props);
             break;
         case "multiSelect":
             input = RenderMultiSelectInput(props);
@@ -57,6 +58,7 @@ function renderTextInput(props: IFormGroupProps) {
                 style={styles.input}
                 secureTextEntry={props.type === "password"}
                 autoCapitalize='none'
+                defaultValue={props.defaultValue}
                 onChangeText={(value)=>{
                     props.callback(value);
                 }}
@@ -74,6 +76,7 @@ function renderPhoneInput(props: IFormGroupProps) {
                 withDarkTheme
                 withShadow
                 placeholder={props.placeholder}
+                defaultValue={props.defaultValue}
                 textInputStyle={styles.phoneTextInput}
                 containerStyle={styles.phoneInput}
                 codeTextStyle={styles.phoneCodeText}
@@ -89,14 +92,24 @@ function renderPhoneInput(props: IFormGroupProps) {
     )
 }
 
-export function renderSelectInput(props: IFormGroupProps) {
+export function RenderSelectInput(props: IFormGroupProps) {
+    const [value, setValue] = useState<string | null>(null);
+
+    useEffect(()=>{
+        if(props.defaultValue){
+            setValue(props.defaultValue as string);
+        }
+    }, [props.defaultValue])
+
     return (
         <View style={styles.inputView}>
             <RNPickerSelect
                 useNativeAndroidPickerStyle={false}
                 onValueChange={(value) => {
                     props.callback(value)
+                    setValue(value);
                 }}
+                value={value}
                 placeholder={{label: props.placeholder, value: null }}
                 style={{inputIOS: styles.input, inputAndroid: styles.input}}
                 items={props.options ? props.options : []}
@@ -153,11 +166,18 @@ export function RenderMultiSelectInput(props: IFormGroupProps) {
 export function RenderDateInput(props: IFormGroupProps) {
     const [date, setDate] = useState('');
 
+    useEffect(()=>{
+        if(props.defaultValue){
+            setDate(props.defaultValue as string);
+        }
+    }, [props.defaultValue])
+
     return (
         <View style={styles.inputView}>
         <MaskInput
             style={styles.input}
             value={date}
+            defaultValue={props.defaultValue}
             onChangeText={(masked, unmasked) => {
                 setDate(masked);
                 const [day, month, year] = masked.split("/");

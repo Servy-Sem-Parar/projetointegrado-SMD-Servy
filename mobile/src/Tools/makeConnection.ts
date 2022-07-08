@@ -3,6 +3,7 @@ import { Alert } from "react-native";
 import { storage } from "./storage";
 import * as RootNavigation from "../routes/RootNavigation";
 import { signOut } from "../context/Auth";
+import { closeLoader, openLoader } from "../components/Layout/Layout";
 interface IMakeConnectionProps {
     method: "get" | "post" | "put" | "delete",
     suffix: string,
@@ -12,6 +13,7 @@ interface IMakeConnectionProps {
 }
 
 export async function makeConnection(props: IMakeConnectionProps) {
+    openLoader();
     const api = axios.create({
         baseURL: "https://servybackend.herokuapp.com",
         headers: await generateHeader(),
@@ -40,6 +42,7 @@ export async function makeConnection(props: IMakeConnectionProps) {
             }]);
         }    
     }
+    closeLoader();
     return response;
 }
 

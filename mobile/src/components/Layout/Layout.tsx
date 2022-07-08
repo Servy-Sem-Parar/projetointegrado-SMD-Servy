@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator } from "react-native";
 import styles from "./LayoutStyles";
 import Icon from "react-native-vector-icons/Ionicons";
 import Icon2 from "react-native-vector-icons/MaterialCommunityIcons";
@@ -8,13 +8,23 @@ import { useAuth } from "../../context/Auth";
 interface ILayoutProps {
     title: string,
     children: JSX.Element | JSX.Element[];
-    navigation: any
+    navigation: any,
+    hideBar?: boolean
 }
 
+export let openLoader: ()=>void;
+export let closeLoader: ()=>void;
+
 export function Layout(props: ILayoutProps) {
+    const [loading, setLoading] = useState(false);
+
+    openLoader = ()=>{setLoading(true)}
+    closeLoader = ()=>{setLoading(false)}
+
     return (
         <View style={styles.layout}>
-            <View style={styles.topBar}>
+            {loading && <ActivityIndicator style={styles.loader} size="large" color="#F97E0D" />}
+            {!props.hideBar && <View style={styles.topBar}>
                 <Icon
                     onPress={() => {
                         props.navigation.toggleDrawer();
@@ -24,7 +34,7 @@ export function Layout(props: ILayoutProps) {
                     style={styles.topBarIcon}
                 />
                 <Text style={styles.topBarTitle}>{props.title}</Text>
-            </View>
+            </View>}
             <ScrollView style={styles.pageContainer}>
                 <View>
                     {
@@ -102,7 +112,7 @@ export function Sidebar(props: SidebarProps) {
                                     key={page.name}
                                     style={page.logout ? styles.itemBoxLogout : page.page === props.activeTab ? styles.itemBoxActive : styles.itemBox}
                                     onPress={() => {
-                                        page.onClick ? page.onClick() : props.navigation.navigate(page.page);
+                                        page.onClick ? page.onClick() : props.navigation.navigate(page.page)
                                     }}
                                 >
                                     <View style={styles.logoIconBox}>
