@@ -112,7 +112,7 @@ export function Calendar(props: ICalendarProps) {
         }
         const renderDays = () => {
             const renderAulaDots = (day: Record<string, unknown>) => {
-                const aulas = props.aulas.filter(aula => new Date(aula.date as string).getDay() === day.day)
+                const aulas = props.aulas.filter(aula => new Date(aula.date as string).getDate() === day.day)
                 const rest = simpleMode ? aulas.splice(1) : aulas.splice(3)
                 return (
                     <View style={{ display: "flex", flexDirection: "row" }}>

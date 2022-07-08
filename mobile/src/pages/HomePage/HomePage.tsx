@@ -8,6 +8,7 @@ import { useAuth } from '../../context/Auth';
 import { nameToIcon } from '../../Tools/icons';
 import styles from "./HomePageStyles";
 import { getAulas, getUser } from './requester';
+import { AulasModal } from './AulasModal';
 
 type UserInfo = {
     _id: string,
@@ -23,18 +24,32 @@ type TurmaInfo = {
     }
 }
 
+export type AulaInfo = {
+    _id: string,
+    date: Date,
+    title: string,
+    duration: number,
+    link: string,
+    turma: {
+        name: string,
+        color: string,
+    }
+}
+
 export function HomePage({ navigation }: { navigation: any }) {
 
     const { authData } = useAuth()
     const [date, setDate] = useState(new Date())
     const [userInfo, setUserInfo] = useState<UserInfo>()
     const [refreshing, setRefreshing] = useState(false)
-    const [aulas, setAulas] = useState([])
+    const [aulas, setAulas] = useState<AulaInfo[]>([])
+    const [dateModal, setDateModal] = useState<Date>()
+    const [aulaModal, setAulaModal] = useState<AulaInfo>()
 
     useEffect(() => {
-        if (!userInfo || refreshing){
+        if (!userInfo || refreshing) {
             const userId = authData?._id
-            if (userId){
+            if (userId) {
                 getUser(userId).then((result) => {
                     setUserInfo(result)
                     setRefreshing(false)
@@ -44,7 +59,7 @@ export function HomePage({ navigation }: { navigation: any }) {
     }, [refreshing, userInfo])
 
     useEffect(() => {
-        if (userInfo){
+        if (userInfo) {
             const turmas = userInfo.turmas || []
             const turmasId = turmas.map(t => t._id)
             const dateStart = moment().startOf("month").toDate().toISOString()
@@ -61,8 +76,8 @@ export function HomePage({ navigation }: { navigation: any }) {
                     key={turma._id}
                     style={styles.turmaContainer}
                 >
-                    <TouchableOpacity style={[styles.turmaBox, {backgroundColor: turma.color}]}>
-                        {React.cloneElement(nameToIcon(turma.disciplina.icon), {style: styles.turmaIcon})}
+                    <TouchableOpacity style={[styles.turmaBox, { backgroundColor: turma.color }]}>
+                        {React.cloneElement(nameToIcon(turma.disciplina.icon), { style: styles.turmaIcon })}
                     </TouchableOpacity>
                     <Text style={styles.turmaText}>
                         {turma.name}
@@ -78,7 +93,7 @@ export function HomePage({ navigation }: { navigation: any }) {
                         <Text style={styles.turmasSubText}>Ver mais</Text>
                     </TouchableOpacity>
                 </View>
-                <ScrollView 
+                <ScrollView
                     horizontal
                     style={styles.turmasContainer}
                     showsHorizontalScrollIndicator={false}
@@ -92,7 +107,12 @@ export function HomePage({ navigation }: { navigation: any }) {
     const renderAulas = () => {
         return (
             <View>
-                <Calendar date={date} aulas={aulas} />
+                <Calendar
+                    date={date}
+                    aulas={aulas}
+                    onClickDayCallback={setDateModal}
+                />
+                <AulasModal date={dateModal} setDate={setDateModal} aulas={aulas}/>
             </View>
         )
     }
