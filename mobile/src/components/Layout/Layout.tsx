@@ -7,7 +7,7 @@ import { useAuth } from "../../context/Auth";
 
 interface ILayoutProps {
     title: string,
-    children: JSX.Element;
+    children: JSX.Element | JSX.Element[];
     navigation: any
 }
 
@@ -25,13 +25,13 @@ export function Layout(props: ILayoutProps) {
                 />
                 <Text style={styles.topBarTitle}>{props.title}</Text>
             </View>
-            <View style={styles.pageContainer}>
-                <ScrollView>
+            <ScrollView style={styles.pageContainer}>
+                <View>
                     {
                         props.children
                     }
-                </ScrollView>
-            </View>
+                </View>
+            </ScrollView>
         </View>
     )
 }
