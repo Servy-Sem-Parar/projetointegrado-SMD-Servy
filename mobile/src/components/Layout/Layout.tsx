@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity, ActivityIndicator } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, RefreshControl, ActivityIndicator } from "react-native";
 import styles from "./LayoutStyles";
 import Icon from "react-native-vector-icons/Ionicons";
 import Icon2 from "react-native-vector-icons/MaterialCommunityIcons";
@@ -10,6 +10,7 @@ interface ILayoutProps {
     children: JSX.Element | JSX.Element[];
     navigation: any,
     hideBar?: boolean
+    refreshControl?: JSX.Element
 }
 
 export let openLoader: ()=>void;
@@ -35,7 +36,7 @@ export function Layout(props: ILayoutProps) {
                 />
                 <Text style={styles.topBarTitle}>{props.title}</Text>
             </View>}
-            <ScrollView style={styles.pageContainer}>
+            <ScrollView style={styles.pageContainer} refreshControl={props.refreshControl}>
                 <View>
                     {
                         props.children

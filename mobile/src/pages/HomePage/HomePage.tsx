@@ -1,12 +1,14 @@
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { RefreshControl, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Calendar } from '../../components/Calendar/Calendar';
 import { Layout } from '../../components/Layout/Layout';
 import { useAuth } from '../../context/Auth';
 import { nameToIcon } from '../../Tools/icons';
 import styles from "./HomePageStyles";
-import { getUser } from './requester';
+import { getAulas, getUser } from './requester';
+import { AulasModal } from './AulasModal';
 
 type UserInfo = {
     _id: string,
@@ -22,18 +24,49 @@ type TurmaInfo = {
     }
 }
 
+export type AulaInfo = {
+    _id: string,
+    date: Date,
+    title: string,
+    duration: number,
+    link: string,
+    turma: {
+        name: string,
+        color: string,
+    }
+}
+
 export function HomePage({ navigation }: { navigation: any }) {
 
     const { authData } = useAuth()
     const [date, setDate] = useState(new Date())
     const [userInfo, setUserInfo] = useState<UserInfo>()
+    const [refreshing, setRefreshing] = useState(false)
+    const [aulas, setAulas] = useState<AulaInfo[]>([])
+    const [dateModal, setDateModal] = useState<Date>()
+    const [aulaModal, setAulaModal] = useState<AulaInfo>()
 
     useEffect(() => {
-        const userId = authData?._id
-        if (userId){
-            getUser(userId).then(setUserInfo)
+        if (!userInfo || refreshing) {
+            const userId = authData?._id
+            if (userId) {
+                getUser(userId).then((result) => {
+                    setUserInfo(result)
+                    setRefreshing(false)
+                })
+            }
         }
-    }, [])
+    }, [refreshing, userInfo])
+
+    useEffect(() => {
+        if (userInfo) {
+            const turmas = userInfo.turmas || []
+            const turmasId = turmas.map(t => t._id)
+            const dateStart = moment().startOf("month").toDate().toISOString()
+            const dateEnd = moment().endOf("month").toDate().toISOString()
+            getAulas(turmasId, dateStart, dateEnd).then(setAulas)
+        }
+    }, [userInfo])
 
     const renderTurmas = () => {
         const turmas = userInfo?.turmas || []
@@ -43,8 +76,8 @@ export function HomePage({ navigation }: { navigation: any }) {
                     key={turma._id}
                     style={styles.turmaContainer}
                 >
-                    <TouchableOpacity style={[styles.turmaBox, {backgroundColor: turma.color}]}>
-                        {React.cloneElement(nameToIcon(turma.disciplina.icon), {style: styles.turmaIcon})}
+                    <TouchableOpacity style={[styles.turmaBox, { backgroundColor: turma.color }]}>
+                        {React.cloneElement(nameToIcon(turma.disciplina.icon), { style: styles.turmaIcon })}
                     </TouchableOpacity>
                     <Text style={styles.turmaText}>
                         {turma.name}
@@ -60,7 +93,7 @@ export function HomePage({ navigation }: { navigation: any }) {
                         <Text style={styles.turmasSubText}>Ver mais</Text>
                     </TouchableOpacity>
                 </View>
-                <ScrollView 
+                <ScrollView
                     horizontal
                     style={styles.turmasContainer}
                     showsHorizontalScrollIndicator={false}
@@ -74,13 +107,27 @@ export function HomePage({ navigation }: { navigation: any }) {
     const renderAulas = () => {
         return (
             <View>
-                <Calendar date={date} aulas={[]} />
+                <Calendar
+                    date={date}
+                    aulas={aulas}
+                    onClickDayCallback={setDateModal}
+                />
+                <AulasModal date={dateModal} setDate={setDateModal} aulas={aulas}/>
             </View>
         )
     }
 
     return (
-        <Layout title='Início' navigation={navigation}>
+        <Layout
+            title='Início'
+            navigation={navigation}
+            refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={() => setRefreshing(true)}
+                />
+            }
+        >
             {renderTurmas()}
             {renderAulas()}
         </Layout>
