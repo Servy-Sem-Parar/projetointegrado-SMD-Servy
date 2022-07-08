@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { RefreshControl, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Calendar } from '../../components/Calendar/Calendar';
 import { Layout } from '../../components/Layout/Layout';
@@ -27,13 +27,19 @@ export function HomePage({ navigation }: { navigation: any }) {
     const { authData } = useAuth()
     const [date, setDate] = useState(new Date())
     const [userInfo, setUserInfo] = useState<UserInfo>()
+    const [refreshing, setRefreshing] = useState(false)
 
     useEffect(() => {
-        const userId = authData?._id
-        if (userId){
-            getUser(userId).then(setUserInfo)
+        if (!userInfo || refreshing){
+            const userId = authData?._id
+            if (userId){
+                getUser(userId).then((result) => {
+                    setUserInfo(result)
+                    setRefreshing(false)
+                })
+            }
         }
-    }, [])
+    }, [refreshing, userInfo])
 
     const renderTurmas = () => {
         const turmas = userInfo?.turmas || []
@@ -80,7 +86,16 @@ export function HomePage({ navigation }: { navigation: any }) {
     }
 
     return (
-        <Layout title='Início' navigation={navigation}>
+        <Layout
+            title='Início'
+            navigation={navigation}
+            refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={() => setRefreshing(true)}
+                />
+            }
+        >
             {renderTurmas()}
             {renderAulas()}
         </Layout>

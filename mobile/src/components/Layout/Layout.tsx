@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, RefreshControl } from "react-native";
 import styles from "./LayoutStyles";
 import Icon from "react-native-vector-icons/Ionicons";
 import Icon2 from "react-native-vector-icons/MaterialCommunityIcons";
@@ -8,7 +8,8 @@ import { useAuth } from "../../context/Auth";
 interface ILayoutProps {
     title: string,
     children: JSX.Element | JSX.Element[];
-    navigation: any
+    navigation: any,
+    refreshControl?: JSX.Element
 }
 
 export function Layout(props: ILayoutProps) {
@@ -25,7 +26,7 @@ export function Layout(props: ILayoutProps) {
                 />
                 <Text style={styles.topBarTitle}>{props.title}</Text>
             </View>
-            <ScrollView style={styles.pageContainer}>
+            <ScrollView style={styles.pageContainer} refreshControl={props.refreshControl}>
                 <View>
                     {
                         props.children
