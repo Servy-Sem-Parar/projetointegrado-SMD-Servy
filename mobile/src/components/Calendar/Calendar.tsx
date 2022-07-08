@@ -14,6 +14,8 @@ interface ICalendarProps {
     titleButton?: JSX.Element;
 }
 
+const simpleMode = true // mostrar apenas uma aula
+
 export function Calendar(props: ICalendarProps) {
     const [calendar, setCalendar] = useState<Record<string, unknown>[]>([])
     const currentDay = moment().format("DD");
@@ -111,7 +113,7 @@ export function Calendar(props: ICalendarProps) {
         const renderDays = () => {
             const renderAulaDots = (day: Record<string, unknown>) => {
                 const aulas = props.aulas.filter(aula => new Date(aula.date as string).getDay() === day.day)
-                const rest = aulas.splice(3)
+                const rest = simpleMode ? aulas.splice(1) : aulas.splice(3)
                 return (
                     <View style={{ display: "flex", flexDirection: "row" }}>
                         {aulas.map(aula =>
@@ -119,7 +121,8 @@ export function Calendar(props: ICalendarProps) {
                                 key={aula._id as string}
                                 style={[
                                     { backgroundColor: (aula.turma as Record<string, unknown>).color as string },
-                                    styles.aulaMarker
+                                    styles.aulaMarker,
+                                    simpleMode ? {width: "100%", backgroundColor: "#8538D2", borderRadius: 3} : {}
                                 ]}
                             />
                         )}
