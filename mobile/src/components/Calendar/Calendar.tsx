@@ -117,7 +117,7 @@ export function Calendar(props: ICalendarProps) {
                 return (
                     <View style={{ display: "flex", flexDirection: "row" }}>
                         {aulas.map(aula =>
-                            <TouchableOpacity
+                            <View
                                 key={aula._id as string}
                                 style={[
                                     { backgroundColor: (aula.turma as Record<string, unknown>).color as string },

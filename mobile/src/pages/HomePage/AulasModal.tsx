@@ -1,5 +1,5 @@
 import React from "react"
-import { Text, TouchableOpacity, View } from "react-native"
+import { Linking, Text, TouchableOpacity, View } from "react-native"
 import { AulaInfo } from "./HomePage"
 import styles from "./AulasModalStyles"
 import moment from "moment"
@@ -15,7 +15,13 @@ type AulasModalProps = {
 }
 
 export const AulasModal = ({ date, setDate, aulas }: AulasModalProps) => {
+    
     const filteredAulas = aulas.filter(aula => moment(aula.date).format("DD/MM/YYYY") === moment(date).format("DD/MM/YYYY"))
+    
+    const openAula = (aula: AulaInfo) => {
+        Linking.openURL(aula.link).then(() => {})
+    }
+
     return (
         <Modal
             isVisible={!!date}
@@ -35,7 +41,11 @@ export const AulasModal = ({ date, setDate, aulas }: AulasModalProps) => {
                 </View>
                 <View style={styles.aulasContainer}>
                     {filteredAulas.map(aula => (
-                        <TouchableOpacity key={aula._id} style={styles.aulaContainer}>
+                        <TouchableOpacity
+                            key={aula._id}
+                            style={styles.aulaContainer}
+                            onPress={() => openAula(aula)}
+                        >
                             <View style={[styles.aulaBola, { backgroundColor: aula.turma.color }]} />
                             <View style={styles.aulaTextContainer}>
                                 <Text style={styles.aulaTitle}>
