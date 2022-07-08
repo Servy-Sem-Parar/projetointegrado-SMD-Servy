@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { RefreshControl, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -6,7 +7,7 @@ import { Layout } from '../../components/Layout/Layout';
 import { useAuth } from '../../context/Auth';
 import { nameToIcon } from '../../Tools/icons';
 import styles from "./HomePageStyles";
-import { getUser } from './requester';
+import { getAulas, getUser } from './requester';
 
 type UserInfo = {
     _id: string,
@@ -28,6 +29,7 @@ export function HomePage({ navigation }: { navigation: any }) {
     const [date, setDate] = useState(new Date())
     const [userInfo, setUserInfo] = useState<UserInfo>()
     const [refreshing, setRefreshing] = useState(false)
+    const [aulas, setAulas] = useState([])
 
     useEffect(() => {
         if (!userInfo || refreshing){
@@ -40,6 +42,16 @@ export function HomePage({ navigation }: { navigation: any }) {
             }
         }
     }, [refreshing, userInfo])
+
+    useEffect(() => {
+        if (userInfo){
+            const turmas = userInfo.turmas || []
+            const turmasId = turmas.map(t => t._id)
+            const dateStart = moment().startOf("month").toDate().toISOString()
+            const dateEnd = moment().endOf("month").toDate().toISOString()
+            getAulas(turmasId, dateStart, dateEnd).then(setAulas)
+        }
+    }, [userInfo])
 
     const renderTurmas = () => {
         const turmas = userInfo?.turmas || []
@@ -80,7 +92,7 @@ export function HomePage({ navigation }: { navigation: any }) {
     const renderAulas = () => {
         return (
             <View>
-                <Calendar date={date} aulas={[]} />
+                <Calendar date={date} aulas={aulas} />
             </View>
         )
     }
