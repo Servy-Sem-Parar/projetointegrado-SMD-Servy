@@ -41,7 +41,6 @@ type SidebarProps = {
 }
 
 export function Sidebar(props: SidebarProps) {
-    console.log(props.activeTab)
     const pages = [
         {
             name: "home",
