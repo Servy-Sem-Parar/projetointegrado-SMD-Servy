@@ -11,6 +11,7 @@ import AppLoading from "expo-app-loading";
 import { navigationRef } from './RootNavigation';
 import { AccountPage } from "../pages/AccountPage/AccountPage";
 import { TurmasPage } from "../pages/TurmasPage/TurmasPage";
+import { Sidebar } from "../components/Layout/Layout";
 
 const { Navigator, Screen } = createDrawerNavigator();
 
@@ -46,6 +47,7 @@ function AppStack() {
                     headerShown: false,
                 }}
                 useLegacyImplementation={true}
+                drawerContent={(props) => <Sidebar activeTab={props.state.routeNames[props.state.index]} navigation={props.navigation}/>}
             >
                 {(authData ? privateRoutes : publicRoutes).map(route => {
                         return(

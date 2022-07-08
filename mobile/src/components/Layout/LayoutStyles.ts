@@ -76,13 +76,15 @@ const styles = StyleSheet.create({
     logoMainText: {
         color: "#F97E0D",
         fontFamily: "Raleway_400Regular",
-        fontSize: 20
+        fontSize: 25
     },
 
     logoSubText: {
         color: "#8538D2",
         fontFamily: "Raleway_600SemiBold",
-        fontSize: 26
+        fontSize: 30,
+        fontWeight: "bold",
+        marginTop: -10
     },
 
     logoIconBox: {

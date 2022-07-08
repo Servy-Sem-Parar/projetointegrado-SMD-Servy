@@ -3,7 +3,7 @@ import { Layout } from '../../components/Layout/Layout';
 
 export function HomePage({navigation}: {navigation: any}) {
     return (
-        <Layout title='Início' activeTab={"home"} navigation={navigation}>
+        <Layout title='Início' navigation={navigation}>
             <Text>Home</Text>
         </Layout>
     )

@@ -3,7 +3,7 @@ import { Layout } from '../../components/Layout/Layout';
 
 export function AccountPage({navigation}: {navigation: any}) {
     return (
-        <Layout title='Meu Perfil' activeTab={"profile"} navigation={navigation}>
+        <Layout title='Meu Perfil' navigation={navigation}>
             <Text>Account</Text>
         </Layout>
     )
