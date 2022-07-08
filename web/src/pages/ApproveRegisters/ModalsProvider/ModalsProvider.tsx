@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { alertError, alertSuccess } from "../../../components/Alert/Alert";
 import { SaveModal } from "../../../components/SaveModal/SaveModal"
 import { validateAllInputs } from "../../../Tools/validateInputs";
-import { editEntity, getEntity, getTurmas } from "../requester";
+import { deleteEntity, editEntity, getEntity, getTurmas } from "../requester";
 import { updateEntities } from "../ApproveRegisters";
 import { fieldValidations, getSaveModalFields } from "./getSaveModalFields";
 
@@ -67,9 +67,7 @@ export function ModalsProvider() {
                                     const validationResult = validateAllInputs({entity, validations})
                                     
                                     if(validationResult.success) {
-                                        const finalEntity = {...entity};
-                                        finalEntity.status = "disapproved";
-                                        const success = await editEntity(finalEntity, targetEntity._id as string);
+                                        const success = await deleteEntity(targetEntity._id as string);
                                         if(success) {
                                             alertSuccess("Aluna rejeitada com sucesso.")
                                             setEntity({});
