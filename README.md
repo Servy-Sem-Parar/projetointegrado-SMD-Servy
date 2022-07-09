@@ -18,7 +18,7 @@
 
 ## :computer: :iphone: Sobre
 
-O código econtrado neste repositório é de uma aplicação desenvolvida para o Projeto Sem Parar e foi desenvolido durante a disciplina de Projeto Integrado I. Criado em 09 de junho de 2018, o Projeto se propõe a preparar meninas, do ensino fundamental e médio, para olimpíadas científicas, com foco em astronomia, biologia, física, informática, química e matemática. Seu lema é “Meninas ensinando meninas” e visa, principalmente, estimular e aumentar a presença feminina nas competições. Nossa solução visa principalmente ajudar o Projeto na organização de dados e distribuição de informações e materiais para as alunas.
+O código econtrado neste repositório é de uma aplicação desenvolvida para o Projeto Sem Parar e foi desenvolvido durante a disciplina de Projeto Integrado I. Criado em 09 de junho de 2018, o Projeto se propõe a preparar meninas, do ensino fundamental e médio, para olimpíadas científicas, com foco em astronomia, biologia, física, informática, química e matemática. Seu lema é “Meninas ensinando meninas” e visa, principalmente, estimular e aumentar a presença feminina nas competições. Nossa solução visa principalmente ajudar o Projeto na organização de dados e distribuição de informações e materiais para as alunas.
 
 <div align="center">
   <img src="mockup.png" style="width: 800px;" />
@@ -48,7 +48,7 @@ Este código está sobre a licença GNU. Para mais informações, veja o [LICENS
 ### Clonando o repositório
 
 ```shell
-git clone https://github.com/VictorDKT/projetointegrado-SMD-Servy.git
+git clone https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy.git
 cd projetointegrado-SMD-Servy
 ```
 
