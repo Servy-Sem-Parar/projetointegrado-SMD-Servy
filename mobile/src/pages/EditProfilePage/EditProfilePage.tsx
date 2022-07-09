@@ -140,6 +140,13 @@ export function EditProfilePage({navigation}: {navigation: any}) {
                         }
                     }}
                 />
+                <Button
+                    type={"span"}
+                    label={"Mudar senha"}
+                    callback={()=>{
+                        navigation.navigate("EditPasswordPage")
+                    }}
+                />
             </View>
         </ScrollView>
         </Layout>

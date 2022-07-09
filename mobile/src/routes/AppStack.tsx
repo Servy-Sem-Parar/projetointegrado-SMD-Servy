@@ -13,6 +13,7 @@ import { AccountPage } from "../pages/AccountPage/AccountPage";
 import { TurmasPage } from "../pages/TurmasPage/TurmasPage";
 import { Sidebar } from "../components/Layout/Layout";
 import { EditProfilePage } from "../pages/EditProfilePage/EditProfilePage";
+import { EditPasswordPage } from "../pages/EditPasswordPage/EditPasswordPage";
 
 const { Navigator, Screen } = createDrawerNavigator();
 
@@ -33,6 +34,7 @@ const privateRoutes: Route[] = [
     {name: "AccountPage", component: AccountPage},
     {name: "TurmasPage", component: TurmasPage},
     {name: "EditProfilePage", component: EditProfilePage},
+    {name: "EditPasswordPage", component: EditPasswordPage},
 ]
 
 function AppStack() {
