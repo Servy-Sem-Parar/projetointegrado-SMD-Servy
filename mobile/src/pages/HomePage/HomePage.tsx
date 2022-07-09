@@ -7,10 +7,10 @@ import { Layout } from '../../components/Layout/Layout';
 import { useAuth } from '../../context/Auth';
 import { nameToIcon } from '../../Tools/icons';
 import styles from "./HomePageStyles";
-import { AulasModal } from './AulasModal';
 import { AulaInfo, TurmaInfo, UserInfo } from '../../Tools/commons.types';
 import { getUser, getAulas } from '../../Tools/commons.requester';
 import { storage } from '../../Tools/storage';
+import { AulasModal } from '../../components/AulasModal/AulasModal';
 
 export function HomePage({ navigation }: { navigation: any }) {
 

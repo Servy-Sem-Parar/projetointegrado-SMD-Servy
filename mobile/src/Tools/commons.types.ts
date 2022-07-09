@@ -25,3 +25,10 @@ export type AulaInfo = {
         color: string,
     }
 }
+
+export type MaterialInfo = {
+    _id: string,
+    date: Date,
+    name: string,
+    link: string,
+}
