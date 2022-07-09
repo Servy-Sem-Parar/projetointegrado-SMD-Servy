@@ -10,6 +10,7 @@ import styles from "./HomePageStyles";
 import { AulasModal } from './AulasModal';
 import { AulaInfo, TurmaInfo, UserInfo } from '../../Tools/commons.types';
 import { getUser, getAulas } from '../../Tools/commons.requester';
+import { storage } from '../../Tools/storage';
 
 export function HomePage({ navigation }: { navigation: any }) {
 
@@ -50,7 +51,17 @@ export function HomePage({ navigation }: { navigation: any }) {
                     key={turma._id}
                     style={styles.turmaContainer}
                 >
-                    <TouchableOpacity style={[styles.turmaBox, { backgroundColor: turma.color }]}>
+                    <TouchableOpacity 
+                        style={[styles.turmaBox, { backgroundColor: turma.color }]}
+                        onPress={async ()=>{
+                            await storage.setItem("turma", JSON.stringify(turma));
+                            await storage.setItem("backPage", "HomePage")
+                            navigation.reset({
+                                index: 0,
+                                routes: [{ name: 'TurmaPage' }]
+                            }) 
+                        }}
+                    >
                         {React.cloneElement(nameToIcon(turma.disciplina.icon), { style: styles.turmaIcon })}
                     </TouchableOpacity>
                     <Text style={styles.turmaText}>

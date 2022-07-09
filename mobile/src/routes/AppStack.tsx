@@ -14,6 +14,7 @@ import { TurmasPage } from "../pages/TurmasPage/TurmasPage";
 import { Sidebar } from "../components/Layout/Layout";
 import { EditProfilePage } from "../pages/EditProfilePage/EditProfilePage";
 import { EditPasswordPage } from "../pages/EditPasswordPage/EditPasswordPage";
+import { TurmaPage } from "../pages/TurmaPage/TurmaPage";
 
 const { Navigator, Screen } = createDrawerNavigator();
 
@@ -35,6 +36,7 @@ const privateRoutes: Route[] = [
     {name: "TurmasPage", component: TurmasPage},
     {name: "EditProfilePage", component: EditProfilePage},
     {name: "EditPasswordPage", component: EditPasswordPage},
+    {name: "TurmaPage", component: TurmaPage},
 ]
 
 function AppStack() {

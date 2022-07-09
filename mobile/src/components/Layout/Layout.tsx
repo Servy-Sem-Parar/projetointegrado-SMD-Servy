@@ -9,8 +9,10 @@ interface ILayoutProps {
     title: string,
     children: JSX.Element | JSX.Element[];
     navigation: any,
-    hideBar?: boolean
-    refreshControl?: JSX.Element
+    hideBar?: boolean,
+    refreshControl?: JSX.Element,
+    showBackButtonBar?: boolean,
+    backPage?: string
 }
 
 export let openLoader: ()=>void;
@@ -36,6 +38,18 @@ export function Layout(props: ILayoutProps) {
                 />
                 <Text style={styles.topBarTitle}>{props.title}</Text>
             </View>}
+            {props.showBackButtonBar &&  <View style={styles.topBar}>
+                <Icon
+                    onPress={() => {
+                        props.navigation.navigate(props.backPage ? props.backPage : "HomePage");
+                    }}
+                    name="chevron-back"
+                    size={40}
+                    style={styles.topBarIcon}
+                />
+                <Text style={styles.topBarTitle}>{props.title}</Text>
+            </View>
+            }
             <ScrollView style={styles.pageContainer} refreshControl={props.refreshControl}>
                 <View>
                     {

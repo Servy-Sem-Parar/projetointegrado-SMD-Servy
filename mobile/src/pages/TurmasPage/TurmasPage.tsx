@@ -7,6 +7,7 @@ import { useAuth } from '../../context/Auth';
 import { getUser } from '../../Tools/commons.requester';
 import { TurmaInfo, UserInfo } from '../../Tools/commons.types';
 import { nameToIcon } from '../../Tools/icons';
+import { storage } from '../../Tools/storage';
 import styles from "./TurmasPageStyles";
 
 export function TurmasPage({ navigation }: { navigation: any }) {
@@ -32,6 +33,14 @@ export function TurmasPage({ navigation }: { navigation: any }) {
             <TouchableOpacity
                 key={turma._id}
                 style={[styles.turmaContainer, { backgroundColor: turma.color }]}
+                onPress={async ()=>{
+                    await storage.setItem("turma", JSON.stringify(turma));
+                    await storage.setItem("backPage", "TurmasPage")
+                    navigation.reset({
+                        index: 0,
+                        routes: [{ name: 'TurmaPage' }]
+                    }) 
+                }}
             >
                 <View>
                     {React.cloneElement(nameToIcon(turma.disciplina.icon), { style: styles.turmaIcon })}

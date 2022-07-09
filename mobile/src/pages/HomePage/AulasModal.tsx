@@ -40,14 +40,14 @@ export const AulasModal = ({ date, setDate, aulas }: AulasModalProps) => {
                 </View>
                 <View style={styles.aulasContainer}>
                     {filteredAulas.map(aula => (
-                        <View
+                        <TouchableOpacity
                             key={aula._id}
                             style={styles.aulaContainer}
-                            //onPress={() => openAula(aula)}
+                            onPress={() => openAula(aula)}
                         >
                             <View style={[styles.aulaBola, { backgroundColor: aula.turma.color }]} />
                             <View style={styles.aulaTextContainer}>
-                                <Text style={[styles.aulaTitle]} onPress={() => openAula(aula)}>
+                                <Text style={[styles.aulaTitle]}>
                                     {aula.title}
                                 </Text>
                                 <Text style={styles.aulaTurma}>
@@ -59,7 +59,7 @@ export const AulasModal = ({ date, setDate, aulas }: AulasModalProps) => {
                                     &nbsp;{aula.duration} horas de duração
                                 </Text>
                             </View>
-                        </View>
+                        </TouchableOpacity>
                     ))}
                 </View>
                 <View style={styles.buttonContainer}>
