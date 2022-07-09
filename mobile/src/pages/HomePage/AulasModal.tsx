@@ -1,12 +1,11 @@
 import React from "react"
 import { Linking, Text, TouchableOpacity, View } from "react-native"
-import { AulaInfo } from "./HomePage"
 import styles from "./AulasModalStyles"
 import moment from "moment"
 import { ScrollView } from "react-native-gesture-handler"
 import Modal from "react-native-modal";
-import { Button } from "../../components/Button/Button"
 import Icon from "react-native-vector-icons/Ionicons"
+import { AulaInfo } from "../../Tools/commons.types"
 
 type AulasModalProps = {
     date?: Date,

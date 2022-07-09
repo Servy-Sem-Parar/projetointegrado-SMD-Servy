@@ -7,34 +7,9 @@ import { Layout } from '../../components/Layout/Layout';
 import { useAuth } from '../../context/Auth';
 import { nameToIcon } from '../../Tools/icons';
 import styles from "./HomePageStyles";
-import { getAulas, getUser } from './requester';
 import { AulasModal } from './AulasModal';
-
-type UserInfo = {
-    _id: string,
-    turmas: TurmaInfo[]
-}
-
-type TurmaInfo = {
-    _id: string,
-    name: string,
-    color: string,
-    disciplina: {
-        icon: string,
-    }
-}
-
-export type AulaInfo = {
-    _id: string,
-    date: Date,
-    title: string,
-    duration: number,
-    link: string,
-    turma: {
-        name: string,
-        color: string,
-    }
-}
+import { AulaInfo, TurmaInfo, UserInfo } from '../../Tools/commons.types';
+import { getUser, getAulas } from '../../Tools/commons.requester';
 
 export function HomePage({ navigation }: { navigation: any }) {
 
@@ -44,7 +19,6 @@ export function HomePage({ navigation }: { navigation: any }) {
     const [refreshing, setRefreshing] = useState(false)
     const [aulas, setAulas] = useState<AulaInfo[]>([])
     const [dateModal, setDateModal] = useState<Date>()
-    const [aulaModal, setAulaModal] = useState<AulaInfo>()
 
     useEffect(() => {
         if (!userInfo || refreshing) {

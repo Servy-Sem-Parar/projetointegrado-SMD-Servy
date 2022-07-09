@@ -1,4 +1,4 @@
-import { makeConnection } from "../../Tools/makeConnection";
+import { makeConnection } from "./makeConnection";
 
 export async function getUser(entityId: string) {
     const suffix = "user";

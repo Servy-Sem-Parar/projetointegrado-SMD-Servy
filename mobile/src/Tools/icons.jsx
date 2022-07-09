@@ -5,7 +5,7 @@ import MdIcon from "react-native-vector-icons/MaterialIcons"
 
 const icons = {
     rocket: <IoIcon name="rocket"/>,
-    calculator: <AiIcon name="calculator"/>,
+    calculator: <MdIcon name="calculate"/>,
     leaf: <McIcon name="leaf"/>,
     proveta: <MdIcon name="science"/>,
     book: <McIcon name="book"/>,
