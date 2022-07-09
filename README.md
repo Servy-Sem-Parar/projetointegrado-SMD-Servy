@@ -124,6 +124,12 @@ npm run start
 |  RFG0039     |  Editar informações do seu cadastro                |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/components/Layout/MyAccountModal/ModalsProvider.tsx)     | &#10003;
 |  RFE0040     |  Mostrar notificação de nova aula               |  X     | A fazer
 |  RFE0041     |  Mostrar tela de solicitação de cadastro               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/mobile/src/pages/RegisterPage/RegisterPage.tsx)     | &#10003;
+|  RFG0042     |  Mostrar tela de Login               |  [código]()     | &#10003;
+|  RFG0043     |  Realizar login               |  [código]()     | &#10003;
+|  RFA0044     |  Filtrar listagem de disciplinas por parâmetro               |  [código]()     | &#10003;
+|  RFA0045     |  Ordenar listagem de disciplinas por parâmetro               |  [código]()     | &#10003;
+|  RFA0046     |  Editar cadastro de disciplina               |  [código]()     | &#10003;
+|  RFE0047     |  Mostrar pop-up com listagem de aulas do dia               |  [código]()     | &#10003;
 
 <a name="documento"></a>
 
