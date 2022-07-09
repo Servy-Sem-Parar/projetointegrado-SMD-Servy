@@ -117,3 +117,18 @@ export async function getEntity(id: string, turmasOptions: Record<string, unknow
     
     return entity;
 }
+
+export async function deleteEntity(entityId: string) {
+    const suffix = "user";
+    const method = "delete";
+    let success = false;
+
+    const response = await makeConnection({
+        suffix,
+        method,
+        entityId
+    });
+    success = response ? true : false;
+
+    return success;
+}

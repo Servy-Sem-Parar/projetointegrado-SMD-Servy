@@ -166,7 +166,6 @@ export function RegisterPage({navigation}: {navigation: any}) {
                                 callback={()=>{
                                     const validations = {...fieldValidations};
                                     validations.retypePassword = [];
-                                    console.log(userInfo);
                                     const validationResult = validateAllInputs({entity: userInfo, validations});
                                     if(validationResult.success) {
                                         createEntity(userInfo).then(success=>{
