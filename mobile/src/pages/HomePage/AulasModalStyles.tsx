@@ -53,6 +53,8 @@ const styles = StyleSheet.create({
     aulaTitle: {
         fontSize: 18,
         fontWeight: "700",
+        textDecorationLine: "underline",
+        color: "#7000E0",
     },
     aulaTurma: {
         marginTop: -2,
@@ -63,6 +65,40 @@ const styles = StyleSheet.create({
     buttonContainer: {
         position: "absolute",
         right: 5
+    },
+    primaryButton: {
+        //backgroundColor: "#F97E0D",        
+        //borderRadius: 15,
+        //shadowOffset: {
+        //    width: 0,
+        //    height: 2,
+        //},
+        //shadowOpacity: 0.7,
+        //shadowRadius: 3.84,
+        //elevation: 5,
+        paddingTop: 13,  
+        paddingBottom: 10, 
+        width: "100%",
+        paddingRight: 10,  
+        paddingLeft: 10,  
+        //marginTop: 20,
+        minWidth: 200,       
+    },
+    primaryButtonLabel: {
+        fontFamily: "Raleway_600SemiBold",
+        fontSize: 15,
+        textAlign: "center",
+        //color: "white",
+
+        textDecorationLine: "underline",
+        color: "#8010F0",
+        marginTop: -8
+    },
+    linkContainer: {
+        width: "100%",
+        display: "flex",
+        //justifyContent: "flex-end",
+       // flexDirection: "row"
     }
 });
 

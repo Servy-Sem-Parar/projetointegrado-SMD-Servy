@@ -36,14 +36,14 @@ export function TurmasPage({ navigation }: { navigation: any }) {
                 <View>
                     {React.cloneElement(nameToIcon(turma.disciplina.icon), { style: styles.turmaIcon })}
                 </View>
-                <View>
+                <View style={{display: "flex", flexShrink: 1}}>
                     <Text style={styles.turmaName}>
                         {turma.name}
                     </Text>
                     <Text style={styles.turmaProfessora}>
                         Professoras:
                         &nbsp;
-                        {turma.teachers[0].name}
+                        {`${turma.teachers[0].name}`}
                     </Text>
                 </View>
             </TouchableOpacity>
