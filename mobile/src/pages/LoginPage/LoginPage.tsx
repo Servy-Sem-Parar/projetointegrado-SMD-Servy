@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { storage } from '../../Tools/storage';
 import { makeConnection } from '../../Tools/makeConnection';
 import { useAuth } from '../../context/Auth';
+import { Layout } from '../../components/Layout/Layout';
 
 export function LoginPage({navigation}: {navigation: any}) {
     const [entity, setEntity] = useState<Record<string, unknown>>({});
@@ -26,6 +27,12 @@ export function LoginPage({navigation}: {navigation: any}) {
     }
 
     return (
+        <Layout
+            title={"Login"}
+            navigation={navigation} 
+            hideBar={true}
+            landing={true}
+        >
         <View style={containerStyles.page}>
             <View style={styles.container}>
                 <View style={styles.backContainer}>
@@ -85,5 +92,6 @@ export function LoginPage({navigation}: {navigation: any}) {
                 </View>  
             </View>
         </View>
+        </Layout>
     )
 }

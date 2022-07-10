@@ -12,7 +12,8 @@ interface ILayoutProps {
     hideBar?: boolean,
     refreshControl?: JSX.Element,
     showBackButtonBar?: boolean,
-    backPage?: string
+    backPage?: string,
+    landing?: boolean
 }
 
 export let openLoader: ()=>void;
@@ -50,13 +51,23 @@ export function Layout(props: ILayoutProps) {
                 <Text style={styles.topBarTitle}>{props.title}</Text>
             </View>
             }
-            <ScrollView style={styles.pageContainer} refreshControl={props.refreshControl}>
-                <View>
-                    {
-                        props.children
-                    }
-                </View>
-            </ScrollView>
+            {props.landing ?
+                <View style={{width: "100%", height: "100%",}}>
+                    <View style={{height: "100%", width: "100%"}}>
+                        {
+                            props.children
+                        }
+                    </View>
+                </View> 
+            :
+                <ScrollView style={styles.pageContainer} refreshControl={props.refreshControl}>
+                    <View>
+                        {
+                            props.children
+                        }
+                    </View>
+                </ScrollView>
+            }
         </View>
     )
 }

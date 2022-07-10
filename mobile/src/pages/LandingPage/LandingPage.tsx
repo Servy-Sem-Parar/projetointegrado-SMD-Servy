@@ -1,11 +1,18 @@
 import { View, Text } from 'react-native';
 import { Button } from '../../components/Button/Button';
+import { Layout } from '../../components/Layout/Layout';
 import { containerStyles } from '../../styles/containerStyles';
 
 import styles from "./LandingPageStyles";
 
 export function LandingPage({navigation}: {navigation: any}) {
     return (
+        <Layout
+            title={"Landing"}
+            navigation={navigation} 
+            hideBar={true}
+            landing={true}
+        >
         <View style={containerStyles.page}>
             <View style={styles.container}>
                 <View style={styles.content}>
@@ -29,5 +36,6 @@ export function LandingPage({navigation}: {navigation: any}) {
                 </View>
             </View>
         </View>
+        </Layout>
     )
 }

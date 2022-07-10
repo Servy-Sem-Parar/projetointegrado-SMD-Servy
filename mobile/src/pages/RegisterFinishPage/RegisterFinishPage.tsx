@@ -3,9 +3,16 @@ import { Button } from '../../components/Button/Button';
 import { containerStyles } from '../../styles/containerStyles';
 import { styles } from './RegisterFinishPageStyles';
 import Pesquisadora from "../../assets/pesquisadora.png";
+import { Layout } from '../../components/Layout/Layout';
 
 export function RegisterFinishPage({navigation}: {navigation: any}) {
     return (
+        <Layout
+            title={"Finish"}
+            navigation={navigation} 
+            hideBar={true}
+            landing={true}
+        >
         <View style={containerStyles.page}>
             <View style={styles.container}>
                 <View style={styles.mainContainer}>
@@ -30,5 +37,6 @@ export function RegisterFinishPage({navigation}: {navigation: any}) {
                 </View>
             </View>
         </View>
+        </Layout>
     )
 }

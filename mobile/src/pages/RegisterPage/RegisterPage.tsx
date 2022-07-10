@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { getTurmas, createEntity } from './requester';
 import { validateAllInputs, validateInput } from '../../Tools/validateInputs';
 import { Alert } from "react-native";
+import { Layout } from '../../components/Layout/Layout';
 
 export function RegisterPage({navigation}: {navigation: any}) {
     const [turmas, setTurmas] = useState<{label: string, value: string}[]>([]);
@@ -45,6 +46,12 @@ export function RegisterPage({navigation}: {navigation: any}) {
     }, [])
 
     return (
+        <Layout
+            title={"Register"}
+            navigation={navigation} 
+            hideBar={true}
+            landing={true}
+        >
         <View style={containerStyles.page}>
             <ScrollView style={styles.container}>
                 <View style={styles.backContainer}>
@@ -186,5 +193,6 @@ export function RegisterPage({navigation}: {navigation: any}) {
                 </View>  
             </ScrollView>
         </View>
+        </Layout>
     )
 }
