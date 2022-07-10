@@ -5,6 +5,7 @@ import HttpError from '@models/errors/HttpError';
 import { ParamsDictionary } from 'express-serve-static-core';
 import { ParsedQs } from 'qs';
 import Turma from '@models/turma';
+import bcrypt from 'bcryptjs';
 import CrudController from './crudController';
 import mongoose from '../database';
 import Role from '../enums/role';
@@ -35,6 +36,10 @@ class UserController extends CrudController<IUser, typeof User> {
     // se o usuario tentar alterar a propria role
     if (request.body.role && user.role !== request.body.role && user.role !== Role.ADMIN) {
       throw new HttpError('Forbidden', 403);
+    }
+
+    if (request.params.password) {
+      request.params.password = await bcrypt.hash(request.params.password, 10);
     }
 
     return super.updateFromParameters(request);
