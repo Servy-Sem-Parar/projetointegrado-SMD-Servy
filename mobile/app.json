@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "mobile",
+    "name": "Projeto Sem Parar",
     "slug": "mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/logo.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./src/assets/logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,7 +21,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./src/assets/logo.png",
         "backgroundColor": "#FFFFFF"
       }
     },
