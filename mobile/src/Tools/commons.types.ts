@@ -22,10 +22,12 @@ export type AulaInfo = {
     title: string,
     duration: number,
     link: string,
+    description: string,
     turma: {
         name: string,
         color: string,
-    }
+    },
+    materiais: MaterialInfo[]
 }
 
 export type MaterialInfo = {

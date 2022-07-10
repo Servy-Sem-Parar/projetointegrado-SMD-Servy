@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { Linking, Text, TouchableOpacity, View } from "react-native"
 import styles from "./AulasModalStyles"
 import moment from "moment"
@@ -6,6 +6,7 @@ import { ScrollView } from "react-native-gesture-handler"
 import Modal from "react-native-modal";
 import Icon from "react-native-vector-icons/Ionicons"
 import { AulaInfo } from "../../Tools/commons.types"
+import { AulaModal } from "../AulaModal/AulaModal"
 
 type AulasModalProps = {
     date?: Date,
@@ -16,10 +17,7 @@ type AulasModalProps = {
 export const AulasModal = ({ date, setDate, aulas }: AulasModalProps) => {
     
     const filteredAulas = aulas.filter(aula => moment(aula.date).format("DD/MM/YYYY") === moment(date).format("DD/MM/YYYY"))
-    
-    const openAula = (aula: AulaInfo) => {
-        Linking.openURL(aula.link).then(() => {})
-    }
+    const [aulaModal, setAulaModal] = useState<AulaInfo>()
 
     return (
         <Modal
@@ -29,6 +27,7 @@ export const AulasModal = ({ date, setDate, aulas }: AulasModalProps) => {
             }}
             style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
         >
+            <AulaModal aula={aulaModal} setAula={setAulaModal}/>
             <ScrollView style={styles.container}>
                 <View style={styles.dateTextContainer}>
                     <Text style={styles.dateTextDay}>
@@ -43,7 +42,7 @@ export const AulasModal = ({ date, setDate, aulas }: AulasModalProps) => {
                         <TouchableOpacity
                             key={aula._id}
                             style={styles.aulaContainer}
-                            onPress={() => openAula(aula)}
+                            onPress={() => setAulaModal(aula)}
                         >
                             <View style={[styles.aulaBola, { backgroundColor: aula.turma.color }]} />
                             <View style={styles.aulaTextContainer}>
