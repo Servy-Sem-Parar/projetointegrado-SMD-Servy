@@ -10,7 +10,7 @@ import { validateAllInputs, validateInput } from "../../Tools/validateInputs";
 import { Layout } from "../../components/Layout/Layout";
 
 export function EditPasswordPage({navigation}: {navigation: any}) {
-    const [userId, setUserId] = useState("");
+    const [userEmail, setUserEmail] = useState("");
     const [passwordData, setPasswordData] = useState<Record<string, unknown>>({});
     const { authData } = useAuth();
     const [validations, setValidations] = useState<Record<string, unknown>>({});
@@ -28,15 +28,15 @@ export function EditPasswordPage({navigation}: {navigation: any}) {
     }
 
     const fieldValidations = {
-        password: ["password", "mandatory"],
+        oldPassword: ["password", "mandatory"],
         newPassword: ["password", "mandatory"],
         retypePassword: ["matchValue", "mandatory"],
     }
 
     useEffect(()=>{
-        const userId = authData?._id;
-        if (userId){
-            setUserId(userId);
+        const userEmail = authData?.email;
+        if (userEmail){
+            setUserEmail(userEmail);
         }
     }, [])
 
@@ -52,11 +52,11 @@ export function EditPasswordPage({navigation}: {navigation: any}) {
                     <FormGroup
                         placeholder='Senha'
                         type="password"
-                        errorMessage={validations.password as string}
+                        errorMessage={validations.oldPassword as string}
                         callback={(value: string | string[])=>{
-                            callback("password", value);
-                            const error = validateInput(value, fieldValidations.password)
-                            validationCallback("password", error)
+                            callback("oldPassword", value);
+                            const error = validateInput(value, fieldValidations.oldPassword)
+                            validationCallback("oldPassword", error)
                         }}
                     />
                     <FormGroup
@@ -85,13 +85,19 @@ export function EditPasswordPage({navigation}: {navigation: any}) {
                 <Button
                     type={"primary"}
                     label={"Mudar senha"}
-                    callback={()=>{
+                    callback={async ()=>{
                         const validations = {...fieldValidations};
-                        const validationResult = validateAllInputs({entity: passwordData, validations});
+                        const validationResult = validateAllInputs({entity: passwordData, validations, matchValue: passwordData.newPassword as string});
                         if(validationResult.success) {
-                            console.log("Pass", passwordData);
-                            console.log("Id", userId);
-                            navigation.navigate("AccountPage");
+                            const entity = {...passwordData, email: userEmail};
+                            const success =  await editPassword(entity);
+                            if(success) {
+                                Alert.alert("Sucesso!", "Senha editada com sucesso.", [{
+                                    text: "Ok", onPress: ()=>{
+                                        navigation.navigate("AccountPage");
+                                    }
+                                }]);
+                            }
                         } else {
                             setValidations(validationResult.errors);
                             Alert.alert("OOPS!", "Um ou mais campos não estão preenchidos corretamente.", [{

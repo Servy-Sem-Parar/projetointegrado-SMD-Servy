@@ -126,10 +126,14 @@ export function EditProfilePage({navigation}: {navigation: any}) {
                         if(validationResult.success) {
                             editEntity(user, user._id as string).then(success=>{
                                 if(success) {
-                                    navigation.reset({
-                                        index: 0,
-                                        routes: [{ name: 'AccountPage' }]
-                                    }) 
+                                    Alert.alert("Sucesso!", "Perfil editado com sucesso.", [{
+                                        text: "Ok", onPress: ()=>{
+                                            navigation.reset({
+                                                index: 0,
+                                                routes: [{ name: 'AccountPage' }]
+                                            }) 
+                                        }
+                                    }]);
                                 }
                             })
                         } else {
