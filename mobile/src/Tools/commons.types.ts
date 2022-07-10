@@ -8,6 +8,8 @@ export type TurmaInfo = {
     _id: string,
     name: string,
     color: string,
+    description: string,
+    informations: string,
     disciplina: {
         icon: string,
     },

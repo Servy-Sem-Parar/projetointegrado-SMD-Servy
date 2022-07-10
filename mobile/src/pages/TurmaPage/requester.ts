@@ -26,3 +26,16 @@ export async function getMateriais(turma: string) {
     })
     return materiais;
 }
+
+export async function getTurma(turmaId: string) {
+    const suffix = "turma";
+    const method = "get";
+
+    const response = await makeConnection({
+        suffix,
+        method,
+        entityId: turmaId
+    });
+
+    return response?.data?.data;
+}

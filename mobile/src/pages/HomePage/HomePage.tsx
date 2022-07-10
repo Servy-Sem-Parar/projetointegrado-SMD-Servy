@@ -53,13 +53,10 @@ export function HomePage({ navigation }: { navigation: any }) {
                 >
                     <TouchableOpacity 
                         style={[styles.turmaBox, { backgroundColor: turma.color }]}
-                        onPress={async ()=>{
-                            await storage.setItem("turma", JSON.stringify(turma));
-                            await storage.setItem("backPage", "HomePage")
-                            navigation.reset({
-                                index: 0,
-                                routes: [{ name: 'TurmaPage' }]
-                            }) 
+                        onPress={()=>{
+                            navigation.navigate("TurmaPage", {
+                                turmaId: turma._id
+                            })
                         }}
                     >
                         {React.cloneElement(nameToIcon(turma.disciplina.icon), { style: styles.turmaIcon })}

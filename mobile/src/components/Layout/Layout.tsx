@@ -41,7 +41,7 @@ export function Layout(props: ILayoutProps) {
             {props.showBackButtonBar &&  <View style={styles.topBar}>
                 <Icon
                     onPress={() => {
-                        props.navigation.navigate(props.backPage ? props.backPage : "HomePage");
+                        props.navigation.goBack(null)
                     }}
                     name="chevron-back"
                     size={40}

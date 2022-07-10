@@ -53,6 +53,7 @@ function AppStack() {
                     headerShown: false,
                 }}
                 useLegacyImplementation={true}
+                backBehavior="history"
                 drawerContent={(props) => <Sidebar activeTab={props.state.routeNames[props.state.index]} navigation={props.navigation}/>}
             >
                 {(authData ? privateRoutes : publicRoutes).map(route => {

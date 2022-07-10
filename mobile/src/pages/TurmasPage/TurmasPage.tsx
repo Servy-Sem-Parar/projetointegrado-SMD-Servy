@@ -33,13 +33,10 @@ export function TurmasPage({ navigation }: { navigation: any }) {
             <TouchableOpacity
                 key={turma._id}
                 style={[styles.turmaContainer, { backgroundColor: turma.color }]}
-                onPress={async ()=>{
-                    await storage.setItem("turma", JSON.stringify(turma));
-                    await storage.setItem("backPage", "TurmasPage")
-                    navigation.reset({
-                        index: 0,
-                        routes: [{ name: 'TurmaPage' }]
-                    }) 
+                onPress={()=>{
+                    navigation.navigate("TurmaPage", {
+                        turmaId: turma._id
+                    })
                 }}
             >
                 <View>
