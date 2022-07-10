@@ -116,7 +116,7 @@ npm run start
 |  RFG0031     |  Mostrar tela de detalhes de turma                |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/ClassDetails/ClassDetails.tsx) | &#10003;
 |  RFP0032     |  Mostrar informações da turma na tela de detalhes                |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/ClassDetails/ClassDetails.tsx) | &#10003;
 |  RFG0033     |  Mostrar calendário de aulas na tela de detalhes                |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/ClassDetails/ClassDetails.tsx) | &#10003;
-|  RFG0034     |  Mostrar listagem de materiais de apoio da turma na tela de detalhes               |  X     | A fazer
+|  RFG0034     |  Mostrar listagem de materiais de apoio da turma na tela de detalhes               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/ClassDetails/ClassDetails.tsx)     | &#10003;
 |  RFA0035     |  Editar cadastro de professora               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Teachers/ModalsProvider/ModalsProvider.tsx)     | &#10003;
 |  RFP0036     |  Editar informações de uma turma               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Classes/ModalsProvider/ModalsProvider.tsx)     | &#10003;
 |  RFA0037     |  Editar alunas matriculadas em uma turma               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Classes/ModalsProvider/ModalsProvider.tsx)     | &#10003;
