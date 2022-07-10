@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import Turma from '@models/turma';
 import ITurma from '@interfaces/turma';
 import HttpError from '@models/errors/HttpError';
+import Aula from '@models/aula';
 import CrudController from './crudController';
 import mongoose from '../database';
 import Role from '../enums/role';
@@ -43,6 +44,21 @@ class TurmaController extends CrudController<ITurma, typeof Turma> {
       query.disciplina = disciplina;
     }
   }
+
+  finalizar = async (request: Request, response: Response): Promise<Response> => {
+    const { id } = request.params;
+
+    const turma = await Turma.findById(id);
+
+    if (!turma) throw new HttpError('Turma não encontrada', 404);
+
+    await Aula.deleteMany({ turma: turma._id });
+    turma.students = [];
+    turma.aulas = [];
+    turma.save();
+
+    return response.send({ data: turma });
+  };
 }
 
 export default new TurmaController();
