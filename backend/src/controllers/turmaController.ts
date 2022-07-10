@@ -22,23 +22,27 @@ class TurmaController extends CrudController<ITurma, typeof Turma> {
   }
 
   override prepareQuery(request: Request, query: mongoose.FilterQuery<ITurma>, options: any): void {
-    options.populate = ['teachers', 'students', 'aulas', 'disciplina']
-    const {name, level, userId} = request.query
+    options.populate = ['teachers', 'students', 'aulas', 'disciplina'];
+    const {
+      name, level, userId, disciplina,
+    } = request.query;
     if (name) {
-      query.name = {$regex: new RegExp(name as string), $options: "i"}
+      query.name = { $regex: new RegExp(name as string), $options: 'i' };
     }
     if (level) {
-      query.level = {$regex: new RegExp(level as string), $options: "i"}
+      query.level = { $regex: new RegExp(level as string), $options: 'i' };
     }
 
-    if (userId){
+    if (userId) {
       query.$or = [
-        { 'teachers': userId },
-        { 'students': userId }
-      ]
+        { teachers: userId },
+        { students: userId },
+      ];
+    }
+    if (disciplina) {
+      query.disciplina = disciplina;
     }
   }
-
 }
 
 export default new TurmaController();

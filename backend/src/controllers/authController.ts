@@ -59,7 +59,29 @@ const register = async (request: Request, response: Response): Promise<Response>
   return response.status(201).json({ user, token });
 };
 
+const changePassword = async (request: Request, response: Response): Promise<Response> => {
+  const { email, oldPassword, newPassword } = request.body;
+
+  if (!newPassword || !oldPassword) throw new HttpError('Senha não informada', 400);
+
+  const user = await User.findOne({ email }).select('+password');
+
+  if (!user) throw new HttpError('Usuário não encontrado', 404);
+
+  if (!await bcrypt.compare(oldPassword, user.password)) {
+    throw new HttpError('Senha incorreta', 400);
+  }
+
+  user.password = newPassword;
+  await user.save();
+
+  const token = generateToken(user.id);
+  user.password = undefined;
+  return response.send({ user, token });
+};
+
 export default {
   login,
   register,
+  changePassword,
 };

@@ -22,6 +22,7 @@
       "no-shadow": "off",
       "arrow-body-style": "off",
       "class-methods-use-this": "off",
-      "linebreak-style": "off"
+      "linebreak-style": "off",
+      "no-param-reassign": "off"
     }
 }
