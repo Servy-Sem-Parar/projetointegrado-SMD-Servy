@@ -39,7 +39,7 @@ O código econtrado neste repositório é de uma aplicação desenvolvida para o
 <a name="license"></a>
 
 ## :memo: Licença
-Este código está sobre a licença GNU. Para mais informações, veja o [LICENSE](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/b08aef3957dea73682f38ad95597223cbdb51267/LICENSE).
+Este código está sobre a licença GNU GPL 3.0. Para mais informações, veja o [LICENSE](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/b08aef3957dea73682f38ad95597223cbdb51267/LICENSE).
 
 <a name="como-rodar"></a>
 
