@@ -1,4 +1,4 @@
-import { formatDateToShow } from "../../Tools/formatDateToShow";
+import moment from "moment";
 import { makeConnection } from "../../Tools/makeConnection";
 
 export async function getMateriais(turma: string) {
@@ -21,7 +21,7 @@ export async function getMateriais(turma: string) {
     let materiais = (response?.data.data as unknown as Record<string, unknown>[]).map(aula=>aula.materiais).flat() as Record<string, unknown>[];
     materiais = materiais.map(material=>{
         const materialFormated = material;
-        materialFormated.date = material.date ? formatDateToShow(material.date as string).substr(0,10) : "---";
+        materialFormated.date = moment(material.date as string).format("DD/MM/YYYY")
         return materialFormated;
     })
     return materiais;
