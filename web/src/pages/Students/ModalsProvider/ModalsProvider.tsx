@@ -94,7 +94,7 @@ export function ModalsProvider() {
                                 label: "Salvar",
                                 callback: async ()=>{
                                     const validations = {...fieldValidations}
-                                    if(isEdit) {
+                                    if(isEdit && !entity.password) {
                                         validations.password = [];
                                         validations.retypePassword = [];
                                     }

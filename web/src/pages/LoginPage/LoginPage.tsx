@@ -72,7 +72,7 @@ function LoginPage() {
                 setPassword(value as string)
               }}
             />
-            <div className="forgot-password-span">Esqueci minha senha</div>
+            {/*<div className="forgot-password-span">Esqueci minha senha</div>*/}
             <button 
               className="login-button" 
               type='submit'

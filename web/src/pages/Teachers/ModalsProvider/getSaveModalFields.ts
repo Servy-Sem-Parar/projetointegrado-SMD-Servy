@@ -114,7 +114,7 @@ export function getSaveModalFields(props: IGetSaveModalFieldsProps) {
         },      
     ]
 
-    if(props.isEdit === false) {
+    //if(props.isEdit === false) {
         fields.push(
             {
                 id: "password",
@@ -148,7 +148,7 @@ export function getSaveModalFields(props: IGetSaveModalFieldsProps) {
                 }
             }
         )
-    }
+    //}
     return fields;
     
 }

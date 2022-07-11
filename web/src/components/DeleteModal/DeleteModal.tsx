@@ -7,6 +7,8 @@ interface IDeleteModalProps {
     closeModal: ()=>void;
     bodyLabel: string;
     callback: ()=>void;
+    checkBoxLabel?: string;
+    buttomLabel?: string;
 }
 
 export function DeleteModal(props: IDeleteModalProps) {
@@ -35,13 +37,13 @@ export function DeleteModal(props: IDeleteModalProps) {
                         }}
                     >
                         <input type="checkbox" id="remove-modal-checkbox"/>
-                        <label className="delete-modal-checkbox-label" >Estou ciente</label>
+                        <label className="delete-modal-checkbox-label" >{props.checkBoxLabel ? props.checkBoxLabel : "Estou ciente"}</label>
                     </div>
                 </div>
                 <div className="save-modal-footer">
                     <div className="save-modal-footer-buttons-container">
                         <button className="save-modal-footer-button" onClick={()=>{props.closeModal()}}>Cancelar</button>
-                        <button disabled={buttonDisabled} className={buttonDisabled ? "save-modal-footer-button-disabled" : "save-modal-footer-button"} onClick={()=>{props.callback()}}>Remover</button>
+                        <button disabled={buttonDisabled} className={buttonDisabled ? "save-modal-footer-button-disabled" : "save-modal-footer-button"} onClick={()=>{props.callback()}}>{props.buttomLabel ? props.buttomLabel : "Remover"}</button>
                     </div>
                 </div>
             </div>

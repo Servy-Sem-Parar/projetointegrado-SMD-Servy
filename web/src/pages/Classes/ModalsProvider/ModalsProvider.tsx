@@ -3,12 +3,13 @@ import { alertError, alertSuccess } from "../../../components/Alert/Alert";
 import { DeleteModal } from "../../../components/DeleteModal/DeleteModal";
 import { SaveModal } from "../../../components/SaveModal/SaveModal"
 import { validateAllInputs } from "../../../Tools/validateInputs";
-import { createEntity, deleteEntity, editEntity, getDisciplinas, getStudents, getTeachers } from "../requester";
+import { createEntity, deleteEntity, editEntity, finalizarTurma, getDisciplinas, getStudents, getTeachers } from "../requester";
 import { updateEntities } from "../Classes";
 import { fieldValidations, getSaveModalFields } from "./getSaveModalFields";
 
 export let openSaveModal:(targetEntity?: Record<string, unknown>)=>void;
 export let openDeleteModal:(targetEntity: Record<string, unknown>)=>void;
+export let openFinishModal:(targetEntity: Record<string, unknown>)=>void;
 
 export function ModalsProvider() {
     const [targetEntity, setTargetEntity] = useState<Record<string, unknown>>({});
@@ -20,6 +21,7 @@ export function ModalsProvider() {
     const [disciplinas, setDisciplinas] = useState<Record<string, unknown>[]>([]);
     const [teachers, setTeachers] = useState<Record<string, unknown>[]>([]);
     const [students, setStudents] = useState<Record<string, unknown>[]>([]);
+    const [isOpenFinishModal, setIsOpenFinishModal] = useState(false);
 
     useEffect(()=>{
         Promise.all([
@@ -49,6 +51,11 @@ export function ModalsProvider() {
     openDeleteModal = (targetEntity: Record<string, unknown>)=>{ 
         setTargetEntity({...targetEntity}); 
         setIsOpenDeleteModal(true);
+    }
+
+    openFinishModal = (targetEntity: Record<string, unknown>)=>{ 
+        setTargetEntity({...targetEntity}); 
+        setIsOpenFinishModal(true);
     }
 
     return (
@@ -138,6 +145,22 @@ export function ModalsProvider() {
                             updateEntities();
                         }}
                         bodyLabel={"Essa ação irá remover a turma."}
+                    />
+            }
+            {
+                isOpenFinishModal && 
+                    <DeleteModal
+                        titleLabel={"Finalizar turma"}
+                        showModal={isOpenFinishModal}
+                        closeModal={()=>{setIsOpenFinishModal(false)}}
+                        buttomLabel={"Finalizar"}
+                        checkBoxLabel={"Continuar"}
+                        callback={()=>{
+                            finalizarTurma(targetEntity._id as string);
+                            setIsOpenFinishModal(false);
+                            setTargetEntity({});
+                        }}
+                        bodyLabel={"Essa ação é usada no final no semestre para limpar as aulas agendadas e materias. Deseja continuar?"}
                     />
             }
         </div>

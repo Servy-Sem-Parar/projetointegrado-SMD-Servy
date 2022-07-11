@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {BsFillGearFill} from "react-icons/bs";
 import {AiFillEdit} from "react-icons/ai";
 import {AiTwotoneDelete} from "react-icons/ai";
+import {GiFinishLine} from "react-icons/gi";
 
 import "./Popover.css"
 import { MdVisibility } from "react-icons/md";
@@ -31,6 +32,12 @@ function getActionIcon(action: string) {
     } else if(action === "Detalhes") {
         return (
             <MdVisibility
+                className="popover-icon"
+            />
+        )
+    } else if(action === "Finalizar") {
+        return (
+            <GiFinishLine
                 className="popover-icon"
             />
         )

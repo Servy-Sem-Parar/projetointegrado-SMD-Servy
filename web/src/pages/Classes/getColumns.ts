@@ -1,6 +1,6 @@
 import { IColumn } from "../../components/ListPage/ListPage"
 import { getUserPermission } from "../../Tools/getUserPermission"
-import { openDeleteModal, openSaveModal } from "./ModalsProvider/ModalsProvider"
+import { openDeleteModal, openSaveModal, openFinishModal } from "./ModalsProvider/ModalsProvider"
 
 export function getColumns() {
     const userPermission = getUserPermission();
@@ -15,6 +15,12 @@ export function getColumns() {
             label: "Editar",
             callback: (entity: Record<string, unknown>)=>{
                 openSaveModal(entity)
+            }
+        },
+        {
+            label: "Finalizar",
+            callback: (entity: Record<string, unknown>)=>{
+                openFinishModal(entity)
             }
         }
     ];

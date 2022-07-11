@@ -206,3 +206,18 @@ export async function getStudents() {
 
     return options;
 }
+
+export async function finalizarTurma(entityId: string) {
+    const suffix = "turma/finalizar";
+    const method = "post";
+    let success = false;
+
+    const response = await makeConnection({
+        suffix,
+        method,
+        entityId
+    });
+    success = response ? true : false;
+
+    return success;
+}
