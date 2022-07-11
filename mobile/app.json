@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/logo.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.victordkt.mobile"
     },
     "web": {
       "favicon": "./assets/favicon.png"

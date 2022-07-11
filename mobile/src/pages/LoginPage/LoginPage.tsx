@@ -9,10 +9,12 @@ import { storage } from '../../Tools/storage';
 import { makeConnection } from '../../Tools/makeConnection';
 import { useAuth } from '../../context/Auth';
 import { Layout } from '../../components/Layout/Layout';
+import { ForgotPasswordModal } from './ForgotPasswordModal';
 
 export function LoginPage({navigation}: {navigation: any}) {
     const [entity, setEntity] = useState<Record<string, unknown>>({});
     const [validations, setValidations] = useState<Record<string, unknown>>({});
+    const [modalIsOpen, setModalIsOpen] = useState(false);
     const {signIn} = useAuth();
     const callback = (field: string, value: string | string[])=>{
         const newEntity = {...entity};
@@ -33,6 +35,10 @@ export function LoginPage({navigation}: {navigation: any}) {
             hideBar={true}
             landing={true}
         >
+            <ForgotPasswordModal
+                isOpen={modalIsOpen}
+                closeModalFunction={()=>{setModalIsOpen(false)}}
+            />
         <View style={containerStyles.page}>
             <View style={styles.container}>
                 <View style={styles.backContainer}>
@@ -85,6 +91,13 @@ export function LoginPage({navigation}: {navigation: any}) {
                                         signIn({token: `Bearer ${response.data.token}`, ...response.data.user})
                                       }
                                     
+                                }}
+                            />
+                            <Button
+                                type={"span"}
+                                label={"Esqueci minha senha"}
+                                callback={()=>{
+                                    setModalIsOpen(true)
                                 }}
                             />
                         </View>
