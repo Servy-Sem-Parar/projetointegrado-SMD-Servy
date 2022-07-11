@@ -38,8 +38,8 @@ class UserController extends CrudController<IUser, typeof User> {
       throw new HttpError('Forbidden', 403);
     }
 
-    if (request.params.password) {
-      request.params.password = await bcrypt.hash(request.params.password, 10);
+    if (request.body.password) {
+      request.body.password = await bcrypt.hash(request.body.password, 10);
     }
 
     return super.updateFromParameters(request);
