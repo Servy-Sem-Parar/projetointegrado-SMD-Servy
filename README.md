@@ -122,7 +122,7 @@ npm run start
 |  RFA0037     |  Editar alunas matriculadas em uma turma               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Classes/ModalsProvider/ModalsProvider.tsx)     | &#10003;
 |  RFA0038     |  Editar cadastro de aluna               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/pages/Students/ModalsProvider/ModalsProvider.tsx)     | &#10003;
 |  RFG0039     |  Editar informações do seu cadastro                |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/web/src/components/Layout/MyAccountModal/ModalsProvider.tsx)     | &#10003;
-|  RFE0040     |  Mostrar notificação de nova aula               |  X     | A fazer
+|  RFE0040     |  Mostrar notificação de nova aula               |  -     | Suspenso
 |  RFE0041     |  Mostrar tela de solicitação de cadastro               |  [código](https://github.com/Servy-Sem-Parar/projetointegrado-SMD-Servy/blob/main/mobile/src/pages/RegisterPage/RegisterPage.tsx)     | &#10003;
 |  RFG0042     |  Mostrar tela de Login               |  [código]()     | &#10003;
 |  RFG0043     |  Realizar login               |  [código]()     | &#10003;
