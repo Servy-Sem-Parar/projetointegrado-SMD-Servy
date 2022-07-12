@@ -7,8 +7,9 @@ const styles = StyleSheet.create({
         alignItems: 'baseline',
     },
     turmasText: {
-        fontWeight: "bold",
-        fontSize: 40,
+        //fontWeight: "bold",
+        fontSize: 35,
+        fontFamily: "Dosis_700Bold",
         marginBottom: 10,
     },
     turmasSubText: {
@@ -16,6 +17,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         color: "#8010F0",
         paddingBottom: 6,
+        fontFamily: "Raleway_400Regular",
     },
     turmasContainer: {
         display: "flex",
@@ -38,10 +40,12 @@ const styles = StyleSheet.create({
     turmaContainer: {
         display: "flex",
         marginRight: 10,
-        alignItems: "center"
+        alignItems: "center",
+        marginBottom: 20
     },
     turmaText: {
-        fontSize: 16
+        fontSize: 12,
+        fontFamily: "Raleway_400Regular",
     }
 });
 

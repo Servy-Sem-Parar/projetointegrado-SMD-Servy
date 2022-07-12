@@ -36,8 +36,8 @@ const styles = StyleSheet.create({
 
     pageContainer: {
         paddingTop: 15,
-        paddingRight: 15,
-        paddingLeft: 15,
+        paddingRight: 20,
+        paddingLeft: 20,
         width: "100%",
         height: "100%",
     },

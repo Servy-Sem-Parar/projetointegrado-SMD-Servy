@@ -2,8 +2,8 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     pageTitle: {
-        fontFamily: "Dosis_600SemiBold",
-        fontSize: 30,
+        fontFamily: "Dosis_700Bold",
+        fontSize: 35,
         marginBottom: 10
     },
     dataLine: {
@@ -34,6 +34,13 @@ const styles = StyleSheet.create({
         //fontSize: 13,
         color: "#ffffff"
     },
+    noDataLabel: {
+        marginTop: 20,
+        marginBottom: 30,
+        fontFamily: "Raleway_400Regular",
+        textAlign: "center",
+        fontSize: 18,
+    }
 });
 
 export default styles;

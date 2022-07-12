@@ -19,11 +19,11 @@ export const buttonStyles = StyleSheet.create({
     },
 
     primaryButtonLabel: {
-        fontFamily: "Raleway_600SemiBold",
-        fontSize: 30,
+        fontFamily: "Dosis_600SemiBold",
+        fontSize: 25,
         textAlign: "center",
         color: "white",
-        marginTop: -8
+        marginTop: -3
     },
 
     spanButton: {

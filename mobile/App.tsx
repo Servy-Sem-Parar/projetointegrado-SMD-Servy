@@ -4,7 +4,7 @@ import AppStack from './src/routes/AppStack';
 import 'moment/locale/pt-br';
 import moment from 'moment';
 import AppLoading from "expo-app-loading";
-import {useFonts, Dosis_400Regular, Dosis_600SemiBold} from "@expo-google-fonts/dosis"
+import {useFonts, Dosis_400Regular, Dosis_600SemiBold, Dosis_800ExtraBold, Dosis_700Bold} from "@expo-google-fonts/dosis"
 import {Raleway_400Regular, Raleway_600SemiBold} from "@expo-google-fonts/raleway"
 import { Text, StyleSheet, SafeAreaView } from 'react-native';
 import { AuthProvider } from './src/context/Auth';
@@ -15,7 +15,9 @@ export default function App() {
     Dosis_400Regular,
     Dosis_600SemiBold,
     Raleway_400Regular,
-    Raleway_600SemiBold
+    Raleway_600SemiBold,
+    Dosis_800ExtraBold,
+    Dosis_700Bold
   }) 
 
   if(!fontsLoaded) {

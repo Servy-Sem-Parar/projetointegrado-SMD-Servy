@@ -2,11 +2,11 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     calendarTitle: {
-        fontWeight: "bold",
-        fontSize: 40,
+        fontSize: 35,
         marginBottom: 10,
         marginRight: 20,
-        textTransform: "capitalize"
+        textTransform: "capitalize",
+        fontFamily: "Dosis_700Bold",
     },
     calendar: {
         width: "100%",

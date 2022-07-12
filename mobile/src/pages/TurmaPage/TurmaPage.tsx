@@ -63,7 +63,7 @@ export function TurmaPage({ navigation, route }: { navigation: any, route: any }
 
     const renderTurma = () => {
         return (
-            <View>
+            <View style={{marginBottom: 20}}>
                 <Text style={styles.pageTitle}>Dados da turma</Text>
                 <Text style={styles.dataLine}>
                     <Text style={styles.dataName}>Nome: </Text>
@@ -87,8 +87,9 @@ export function TurmaPage({ navigation, route }: { navigation: any, route: any }
 
     const renderMateriais = () => {
         return (
-            <View>
+            <View style={{marginTop: 20}}>
                 <Text style={styles.pageTitle}>Materiais de apoio</Text>
+                {materiais.length === 0 && <Text style={styles.noDataLabel}>Nenhum material disponível</Text>}
                 {
                     materiais.map(material => {
                         return (
