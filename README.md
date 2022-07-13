@@ -63,8 +63,9 @@ npm start
 ### Front-end mobile
 ```shell
 cd mobile
+npm install --global expo-cli
 npm install
-expo start
+npm start
 ```
 
 ### Back-end
