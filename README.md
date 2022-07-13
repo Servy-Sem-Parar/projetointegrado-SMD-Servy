@@ -28,13 +28,13 @@ O código econtrado neste repositório é de uma aplicação desenvolvida para o
 
 ## :busts_in_silhouette: Equipe Servy
 
-|  NOME                           |  FUNÇÃO                    |  MATRÍCULA  |
-|  ----------------------------   |  --------------------------|  ---------  |
-|  Luiz Eduardo Gomes Xavier      |  Codificação               |  509510     |
-|  Roldão Ferreira Gomes Neto     |  Design                    |  507824     |
-|  Samiris Sampaio De Albuquerque |  Design                    |  509735     |
-|  Victor Mota Dos Santos         |  Codificação               |  509223     |
-|  Yanna Torres Gonçalves         |  Líder e Design            |  507773     |
+|  NOME                           |  FUNÇÃO                    |
+|  ----------------------------   |  --------------------------|
+|  Luiz Eduardo Gomes Xavier      |  Codificação               | 
+|  Roldão Ferreira Gomes Neto     |  Design                    |
+|  Samiris Sampaio De Albuquerque |  Design                    |
+|  Victor Mota Dos Santos         |  Codificação               |
+|  Yanna Torres Gonçalves         |  Líder e Design            |
 
 <a name="license"></a>
 
