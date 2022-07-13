@@ -135,7 +135,7 @@ npm run start
 
 ## :clipboard: Relatório e apresentação do projeto
 
-O relatório completo sobre o processo de desenvolvimento dessa aplicação pode ser encontrado em: link. A apresentação geral do projeto pode ser encontrada em: https://youtu.be/6xv7BW4XDSc.
+O relatório completo sobre o processo de desenvolvimento dessa aplicação pode ser encontrado em: https://bit.ly/3Rys0JW. A apresentação geral do projeto pode ser encontrada em: https://youtu.be/6xv7BW4XDSc.
 
 ---
 Feito por Servy
