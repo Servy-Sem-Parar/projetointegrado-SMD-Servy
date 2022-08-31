@@ -6,6 +6,9 @@ import { ParamsDictionary } from 'express-serve-static-core';
 import { ParsedQs } from 'qs';
 import Turma from '@models/turma';
 import bcrypt from 'bcryptjs';
+import UserStatus from 'src/enums/userStatus';
+import config from '@config/config';
+import emailer from 'src/services/email';
 import CrudController from './crudController';
 import mongoose from '../database';
 import Role from '../enums/role';
@@ -40,6 +43,23 @@ class UserController extends CrudController<IUser, typeof User> {
 
     if (request.body.password) {
       request.body.password = await bcrypt.hash(request.body.password, 10);
+    }
+
+    if (request.body.status && request.body.status !== user.status) {
+      const wasApproved = request.body.status === UserStatus.APPROVED;
+      const mailOptions = {
+        from: config.emailLogin,
+        to: user.email,
+        subject: wasApproved ? 'Projeto sem parar - Solicitação aprovada' : 'Projeto sem parar - Solicitação rejeitada',
+        text: wasApproved ? `Parabéns, você foi aprovada para as turmas de ${user.wantedTurmas.map((t) => t.name).join(', ')}.` : 'Infelizmente, suas solicitações foram rejeitadas. Por favor, verifique suas informações e realize o cadastro novamente.',
+      };
+      emailer.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(`Email sent: ${info.response}`);
+        }
+      });
     }
 
     return super.updateFromParameters(request);

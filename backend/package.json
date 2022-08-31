@@ -23,7 +23,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.9",
     "mongoose-paginate-v2": "^1.6.3",
-    "mongoose-type-email": "^1.1.2"
+    "mongoose-type-email": "^1.1.2",
+    "nodemailer": "^6.7.8"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.10.2",

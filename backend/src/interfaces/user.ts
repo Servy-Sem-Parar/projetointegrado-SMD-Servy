@@ -14,7 +14,7 @@ interface IUser extends Document {
   role: Role;
   schoolType: SchoolType;
   status: UserStatus;
-  wantedTurmas: ITurma;
+  wantedTurmas: ITurma[];
   birthDate: Date;
 }
 
