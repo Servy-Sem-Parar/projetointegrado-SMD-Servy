@@ -3,6 +3,5 @@ enum UserStatus {
     DISAPPROVED = 'disapproved',
     PENDING = 'pending',
   }
-  
-  export default UserStatus;
-  
+
+export default UserStatus;
